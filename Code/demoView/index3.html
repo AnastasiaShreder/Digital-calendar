@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>Demo</title>
+		<!--Штука для правильного переноса слов-->
+		<style>
+			.word { 
+			 -moz-hyphens: auto;
+			 -webkit-hyphens: auto;
+			 -ms-hyphens: auto;
+			}
+		   </style>
+	  <!--Конец штуки-->
+		<meta name="description" content="Multi-Level Push Menu: Off-screen navigation with multiple levels" />
+		<meta name="keywords" content="multi-level, menu, navigation, off-canvas, off-screen, mobile, levels, nested, transform" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/icons.css" />
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link rel="stylesheet" type="text/css" href="css/lineMenu.css" />
+		<link rel="stylesheet" type="text/css" href="css/calendar.css" />
+		<link rel="stylesheet" type="text/css" href="css/modal_wind.css" />
+		<link rel="stylesheet" type="text/css" href="css/form.css" />
+		<link rel="stylesheet" type="text/css" href="css/task-menu.css" />
+		<script src="js/modernizr.custom.js"></script>
+		<script src="js/moment.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<!-- Push Wrapper -->
+			<div class="mp-pusher" id="mp-pusher">
+
+				<!-- mp-menu -->
+				<nav id="mp-menu" class="mp-menu">
+					<div class="mp-level">
+						<h2 class="icon icon-world">Календарь</h2>
+						<ul>
+							<li class="icon icon-arrow-left">
+								<a class="icon icon-display" href="#">Общий календарь</a>
+								<div class="mp-level">
+									<h2 class="icon icon-display">Общий календарь</h2>
+									<a class="mp-back" href="#">назад</a>
+									<ul>
+										<li><a href="#">Фильтры</a></li>
+										<!--<li class="icon icon-arrow-left">
+											<a class="icon icon-phone" href="#">Mobile Phones</a>
+											<div class="mp-level">
+												<h2>Mobile Phones</h2>
+												<a class="mp-back" href="#">назад</a>
+												<ul>
+													<li><a href="#">Super Smart Phone</a></li>
+													<li><a href="#">Thin Magic Mobile</a></li>
+													<li><a href="#">Performance Crusher</a></li>
+													<li><a href="#">Futuristic Experience</a></li>
+												</ul>
+											</div>
+										</li>-->
+										<!--<li class="icon icon-arrow-left">
+											<a class="icon icon-tv" href="#">Televisions</a>
+											<div class="mp-level">
+												<h2>Televisions</h2>
+												<a class="mp-back" href="#">назад</a>
+												<ul>
+													<li><a href="#">Flat Superscreen</a></li>
+													<li><a href="#">Gigantic LED</a></li>
+													<li><a href="#">Power Eater</a></li>
+													<li><a href="#">3D Experience</a></li>
+													<li><a href="#">Classic Comfort</a></li>
+												</ul>
+											</div>
+										</li>
+										<li class="icon icon-arrow-left">
+											<a class="icon icon-camera" href="#">Cameras</a>
+											<div class="mp-level">
+												<h2>Cameras</h2>
+												<a class="mp-back" href="#">назад</a>
+												<ul>
+													<li><a href="#">Smart Shot</a></li>
+													<li><a href="#">Power Shooter</a></li>
+													<li><a href="#">Easy Photo Maker</a></li>
+													<li><a href="#">Super Pixel</a></li>
+												</ul>
+											</div>
+										</li>-->
+									</ul>
+								</div>
+							</li>
+							<li class="icon icon-arrow-left">
+								<a class="icon icon-news" href="#">Мой календарь</a>
+								<div class="mp-level">
+									<h2 class="icon icon-news">Мой календарь</h2>
+									<a class="mp-back" href="#">назад</a>
+									<ul>
+										<li><a href="#">Проект 1</a></li>
+										<li><a href="#">Проект 2</a></li>
+										<li><a href="#">Проект 3</a></li>
+										<li><a href="#">Проект 4</a></li>
+										<li><a href="#">Проект 5</a></li>
+										<li><a href="#">Проект 6</a></li>
+									</ul>
+								</div>
+							</li>
+							<!--<li class="icon icon-arrow-left">
+								<a class="icon icon-shop" href="#">Store</a>
+								<div class="mp-level">
+									<h2 class="icon icon-shop">Store</h2>
+									<a class="mp-back" href="#">назад</a>
+									<ul>
+										<li class="icon icon-arrow-left">
+											<a class="icon icon-t-shirt" href="#">Clothes</a>
+											<div class="mp-level">
+												<h2 class="icon icon-t-shirt">Clothes</h2>
+												<a class="mp-back" href="#">назад</a>
+												<ul>
+													<li class="icon icon-arrow-left">
+														<a class="icon icon-female" href="#">Women's Clothing</a>
+														<div class="mp-level">
+															<h2 class="icon icon-female">Women's Clothing</h2>
+															<a class="mp-back" href="#">назад</a>
+															<ul>
+																<li><a href="#">Tops</a></li>
+																<li><a href="#">Dresses</a></li>
+																<li><a href="#">Trousers</a></li>
+																<li><a href="#">Shoes</a></li>
+																<li><a href="#">Sale</a></li>
+															</ul>
+														</div>
+													</li>
+													<li class="icon icon-arrow-left">
+														<a class="icon icon-male" href="#">Men's Clothing</a>
+														<div class="mp-level">
+															<h2 class="icon icon-male">Men's Clothing</h2>
+															<a class="mp-back" href="#">назад</a>
+															<ul>
+																<li><a href="#">Shirts</a></li>
+																<li><a href="#">Trousers</a></li>
+																<li><a href="#">Shoes</a></li>
+																<li><a href="#">Sale</a></li>
+															</ul>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</li>
+										<li>
+											<a class="icon icon-diamond" href="#">Jewelry</a>
+										</li>
+										<li>
+											<a class="icon icon-music" href="#">Music</a>
+										</li>
+										<li>
+											<a class="icon icon-food" href="#">Grocery</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li><a class="icon icon-photo" href="#">Collections</a></li>-->
+							<li><a class="icon icon-wallet" href="#">Список задач</a></li>
+						</ul>
+							
+					</div>
+				</nav>
+
+				<!--modal menu-->
+				<!--<button>Click For Modal</button>-->
+
+<!-- modal -->
+<div class="modal-overlay">
+  <div class="modal">
+    
+    <a class="close-modal">
+      <svg viewBox="0 0 20 20">
+        <path fill="#000000" d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
+      </svg>
+    </a><!-- close modal -->
+
+    <div class="modal-content">
+		
+			<form action="/action_page.php">
+			  <div class="row">
+				<div class="col-25">
+				  <label for="fname">Название</label>
+				</div>
+				<div class="col-75">
+				  <input type="text" id="fname" name="firstname" placeholder="Название задачи..">
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col-25">
+				  <label for="lname">Поручить</label>
+				</div>
+				<div class="col-75">
+				  <input type="text" id="lname" name="lastname" placeholder="Введите имя сотрудника..">
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col-25">
+				  <label for="datapicker">Дата</label>
+				</div>
+				<div class="col-75">
+					<!--<input type="text" value="dd-mm-yy" onfocus="this.select();lcs(this)" onclick="event.cancelBubble=true;this.select();lcs(this)">-->
+					<input type="date" value="ДД/ММ/ГГГГГ">
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col-25">
+				  <label for="mark">Метки</label>
+				</div>
+				<div class="col-75">
+				  <select id="mark" name="mark">
+					<option value="important">Важно</option>
+					<option value="attention">Внимание</option>
+					<option value="urgently">Срочно</option>
+				  </select>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col-25">
+				  <label for="characteristic">Описание задачи</label>
+				</div>
+				<div class="col-75">
+				  <textarea id="characteristic" name="characteristic" placeholder="Введите описание задачи..." style="height:200px"></textarea>
+				</div>
+			  </div>
+			  <div class="row">
+				<input type="submit" value="Submit">
+			  </div>
+			</form>
+		  
+    </div><!-- content -->
+    
+  </div><!-- modal -->
+</div><!-- overlay -->
+				<!-- end of modal menu-->
+
+				<!-- /mp-menu -->
+
+				<div class="scroller"><!-- this is for emulating position fixed of the nav -->
+					<div class="scroller-inner">
+						<!-- Top Navigation -->
+						<!--<div class="codrops-top clearfix">
+							<a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Tutorials/CircularNavigation/"><span>Previous Demo</span></a>
+							<span class="right"><a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=16252"><span>Back to the Codrops Article</span></a></span>
+						</div>
+						<header class="codrops-header">
+							<h1>Multi-Level Push Menu <span>Off-screen navigation with multiple levels</span></h1>
+						</header>-->
+						<div class="content clearfix">
+							<div class="block block-100 clearfix">
+								
+									<span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
+									<section class="section" id="Prospero">
+										<nav class="menu menu--prospero">
+											<ul class="menu__list">
+												<li class="menu__item menu__item--current"><a href="#" class="menu__link">Месяц</a></li>
+												<li class="menu__item"><a href="#" class="menu__link">Неделя</a></li>
+												<li class="menu__item"><a href="#" class="menu__link">День</a></li>
+												<!--<li class="menu__item"><a href="#" class="menu__link">Blog</a></li>
+												<li class="menu__item"><a href="#" class="menu__link">Contact</a></li>-->
+											</ul>
+										</nav>
+									</section>
+								
+								<!--<nav class="codrops-demos">
+									<a href="index.html">Demo 1: Overlapping levels</a>
+									<a href="index2.html">Demo 2: Covering levels</a>
+									<a class="current-demo" href="index3.html">Demo 3: Overlapping levels with back links</a>
+								</nav>-->
+								
+							</div>
+							<!--<div class="block block-60">
+								<p><strong>Demo 3:</strong> Overlapping levels with back links</p>
+								<p>This menu will open by pushing the website content to the right. It has multi-level functionality, allowing endless nesting of navigation elements.</p>
+								<p>The next level can optionally overlap or cover the previous one.</p>
+							</div>-->
+							<!--<div class="info">
+								<p>If you enjoyed this you might also like:</p>
+								<p><a href="http://goo.gl/JLJ4v5">Responsive Multi-Level Menu</a></p>
+								<p><a href="http://goo.gl/qjbq9Y">Google Nexus Website Menu</a></p>
+							</div>-->
+							<div class="surround-calendar">
+							   <div id="calendar"></div>
+							   <div class="right-section">
+								<p>Задачи из группы:
+								<select id="filter">
+								  <option value="all">Все</option>
+								  <option value="important">Важно</option>
+								  <option value="attention">Внимание</option>
+								  <option value="soon">Срочно</option>
+								</select>
+								</p>
+			
+								<div class="task-place">
+								  <div class="task-elem">
+									  <p><input type="checkbox" name="task1" value="task1">  Задача 1</p>
+								  </div>
+								  <div class="task-elem">
+									<p><input type="checkbox" name="task1" value="task1">  Задача 2</p>
+								  </div>
+								  <div class="task-elem">
+									<p><input type="checkbox" name="task1" value="task1">  Я настроил корректный перенос слов!</p>
+								  </div>
+								  <div class="task-elem">
+									<p><input type="checkbox" name="task1" value="task1">  Задача 3</p>
+								  </div>
+								  <div class="task-elem">
+									<p><input type="checkbox" name="task1" value="task1">  Задача 4</p>
+								  </div>
+								</div>
+			
+								<p>Проекты:</p>
+								<div class="project-place">
+			
+								  <a class="button" href="index3.html">
+									<div class="project-elem">
+										<img src="icons/folder.png">
+										<p>Проект 1 </p>
+									</div>
+								  </a>
+			
+								  <a class="button" href="index3.html">
+									<div class="project-elem">
+										<img src="icons/folder.png">
+										<p>Проект 2 </p>
+									</div>
+								  </a>
+			
+								  <a class="button" href="index3.html">
+									<div class="project-elem">
+										<img src="icons/folder.png">
+										<p>Проект 3 </p>
+									</div>
+								  </a>
+			
+								  <a class="button" href="index3.html">
+									<div class="project-elem">
+										<img src="icons/folder.png">
+										<p>Проект 4 </p>
+									</div>
+								  </a>
+			
+								  <a class="button" href="index3.html">
+									<div class="project-elem">
+										<img src="icons/folder.png">
+										<p>Проект 5 </p>
+									</div>
+								  </a>
+			
+								  <a class="button" href="index3.html">
+									<div class="project-elem">
+										<img src="icons/folder.png">
+										<p>Проект 6 </p>
+									</div>
+								  </a>
+			
+								  <a class="button" href="index3.html">
+									<div class="project-elem">
+										<img src="icons/folder.png">
+										<p>Проект 7 </p>
+									</div>
+								  </a>
+			
+								  <a class="button" href="index3.html">
+									<div class="project-elem">
+										<img src="icons/folder.png">
+										<p>Проект 8 </p>
+									</div>
+								  </a>
+								</div>
+								
+								<p>Коллеги:</p>
+								<div class="сolleagues-place">
+			
+								  <a class="button" href="index3.html">
+									<div class="сolleagues-elem">
+										<img src="icons/person.png">
+										<p>Анастасия Шредер</p>
+									</div>
+								  </a>
+			
+								  <a class="button" href="index3.html">
+									<div class="сolleagues-elem">
+										<img src="icons/person.png">
+										<p>Марк Шерман</p>
+									</div>
+								  </a>
+			
+								  <a class="button" href="index3.html">
+									<div class="сolleagues-elem">
+										<img src="icons/person.png">
+										<p>Конев Иван</p>
+									 </div>
+								  </a>
+			
+								  <a class="button" href="index3.html">
+									<div class="сolleagues-elem">
+										<img src="icons/person.png">
+										<p>Данил Лялин</p>
+									</div>
+								  </a>
+			
+								  <a class="button" href="index3.html">
+									<div class="сolleagues-elem">
+										<img src="icons/person.png">
+										<p>Андрей Тагиев</p>
+									</div>
+								  </a>
+								</div>
+			
+								<div class="add-button">
+									<button style="width: 13vw;">Добавить</button>
+								</div>
+			
+							  </div>
+						    </div>
+							<!--<script src="js/calendar_script.js"></script>-->
+						</div>
+					</div><!-- /scroller-inner -->
+					
+                    
+				</div><!-- /scroller -->
+
+			</div><!-- /pusher -->
+		</div><!-- /container -->
+       <script src="js/calendar_script.js"></script>
+		<script src="js/classie.js"></script>
+		<script src="js/mlpushmenu.js"></script>
+		<script>
+			new mlPushMenu( document.getElementById( 'mp-menu' ), document.getElementById( 'trigger' ) );
+		</script>
+
+		<!--for modal window-->
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js'></script>
+		<script src="js/modal_wind.js"></script>
+
+		<!--Проверить!!!!-->
+
+		<script src="js/classie.js"></script>
+		<script src="js/clipboard.min.js"></script>
+		<script>
+		(function() {
+			[].slice.call(document.querySelectorAll('.menu')).forEach(function(menu) {
+				var menuItems = menu.querySelectorAll('.menu__link'),
+					setCurrent = function(ev) {
+						ev.preventDefault();
+
+						var item = ev.target.parentNode; // li
+
+						// return if already current
+						if (classie.has(item, 'menu__item--current')) {
+							return false;
+						}
+						// remove current
+						classie.remove(menu.querySelector('.menu__item--current'), 'menu__item--current');
+						// set current
+						classie.add(item, 'menu__item--current');
+					};
+
+				[].slice.call(menuItems).forEach(function(el) {
+					el.addEventListener('click', setCurrent);
+				});
+			});
+
+			[].slice.call(document.querySelectorAll('.link-copy')).forEach(function(link) {
+				link.setAttribute('data-clipboard-text', location.protocol + '//' + location.host + location.pathname + '#' + link.parentNode.id);
+				new Clipboard(link);
+				link.addEventListener('click', function() {
+					classie.add(link, 'link-copy--animate');
+					setTimeout(function() {
+						classie.remove(link, 'link-copy--animate');
+					}, 300);
+				});
+			});
+		})(window);
+		</script>
+	</body>
+</html>
