@@ -1,0 +1,101 @@
+--%значение для подстановки%--
+--ПОЛЬЗОВАТЕЛЬ--
+Вход по почте и паролю:
+	select id from edgepoint.users where password = %пароль% and email = %почта%;
+
+Поменять пароль/почту/вк/отдел и тд:
+	UPDATE users SET password= %пароль% WHERE id = %id пользователя%;
+	UPDATE users SET email=%почта% WHERE id = %id пользователя%;
+	UPDATE users SET vk= %адрес страницы% WHERE id = %id пользователя%;
+	UPDATE users SET unit= %название отдела% WHERE id = %id пользователя%;
+Получить данные о пользователе по id:
+	SELECT (%surname/name/unit/email....%) FROM edgepoint.users where id=%id пользователя%;
+
+--ЗАДАЧИ--
+Добавить задачу:
+	INSERT INTO `edgepoint`.`tasks` (
+		`name`,
+		`deadline`,
+		`color`, 
+		`description`
+		) VALUES (
+		%Название%,
+		%Дата в формате ГГГГ-ММ-ДД%,
+		%цвет в hex формате(без #)%,
+		%Описание%
+		);
+Привязать задачу к проекту:
+	INSERT INTO `edgepoint`.`task_project`
+	(`id_task`,
+	`id_project`)
+	VALUES
+	(%id задачи%,
+	 %id проекта%);
+Привязать пользователя к задаче:
+	INSERT INTO `edgepoint`.`user_task` (`id_user`, `id_task`) VALUES (%id пользователя%, %id задачи%);
+
+Удалить задачу:
+	DELETE FROM `edgepoint`.`tasks` WHERE id = %id задачи%
+
+Узнать всех участников задачи
+	SELECT edgepoint.user_task.id_user FROM edgepoint.user_task WHERE edgepoint.user_task.id_task = %id задачи%
+
+--ПРОЕКТ--
+Добавить проект:
+	INSERT INTO `edgepoint`.`projects` (
+		`name`,
+		`deadline`, 
+		`global`, 
+		`description`
+		) VALUES (
+		%Название%, 
+		%Дата в формате ГГГГ-ММ-ДД%, 
+		%Отображать на глоб.календаре? 1-да 0 - нет%, 
+		%Описание%
+		)
+Привязать пользователя к проекту(по id):
+	INSERT INTO `edgepoint`.`user_project`
+	(`id_user`,
+	`id_project`,
+	`is_admin`)
+	VALUES
+	(%id пользователя%,
+	 %id проекта%,
+	 %этот пользователь владлец проекта?1-да 0 - нет%);
+	
+Алгоритм удаления проекта:
+	Узнать все задачи в проекте:
+		SELECT edgepoint.task_project.id_task FROM edgepoint.task_project WHERE edgepoint.task_project.id_project = %id проекта%
+	Удалить все его задачи(в for по id из строчки сверху):
+		DELETE FROM `edgepoint`.`tasks` WHERE id = %id задачи%
+	В конце удалить сам проек:
+		DELETE FROM `edgepoint`.`projects` WHERE id = %id проекта%
+
+Узнать владельца проекта
+	SELECT edgepoint.user_project.id_user FROM edgepoint.user_project WHERE edgepoint.user_project.id_project = %id проекта% and edgepoint.user_project.is_admin = True;
+Узнать всех участников проекта
+	SELECT edgepoint.user_project.id_user FROM edgepoint.user_project WHERE edgepoint.user_project.id_project = %id проекта%
+
+--ФИЛЬТРЫ--
+Добавить тэг:
+	INSERT INTO `edgepoint`.`tag_task`
+	(`tag`,
+	`id_task`)
+	VALUES
+	(%тэг(прим. 'Важно,внимание,срочно,т.д.'%,
+	%id задачи%);
+Все задачи с одним тэгом:
+	SELECT id_task FROM edgepoint.tag_task where tag=%тэг%;
+Задачи,содержащие несколько тэгов:
+	SELECT edgepoint.tag_task.id_task
+				FROM edgepoint.tag_task
+                WHERE edgepoint.tag_task.tag IN (%тэг1%,%тэг2%)
+                GROUP BY edgepoint.tag_task.id_task
+                HAVING COUNT(edgepoint.tag_task.id_task) = %колво тэгов для поиска%
+             ;
+В каких задачах участвует:
+	SELECT edgepoint.user_task.id_task FROM edgepoint.user_task WHERE edgepoint.user_task.id_user = %id пользователя%
+В каких проектах участвует:
+	SELECT edgepoint.user_project.id_project FROM edgepoint.user_project WHERE edgepoint.user_project.id_user = %id пользователя%;
+В каких проектах владелец:
+	SELECT edgepoint.user_project.id_project FROM edgepoint.user_project WHERE edgepoint.user_project.id_user = %id пользователя% and edgepoint.user_project.is_admin = True;
