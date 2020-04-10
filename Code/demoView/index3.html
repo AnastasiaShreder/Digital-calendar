@@ -28,6 +28,7 @@
 		<link rel="stylesheet" type="text/css" href="css/task-menu.css" />
 		<script src="js/modernizr.custom.js"></script>
 		<script src="js/moment.min.js"></script>
+		<script src="js/some_cool_functions.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -94,15 +95,11 @@
 								<div class="mp-level">
 									<h2 class="icon icon-news">Мой календарь</h2>
 									<a class="mp-back" href="#">назад</a>
-									<ul>
-										<li><a href="#">Проект 1</a></li>
-										<li><a href="#">Проект 2</a></li>
-										<li><a href="#">Проект 3</a></li>
-										<li><a href="#">Проект 4</a></li>
-										<li><a href="#">Проект 5</a></li>
-										<li><a href="#">Проект 6</a></li>
-									</ul>
+									<ul id="mycalendar"></ul>
 								</div>
+								<script>
+									mycalendar()
+								</script>
 							</li>
 							<!--<li class="icon icon-arrow-left">
 								<a class="icon icon-shop" href="#">Store</a>
@@ -325,123 +322,23 @@
 								</select>
 								</p>
 			
-								<div class="task-place">
-								  <div class="task-elem">
-									  <p><input type="checkbox" name="task1" value="task1">  Задача 1</p>
-								  </div>
-								  <div class="task-elem">
-									<p><input type="checkbox" name="task2" value="task2">  Задача 2</p>
-								  </div>
-								  <div class="task-elem">
-									<p><input type="checkbox" name="task3" value="task3">  Я настроил корректный перенос слов!</p>
-								  </div>
-								  <div class="task-elem">
-									<p><input type="checkbox" name="task4" value="task4">  Задача 4</p>
-								  </div>
-								  <div class="task-elem">
-									<p><input type="checkbox" name="task5" value="task5">  Задача 5</p>
-								  </div>
-								</div>
-			
+								<div class="task-place" id="taskplace"></div>
+								<script>
+									taskplace()
+								</script>
 								<p>Проекты:</p>
-								<div class="project-place">
-			
-								  <a class="button" href="index3.html">
-									<div class="project-elem">
-										<img src="icons/folder.png">
-										<p>Проект 1 </p>
-									</div>
-								  </a>
-			
-								  <a class="button" href="index3.html">
-									<div class="project-elem">
-										<img src="icons/folder.png">
-										<p>Проект 2 </p>
-									</div>
-								  </a>
-			
-								  <a class="button" href="index3.html">
-									<div class="project-elem">
-										<img src="icons/folder.png">
-										<p>Проект 3 </p>
-									</div>
-								  </a>
-			
-								  <a class="button" href="index3.html">
-									<div class="project-elem">
-										<img src="icons/folder.png">
-										<p>Проект 4 </p>
-									</div>
-								  </a>
-			
-								  <a class="button" href="index3.html">
-									<div class="project-elem">
-										<img src="icons/folder.png">
-										<p>Проект 5 </p>
-									</div>
-								  </a>
-			
-								  <a class="button" href="index3.html">
-									<div class="project-elem">
-										<img src="icons/folder.png">
-										<p>Проект 6 </p>
-									</div>
-								  </a>
-			
-								  <a class="button" href="index3.html">
-									<div class="project-elem">
-										<img src="icons/folder.png">
-										<p>Проект 7 </p>
-									</div>
-								  </a>
-			
-								  <a class="button" href="index3.html">
-									<div class="project-elem">
-										<img src="icons/folder.png">
-										<p>Проект 8 </p>
-									</div>
-								  </a>
-								</div>
+								
+								<div class="project-place" id ="projectplace"></div>
+								<script>
+									projectplace()
+								</script>
 								
 								<p>Коллеги:</p>
-								<div class="сolleagues-place">
-			
-								  <a class="button" href="index3.html">
-									<div class="сolleagues-elem">
-										<img src="icons/person.png">
-										<p>Анастасия Шредер</p>
-									</div>
-								  </a>
-			
-								  <a class="button" href="index3.html">
-									<div class="сolleagues-elem">
-										<img src="icons/person.png">
-										<p>Марк Шерман</p>
-									</div>
-								  </a>
-			
-								  <a class="button" href="index3.html">
-									<div class="сolleagues-elem">
-										<img src="icons/person.png">
-										<p>Конев Иван</p>
-									 </div>
-								  </a>
-			
-								  <a class="button" href="index3.html">
-									<div class="сolleagues-elem">
-										<img src="icons/person.png">
-										<p>Данил Лялин</p>
-									</div>
-								  </a>
-			
-								  <a class="button" href="index3.html">
-									<div class="сolleagues-elem">
-										<img src="icons/person.png">
-										<p>Андрей Тагиев</p>
-									</div>
-								  </a>
-								</div>
-			
+								<div class="сolleagues-place" id="colleaguesplace"></div>
+								<script>
+									colleaguesplace()
+								</script>
+								  
 								<div class="add-button">
 									<button style="width: 13vw;">Добавить</button>
 								</div>
