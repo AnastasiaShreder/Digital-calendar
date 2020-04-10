@@ -1,3 +1,5 @@
+let filter = ["Work", "Sports", "Kids", "Other"];
+
 !function () {
 
 	var today = moment();
@@ -55,12 +57,14 @@
 		this.title.innerHTML = this.current.format('MMMM YYYY');
 	}
 
+	
 	Calendar.prototype.drawMonth = function () {
 		var self = this;
 
 		this.events.forEach(function (ev) {
 			ev.date = self.current.clone().date(Math.random() * (29 - 1) + 1);
 		});
+		// Здесь нужно сделать получение данных по одному месяцу из БД и для каждого дня присвоить событие
 
 
 		if (this.month) {
@@ -187,6 +191,10 @@
 		return classes.join(' ');
 	}
 
+/*!*/ Calendar.prototype.filter = function (el) {
+
+};
+
 	Calendar.prototype.openDay = function (el) {
 		var details, arrow;
 		var dayNumber = +el.querySelectorAll('.day-number')[0].innerText || +el.querySelectorAll('.day-number')[0].textContent;
@@ -230,16 +238,20 @@
 		}
 
 		var todaysEvents = this.events.reduce(function (memo, ev) {
-			if (ev.date.isSame(day, 'day')) {
+			if ((ev.date.isSame(day, 'day')) && (
+/*!*/		(ev.calendar == filter[0]) || (ev.calendar == filter[1]) || (ev.calendar == filter[2]) || (ev.calendar == filter[3]))){
 				memo.push(ev);
 			}
 			return memo;
 		}, []);
 
+
 		this.renderEvents(todaysEvents, details);
 
 		arrow.style.left = el.offsetLeft - el.parentNode.offsetLeft + 27 + 'px';
 	}
+
+	
 
 	Calendar.prototype.renderEvents = function (events, ele) {
 		//Remove any events in the current details element
@@ -318,6 +330,7 @@
 
 	window.Calendar = Calendar;
 
+
 	function createElement(tagName, className, innerText) {
 		var ele = document.createElement(tagName);
 		if (className) {
@@ -363,3 +376,34 @@
 
 }();
   
+
+////////////////////////////////////////////////
+document.forms.filters_left.addEventListener('change', function () {
+	var chk = event.target
+	
+	if (chk.tagName === 'INPUT' && chk.type === 'checkbox') {
+		while(filter.length > 0)
+		{
+			filter.pop();
+		}
+		if (document.forms.filters_left.work.checked)
+		{
+			filter.push("Work");
+		}	
+		if (document.forms.filters_left.sport.checked)
+		{
+			filter.push("Sports");
+		}
+		if (document.forms.filters_left.kids.checked)
+		{
+			filter.push("Kids");
+		}
+		if (document.forms.filters_left.other.checked)
+		{
+			filter.push("Other");
+		}
+
+	}
+	})
+
+////////////////////////////////////////////////////////////

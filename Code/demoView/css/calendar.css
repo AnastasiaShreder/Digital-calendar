@@ -1,4 +1,4 @@
-/**, *:before, *:after {
+*:before, *:after {
     -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
     }
     
@@ -9,14 +9,14 @@
      color: rgba(255, 255, 255, 1);
      margin: 0;
      padding: 0;
-     background: #4A4A4A;
+     background-image: url(background/back2.jpg);
      -webkit-touch-callout: none;
      -webkit-user-select: none;
      -khtml-user-select: none;
      -moz-user-select: none;
      -ms-user-select: none;
      user-select: none;
-    }*/
+    }
 
     #calendar {
       -webkit-transform: translate3d(0, 0, 0);
@@ -26,15 +26,17 @@
       margin: 0 auto;
       height: 650px; /*570*/
       overflow: hidden;
+
     }
     
     .header {
       height: 50px;
       width: 1050px; /*420*/
-      background: #d01414;/*rgba(66, 66, 66, 1);*/
+      background: #F4F0B6;/*rgba(66, 66, 66, 1);*/ /*ТУТ МЕНЯЕТСЯ ЦВЕТ ШАПКИ*/
       text-align: center;
       position:relative;
-      z-index: 100;
+      z-index: 10;
+      
     }
     
     .header h1 {

@@ -12,12 +12,11 @@
 			 -webkit-hyphens: auto;
 			 -ms-hyphens: auto;
 			}
-		   </style>
+		</style>
 	  <!--Конец штуки-->
 		<meta name="description" content="Multi-Level Push Menu: Off-screen navigation with multiple levels" />
 		<meta name="keywords" content="multi-level, menu, navigation, off-canvas, off-screen, mobile, levels, nested, transform" />
 		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="../favicon.ico">
 		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/icons.css" />
@@ -283,8 +282,39 @@
 								<p><a href="http://goo.gl/JLJ4v5">Responsive Multi-Level Menu</a></p>
 								<p><a href="http://goo.gl/qjbq9Y">Google Nexus Website Menu</a></p>
 							</div>-->
+
+								  
 							<div class="surround-calendar">
-							   <div id="calendar"></div>
+								<div class="left-section">
+									<div class="filter-header">
+									<p><u>Фильтры:</u><p>
+									</div>
+									<form name="filters_left">
+										<div class="filter-elem">
+										<p><input type="checkbox" name="work" value="filter" checked>  Работа</p>
+										</div>
+										<div class="filter-elem">
+										<p><input type="checkbox" name="sport" value="filter" checked>  Спорт</p>
+										</div>
+										<div class="filter-elem">
+										<p><input type="checkbox" name="kids" value="filter" checked>  Дети</p>
+										</div>
+										<div class="filter-elem">
+										<p><input type="checkbox" name="other" value="filter" checked>  Другое</p>
+										</div>
+									</form>
+									<div class="line">
+									<p><input type="checkbox" name="filter-supervisor" value="filter-supervisor"> Отображать по руководителю:</p>
+									</div>
+									<div class="filter-search">
+										<input type="search" placeholder="Руководитель">
+									</div>
+								</div>
+
+								<div class="calendar-box">
+									   <div id="calendar"></div>
+								</div>
+
 							   <div class="right-section">
 								<p>Задачи из группы:
 								<select id="filter">
@@ -300,16 +330,16 @@
 									  <p><input type="checkbox" name="task1" value="task1">  Задача 1</p>
 								  </div>
 								  <div class="task-elem">
-									<p><input type="checkbox" name="task1" value="task1">  Задача 2</p>
+									<p><input type="checkbox" name="task2" value="task2">  Задача 2</p>
 								  </div>
 								  <div class="task-elem">
-									<p><input type="checkbox" name="task1" value="task1">  Я настроил корректный перенос слов!</p>
+									<p><input type="checkbox" name="task3" value="task3">  Я настроил корректный перенос слов!</p>
 								  </div>
 								  <div class="task-elem">
-									<p><input type="checkbox" name="task1" value="task1">  Задача 3</p>
+									<p><input type="checkbox" name="task4" value="task4">  Задача 4</p>
 								  </div>
 								  <div class="task-elem">
-									<p><input type="checkbox" name="task1" value="task1">  Задача 4</p>
+									<p><input type="checkbox" name="task5" value="task5">  Задача 5</p>
 								  </div>
 								</div>
 			
@@ -416,8 +446,14 @@
 									<button style="width: 13vw;">Добавить</button>
 								</div>
 			
-							  </div>
-						    </div>
+								
+							</div>
+						</div>
+
+
+							
+							
+							
 							<!--<script src="js/calendar_script.js"></script>-->
 						</div>
 					</div><!-- /scroller-inner -->
@@ -427,7 +463,7 @@
 
 			</div><!-- /pusher -->
 		</div><!-- /container -->
-       <script src="js/calendar_script.js"></script>
+	   <script src="js/calendar_script.js"></script>
 		<script src="js/classie.js"></script>
 		<script src="js/mlpushmenu.js"></script>
 		<script>

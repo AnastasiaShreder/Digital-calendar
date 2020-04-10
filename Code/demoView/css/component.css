@@ -9,16 +9,16 @@
 html, body, .container, .scroller {
 	height: 100%;
 }
+
 /*скрол по странице, рекомендую убрать*/
 .scroller {
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 /*это тоже скрол*/
 .scroller,
 .scroller-inner {
 	position: relative;
 }
-
 .container {
 	position: relative;
 	overflow: hidden;
@@ -300,3 +300,4 @@ html, body, .container, .scroller {
 .no-js .mp-menu > .mp-level {
 	display: block;
 }
+

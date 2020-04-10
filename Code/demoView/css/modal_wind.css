@@ -5,7 +5,7 @@
  * Base styles
  */
 
-button {
+.row button {
   background-color: #0D52E9;
   position: relative;
   color: #fff;
@@ -19,10 +19,10 @@ button {
   -webkit-transition: background 0.25s cubic-bezier(0.55, 0, 0.1, 1);
   transition: background 0.25s cubic-bezier(0.55, 0, 0.1, 1);
 }
-button:hover {
+.row button:hover {
   background: #0c4ddb;
 }
-button:focus {
+.row button:focus {
   outline: none;
 }
 
@@ -63,7 +63,7 @@ button:focus {
 /**
  * Modal
  */
-.modal {
+ .modal-overlay .modal {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -92,7 +92,7 @@ button:focus {
   -webkit-transition: all 0.6s cubic-bezier(0.55, 0, 0.1, 1);
   transition: all 0.6s cubic-bezier(0.55, 0, 0.1, 1);
 }
-.modal .close-modal {
+.modal-overlay .modal .close-modal {
   position: absolute;
   cursor: pointer;
   top: 5px;
@@ -107,11 +107,11 @@ button:focus {
   -webkit-transition-delay: 0.3s;
           transition-delay: 0.3s;
 }
-.modal .close-modal svg {
+.modal-overlay .modal .close-modal svg {
   width: 1.75em;
   height: 1.75em;
 }
-.modal .modal-content {
+.modal-overlay .modal .modal-content {
   opacity: 0;
   width: 600px;
   color: black;
@@ -122,16 +122,16 @@ button:focus {
   -webkit-transition-delay: 0.3s;
           transition-delay: 0.3s;
 }
-.modal.active {
+.modal-overlay .modal.active {
   visibility: visible;
   opacity: 1;
   -webkit-transform: scale(1);
           transform: scale(1);
 }
-.modal.active .modal-content {
+.modal-overlay .modal.active .modal-content {
   opacity: 1;
 }
-.modal.active .close-modal {
+.modal-overlay .modal.active .close-modal {
   -webkit-transform: translateY(10px);
           transform: translateY(10px);
   opacity: 1;
@@ -141,11 +141,11 @@ button:focus {
  * Mobile styling
  */
 @media only screen and (max-width: 39.9375em) {
-  h1 {
+  .modal-overlay h1 {
     font-size: 1.5rem;
   }
 
-  .modal {
+  .modal-overlay .modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -158,7 +158,7 @@ button:focus {
     padding: 0 !important;
   }
 
-  .close-modal {
+  .modal-overlay .close-modal {
     right: 20px !important;
   }
 }

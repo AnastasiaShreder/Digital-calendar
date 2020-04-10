@@ -1,36 +1,66 @@
 /*Нужно для того чтобы плашка была рядом с календарём на любом экране*/
 .surround-calendar{
+	display: flex;
+	justify-content: space-between;
 	width: 1050px;
 	height: 650px;
-	margin: 0 auto;
 }
+
+.calendar-box
+{
+	margin: 5px;
+}
+
+/*Плашка слева*/
+.left-section{	
+	color: #72512C;
+	/*background-color: #ffffffff;*/
+	border:2px outset #F4F0B6;
+	width: 14.5vw;
+	height: 280px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 160px;
+}
+
+.left-section .line{
+	border-top:2px outset #F4F0B6;
+}
+
+.left-section .filter-search input{
+	width: 90%;
+	margin: 0 auto;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+/*Конец плашки слева*/
 
 /*Плашка справа*/
  .right-section{	
-	position: relative;
-	right: -1060px;
-	bottom: 650px;
-	color: black;
+	color: #72512C;
 	background-color: #ffffffff;
-	border:2px outset #d01414;
+	border:2px outset #F4F0B6;
 	width: 14.5vw;
 	height: 650px;
+	margin-left: 10px;
+	margin-right: 10px;
+
 }
 
-.right-section p{
+.right-section p, .left-section p{
 	margin: 10px;
 }
 
 /*Описание вкладок на плашке*/
-.task-place, .project-place, .сolleagues-place{
+.filter-place, .task-place, .project-place, .сolleagues-place{
 	overflow-y: auto;
 	position: relative;
 	margin: 5px;
 	width: auto;
 	height: 185px;
-	color: black;
-	background-color: #ff0000 ;
-	border:2px outset #d01414;
+	color: #72512C;
+	background-color: #F4F0B6;
+	border:2px outset #F4F0B6;
 }
 
 .сolleagues-place{
@@ -39,21 +69,20 @@
 /*Конец описания вкладок на плашке*/
 
 /*Описание кнопки*/
-.add-button{
+.right-section .add-button{
 	width: auto;
 	height: auto;
-	margin: 0 auto;
-	padding-left: 10px;
-	color: black;
-	margin: 0 auto;
+	color: #72512C;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 /*Конец описания кнопки*/
 
 /*Описание элементов*/
-.task-elem, .project-elem, .сolleagues-elem{
+ .task-elem, .project-elem, .сolleagues-elem{
 	width: auto;
 	height: auto;
-	border-bottom:2px solid #ad5c17;
+	border-bottom:2px solid #F4F0B6;
 }
 
 /*Перемена цвета при наведении на элемент МОЖЕШЬ МЕНЯТЬ*/
@@ -68,9 +97,9 @@
 }
 .project-elem p, .сolleagues-elem p{
 	display: inline;
-	color: black;
+	color: #72512C;
 	margin: 15px;
 }
 /*Конец описания элементов*/
 
-/*Конец плашки*/
+/*Конец плашки справа*/
