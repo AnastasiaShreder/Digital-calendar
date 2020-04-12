@@ -6,10 +6,10 @@
      overflow: hidden;
      font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
      font-weight: 100;
-     color: rgba(255, 255, 255, 1);
+     color: rgb(255, 255, 255, 1);
      margin: 0;
      padding: 0;
-     background-image: url(background/back2.jpg);
+     background: #ebd3b0 url(background/back2.jpg);
      -webkit-touch-callout: none;
      -webkit-user-select: none;
      -khtml-user-select: none;
@@ -32,7 +32,7 @@
     .header {
       height: 50px;
       width: 1050px; /*420*/
-      background: #F4F0B6;/*rgba(66, 66, 66, 1);*/ /*ТУТ МЕНЯЕТСЯ ЦВЕТ ШАПКИ*/
+      background: #FDCF78;/*rgba(66, 66, 66, 1);*/ /*ТУТ МЕНЯЕТСЯ ЦВЕТ ШАПКИ*/
       text-align: center;
       position:relative;
       z-index: 10;
