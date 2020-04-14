@@ -58,7 +58,7 @@
 }
 
 .menu--prospero .menu__item--current .menu__link {
-	color: #d94f5c;
+	color: #976821;
 }
 
 .menu--prospero .menu__link::before {
@@ -68,7 +68,7 @@
 	left: 0;
 	width: 100%;
 	height: 4px;
-	background: #d94f5c;
+	background: #72512c;
 	-webkit-transform: scale3d(0, 1, 1);
 	transform: scale3d(0, 1, 1);
 	-webkit-transition: -webkit-transform 0.1s;

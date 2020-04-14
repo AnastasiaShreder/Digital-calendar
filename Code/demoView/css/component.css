@@ -37,8 +37,8 @@ html, body, .container, .scroller {
 	left: 0;
 	width: 40px;
 	height: 6px;
-	background: #c80d0d;
-	box-shadow: 0 6px #fff, 0 12px #c80d0d, 0 18px #fff, 0 24px #c80d0d;
+	background: #7c5c39;
+	box-shadow: 0 6px #fff, 0 12px #7c5c39, 0 18px #fff, 0 24px #7c5c39;
 	content: '';
 }
 
