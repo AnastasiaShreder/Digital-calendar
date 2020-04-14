@@ -1,4 +1,4 @@
-let filter = ["Work", "Sports", "Kids", "Other"];
+let filter = ["Общее", "Заказы", "Встречи", "..."];
 
 !function () {
 
@@ -270,7 +270,7 @@ let filter = ["Work", "Sports", "Kids", "Other"];
 
 		if (!events.length) {
 			var div = createElement('div', 'event empty');
-			var span = createElement('span', '', 'No Events');
+			var span = createElement('span', '', 'Нет событий');
 
 			div.appendChild(span);
 			wrapper.appendChild(div);
@@ -345,25 +345,25 @@ let filter = ["Work", "Sports", "Kids", "Other"];
 
 !function () {
 	var data = [
-		{eventName: 'Lunch Meeting w/ Mark', calendar: 'Work', color: 'orange'},
-		{eventName: 'Interview - Jr. Web Developer', calendar: 'Work', color: 'orange'},
-		{eventName: 'Demo New App to the Board', calendar: 'Work', color: 'orange'},
-		{eventName: 'Dinner w/ Marketing', calendar: 'Work', color: 'orange'},
+		{eventName: 'Задача 1', calendar: 'Общее', color: 'orange'},
+		{eventName: 'Задача 2', calendar: 'Общее', color: 'orange'},
+		{eventName: 'Задача 3', calendar: 'Общее', color: 'orange'},
+		{eventName: 'Задача 4', calendar: 'Общее', color: 'orange'},
 
-		{eventName: 'Game vs Portalnd', calendar: 'Sports', color: 'blue'},
-		{eventName: 'Game vs Houston', calendar: 'Sports', color: 'blue'},
-		{eventName: 'Game vs Denver', calendar: 'Sports', color: 'blue'},
-		{eventName: 'Game vs San Degio', calendar: 'Sports', color: 'blue'},
+		{eventName: 'Заказ 1', calendar: 'Заказы', color: 'blue'},
+		{eventName: 'Заказ 2', calendar: 'Заказы', color: 'blue'},
+		{eventName: 'Заказ 3', calendar: 'Заказы', color: 'blue'},
+		{eventName: 'Заказ 4', calendar: 'Заказы', color: 'blue'},
 
-		{eventName: 'School Play', calendar: 'Kids', color: 'yellow'},
-		{eventName: 'Parent/Teacher Conference', calendar: 'Kids', color: 'yellow'},
-		{eventName: 'Pick up from Soccer Practice', calendar: 'Kids', color: 'yellow'},
-		{eventName: 'Ice Cream Night', calendar: 'Kids', color: 'yellow'},
+		{eventName: 'Встреча 1', calendar: 'Встречи', color: 'yellow'},
+		{eventName: 'Встреча 2', calendar: 'Встречи', color: 'yellow'},
+		{eventName: 'Встреча 3', calendar: 'Встречи', color: 'yellow'},
+		{eventName: 'Встреча 4', calendar: 'Встречи', color: 'yellow'},
 
-		{eventName: 'Free Tamale Night', calendar: 'Other', color: 'green'},
-		{eventName: 'Bowling Team', calendar: 'Other', color: 'green'},
-		{eventName: 'Teach Kids to Code', calendar: 'Other', color: 'green'},
-		{eventName: 'Startup Weekend', calendar: 'Other', color: 'green'}
+		{eventName: 'Прочее 1', calendar: '...', color: 'green'},
+		{eventName: 'Прочее 2', calendar: '...', color: 'green'},
+		{eventName: 'Прочее 3', calendar: '...', color: 'green'},
+		{eventName: 'Прочее 4', calendar: '...', color: 'green'}
 	];
 
 
@@ -388,19 +388,19 @@ document.forms.filters_left.addEventListener('change', function () {
 		}
 		if (document.forms.filters_left.work.checked)
 		{
-			filter.push("Work");
+			filter.push("Общее");
 		}	
 		if (document.forms.filters_left.sport.checked)
 		{
-			filter.push("Sports");
+			filter.push("Заказы");
 		}
 		if (document.forms.filters_left.kids.checked)
 		{
-			filter.push("Kids");
+			filter.push("Встречи");
 		}
 		if (document.forms.filters_left.other.checked)
 		{
-			filter.push("Other");
+			filter.push("...");
 		}
 
 	}
