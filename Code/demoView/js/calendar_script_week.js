@@ -1,9 +1,11 @@
 
+// --------Старая версия календаря, без использования сервера. Нужно переделать так, чтоб он показывал только одну неделю-------------
+
 !function () {
 
 	var today = moment();
 
-	function Calendar(selector, events) {
+	function Calendar_w(selector, events) {
 		this.el = document.querySelector(selector);
 		this.events = events;
 		this.current = moment().date(1);
@@ -17,17 +19,20 @@
 		}
 	}
 
-	Calendar.prototype.draw = function () {
-		this.drawHeader();
+	Calendar_w.prototype.draw = function () {
+		//Create Header
+		//this.drawHeader();
 
+		//Draw Month
 		this.drawMonth();
 
 		this.drawLegend();
 	}
 
-	Calendar.prototype.drawHeader = function () {
+	Calendar_w.prototype.drawHeader = function () {
 		var self = this;
 		if (!this.header) {
+			//Create the header elements
 			this.header = createElement('div', 'header');
 			this.header.className = 'header';
 
@@ -54,8 +59,14 @@
 	}
 
 	
-	Calendar.prototype.drawMonth = function () {
+	Calendar_w.prototype.drawMonth = function () {
 		var self = this;
+
+		this.events.forEach(function (ev) {
+			ev.date = self.current.clone().date(Math.random() * (29 - 1) + 1);
+		});
+		// Здесь нужно сделать получение данных по одному месяцу из БД и для каждого дня присвоить событие
+
 
 		if (this.month) {
 			this.oldMonth = this.month;
@@ -81,7 +92,7 @@
 		}
 	}
 
-	Calendar.prototype.backFill = function () {
+	Calendar_w.prototype.backFill = function () {
 		var clone = this.current.clone();
 		var dayOfWeek = clone.day() - 1;
 
@@ -99,7 +110,7 @@
 		}
 	}
 
-	Calendar.prototype.fowardFill = function () {
+	Calendar_w.prototype.fowardFill = function () {
 		var clone = this.current.clone().add('months', 1).subtract('days', 1);
 		var dayOfWeek = clone.day();
 
@@ -112,7 +123,7 @@
 		}
 	}
 
-	Calendar.prototype.currentMonth = function () {
+	Calendar_w.prototype.currentMonth = function () {
 		var clone = this.current.clone();
 
 		while (clone.month() === this.current.month()) {
@@ -121,16 +132,16 @@
 		}
 	}
 
-	Calendar.prototype.getWeek = function (day) {
+	Calendar_w.prototype.getWeek = function (day) {
 		if (!this.week || day.day() === 1) {
 			this.week = createElement('div', 'week');
 			this.month.appendChild(this.week);
 		}
 	}
 
-	Calendar.prototype.drawDay = function (day) {
+	Calendar_w.prototype.drawDay = function (day) {
 		var self = this;
-		this.getWeek(day);
+		//this.getWeek(day);
 
 		//Outer Day
 		var outer = createElement('div', this.getDayClass(day));
@@ -155,7 +166,7 @@
 		this.week.appendChild(outer);
 	}
 
-	Calendar.prototype.drawEvents = function (day, element) {
+	Calendar_w.prototype.drawEvents = function (day, element) {
 		if (day.month() === this.current.month()) {
 			var todaysEvents = this.events.reduce(function (memo, ev) {
 				if (ev.date.isSame(day, 'day')) {
@@ -171,7 +182,7 @@
 		}
 	}
 
-	Calendar.prototype.getDayClass = function (day) {
+	Calendar_w.prototype.getDayClass = function (day) {
 		classes = ['day'];
 		if (day.month() !== this.current.month()) {
 			classes.push('other');
@@ -181,11 +192,11 @@
 		return classes.join(' ');
 	}
 
-/*!*/ Calendar.prototype.filter = function (el) {
+/*!*/ Calendar_w.prototype.filter = function (el) {
 
 };
 
-	Calendar.prototype.openDay = function (el) {
+	Calendar_w.prototype.openDay = function (el) {
 		var details, arrow;
 		var dayNumber = +el.querySelectorAll('.day-number')[0].innerText || +el.querySelectorAll('.day-number')[0].textContent;
 		var day = this.current.clone().date(dayNumber);
@@ -228,7 +239,8 @@
 		}
 
 		var todaysEvents = this.events.reduce(function (memo, ev) {
-			if (ev.date.isSame(day,'day')){
+			if ((ev.date.isSame(day, 'day')) && (
+/*!*/		(ev.calendar == filter[0]) || (ev.calendar == filter[1]) || (ev.calendar == filter[2]) || (ev.calendar == filter[3]))){
 				memo.push(ev);
 			}
 			return memo;
@@ -242,7 +254,7 @@
 
 	
 
-	Calendar.prototype.renderEvents = function (events, ele) {
+	Calendar_w.prototype.renderEvents = function (events, ele) {
 		//Remove any events in the current details element
 		var currentWrapper = ele.querySelector('.events');
 		var wrapper = createElement('div', 'events in' + (currentWrapper ? ' new' : ''));
@@ -288,8 +300,7 @@
 		}
 	}
 
-	Calendar.prototype.drawLegend = function () {
-
+	Calendar_w.prototype.drawLegend = function () {
 		var legend = createElement('div', 'legend');
 		var calendars = this.events.map(function (e) {
 			return e.calendar + '|' + e.color;
@@ -306,19 +317,19 @@
 		this.el.appendChild(legend);
 	}
 
-	Calendar.prototype.nextMonth = function () {
+	Calendar_w.prototype.nextMonth = function () {
 		this.current.add('months', 1);
 		this.next = true;
 		this.draw();
 	}
 
-	Calendar.prototype.prevMonth = function () {
+	Calendar_w.prototype.prevMonth = function () {
 		this.current.subtract('months', 1);
 		this.next = false;
 		this.draw();
 	}
 
-	window.Calendar = Calendar;
+	window.Calendar_w = Calendar;
 
 
 	function createElement(tagName, className, innerText) {
@@ -332,36 +343,3 @@
 		return ele;
 	}
 }();
-
-  // пример того, как можно проверять галочки
-
-////////////////////////////////////////////////
-/*document.forms.filters_left.addEventListener('change', function () {
-	var chk = event.target
-	
-	if (chk.tagName === 'INPUT' && chk.type === 'checkbox') {
-		while(filter.length > 0)
-		{
-			filter.pop();
-		}
-		if (document.forms.filters_left.work.checked)
-		{
-			filter.push("Общее");
-		}	
-		if (document.forms.filters_left.sport.checked)
-		{
-			filter.push("Заказы");
-		}
-		if (document.forms.filters_left.kids.checked)
-		{
-			filter.push("Встречи");
-		}
-		if (document.forms.filters_left.other.checked)
-		{
-			filter.push("...");
-		}
-
-	}
-	})
-*/
-////////////////////////////////////////////////////////////
