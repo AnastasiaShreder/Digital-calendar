@@ -92,11 +92,6 @@ function render_calendar_d(){
     var calendar = new Calendar('#calendar', tasks); //заменить на день
 }
 
-function render_calendar_m_first(){
-    render_calendar_m()
-}
-
-
 function taskplace(){
     var div = document.getElementById('taskplace');
 	for (i=0;i<tasks.length;i++){
@@ -157,7 +152,7 @@ async function render_all(){
     await collect_data()
     mycalendar()
     filters_left()
-    render_calendar_m_first()
+    render_calendar_m()
     taskplace()
     projectplace()
     colleaguesplace()
