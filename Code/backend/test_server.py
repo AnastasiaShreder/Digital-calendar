@@ -14,7 +14,18 @@ def create_data(data):
         return json.dumps(["Проект 1","Проект 2","Проект 3","Проект 4","Проект 5","Проект 6","Проект 7","Проект 8"])
     if data["type"]=="taskplace":
         return json.dumps([{"eventName":"Задача 1", "calendar":"Встреча", "color":"blue","date":"2020-04-27"},{"eventName":"Задача 3", "calendar":"Мероприятие", "color":"orange","date":"2020-04-04"}])
+    
+    
+    if data["type"] == "login":
+        if data["email"] =="user" and data["password"] == "user":
+            return json.dumps({'isTrue':"True", 'user_id' : 1})
+        
+        if data["email"] =="l" and data["password"] == "p":
+            return json.dumps({'isTrue':"True", 'user_id' : 239})
+        return json.dumps({'isTrue':"False", 'user_id' : 0})
+    
     return json.dumps([])
+
 
 @app.route("/",methods=['GET'])
 def simple():
