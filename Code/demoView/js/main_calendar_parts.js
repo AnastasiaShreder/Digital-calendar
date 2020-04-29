@@ -91,6 +91,7 @@ function render_mp_menu(){
               
               <input type="button" style="width: 13vw;" onclick="apply_right()" value="Применить"></input>
               <input type="button" style="width: 13vw;" onclick="add_task()" value="Добавить"></input>
+              <input type="button" style="width: 13vw;" onclick="logout()" value="Выйти"></input>
     
               
             </div>
@@ -270,9 +271,16 @@ function add_task(){
 
 }
 
+function delete_calendar(){
+  document.getElementById("container").remove()
+  document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
+  render_login_page()
+}
 
-
-
+function logout(){
+  localStorage.clear()
+  delete_calendar()
+}
 
 
 function mp_menu_animate(){
@@ -315,14 +323,6 @@ function mp_menu_animate(){
   }
   
 
-
-
-
-
-
-
-
-
   async function render_calendar(){
     await collect_data()
 
@@ -338,3 +338,8 @@ function mp_menu_animate(){
     mp_menu_animate()
 
   }
+
+  function render_successful_login (){  
+    delete_login_form()
+    render_calendar()
+}
