@@ -8,16 +8,18 @@ cors = CORS(app)
 def create_data(data):
     if data["type"]=="colleaguesplace":
         return json.dumps(["Андрей Тагиев","Марк Шерман","Анастасия Шредер","Иван Конев","Данил Лялин"])
+    if data["type"]=="filters":
+        return json.dumps(["Встреча","Заказ","Лекция","Совещание","Обед","Завтрак","Мероприятие","Еще мероприятие"])
     if data["type"]=="projectplace":
         return json.dumps(["Проект 1","Проект 2","Проект 3","Проект 4","Проект 5","Проект 6","Проект 7","Проект 8"])
     if data["type"]=="taskplace":
-        return json.dumps(["Задача 1","Задача 2","Задача 3","Заказ 1","Заказ 2","Заказ 3","Встреча 1","Встреча 2","Встреча 3","Прочее 1","Прочее 2","Прочее 3"])
+        return json.dumps([{"eventName":"Задача 1", "calendar":"Встреча", "color":"blue","date":"2020-04-27"},{"eventName":"Задача 3", "calendar":"Мероприятие", "color":"orange","date":"2020-04-04"}])
     return json.dumps([])
 
 @app.route("/",methods=['GET'])
 def simple():
     print(request.args)
-    return "тут ничего нет"
+    return '<a>ТУТ НИЧЕГО НЕТ</a>'
 
 @app.route("/",methods = ['POST'])
 @cross_origin()
