@@ -337,6 +337,4 @@ function mp_menu_animate(){
 
     mp_menu_animate()
 
-
-
   }

@@ -1,6 +1,6 @@
 function render_login_page(){
     var div = document.getElementById("container");
-    div.insertAdjacentHTML("beforebegin",`	<div class="limiter" id="login_form">
+    div.insertAdjacentHTML("beforebegin",`<div class="limiter" id="login_form">
     <div class="container-login100">
       <div class="wrap-login100">
         <form class="login100-form validate-form">
