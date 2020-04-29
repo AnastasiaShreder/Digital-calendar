@@ -273,7 +273,6 @@ function add_task(){
 
 function delete_calendar(){
   document.getElementById("container").remove()
-  document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
   render_login_page()
 }
 
@@ -325,7 +324,7 @@ function mp_menu_animate(){
 
   async function render_calendar(){
     await collect_data()
-
+    document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
     render_mp_menu()
 
     mycalendar()
@@ -339,7 +338,3 @@ function mp_menu_animate(){
 
   }
 
-  function render_successful_login (){  
-    delete_login_form()
-    render_calendar()
-}

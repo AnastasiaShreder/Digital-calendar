@@ -1,8 +1,8 @@
 function render_login_page(){
     if (localStorage.length==0){
-      
-      var div = document.getElementById("container");
-      div.insertAdjacentHTML("beforebegin",`<div class="limiter" id="login_form">
+
+      var div = document.body;
+      div.insertAdjacentHTML("beforeend",`<div class="limiter" id="login_form">
       <div class="container-login100">
         <div class="wrap-login100">
           <form class="login100-form validate-form">
@@ -75,13 +75,12 @@ function check_login(){
             if (responce.isTrue == "True"){
                 user_id = responce.user_id
                 localStorage.setItem("user_id", user_id)
-                render_successful_login()
+                delete_login_form()
+                render_calendar()
             }
-
             else {
                 alert("Неправильный логин или пароль")
             }
-
         }}) 
         
     if ((email != "") && (password !="")) {
@@ -94,8 +93,6 @@ function check_login(){
 
 
 function delete_login_form(){
-
     var div = document.getElementById("login_form")
     div.remove()
-   
 }
