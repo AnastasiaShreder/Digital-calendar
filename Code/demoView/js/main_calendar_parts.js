@@ -277,6 +277,9 @@ function delete_calendar(){
 }
 
 function logout(){
+  user_id = 0
+  tasks = []
+  filter = []
   localStorage.clear()
   delete_calendar()
 }
