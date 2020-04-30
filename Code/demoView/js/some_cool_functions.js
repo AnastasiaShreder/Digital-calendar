@@ -23,9 +23,18 @@ function apply_filters(){
 }
 
 function apply_right(){
-  
-  //render_calendar_m(...)оставить только задачи с галочками
-  
+  var new_tasks = []
+  var div = document.getElementById("task_place")
+  for(i=0;i<div.length;i++){
+    if(div[i].checked){     
+      for (j=0;j<tasks.length;j++){
+        if (tasks[j].eventName == div[i].value){
+          new_tasks.push(tasks[j])
+        }
+      }
+    }
+  }
+  render_calendar_m(new_tasks)
  //сработает при нажатии кнопки "применить" справа
 } 
 

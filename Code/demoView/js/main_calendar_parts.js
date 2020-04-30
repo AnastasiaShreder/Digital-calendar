@@ -83,7 +83,7 @@ function render_mp_menu(){
               </select>
               </p>
     
-              <div class="task-place" id="taskplace"></div>
+              <form class="task-place" id="task_place"></form>
               <p id="aftertaskplace">Проекты:</p>
               <div class="project-place" id ="projectplace"></div>
               <p>Коллеги:</p>
@@ -150,12 +150,12 @@ function render_calendar_d(task = tasks){
 }
 
 function taskplace(){
-    document.getElementById('taskplace').remove()
-    document.getElementById("aftertaskplace").insertAdjacentHTML("beforebegin",`<div class="task-place" id="taskplace"></div>`)
-    var div = document.getElementById('taskplace');
+    document.getElementById('task_place').remove()
+    document.getElementById("aftertaskplace").insertAdjacentHTML("beforebegin",`<form class="task-place" id="task_place"></form>`)
+    var div = document.getElementById('task_place');
     for (i=0;i<tasks.length;i++){
         div.insertAdjacentHTML("beforeend", `<div class="task-elem">
-        <p><input type="checkbox" name="task${i}" value="task${i}" checked>${tasks[i].eventName}</p>
+        <p><input type="checkbox" name="task${i}" value="${tasks[i].eventName}" checked>${tasks[i].eventName}</p>
         </div>`);
     }
 }
