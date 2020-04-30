@@ -89,8 +89,8 @@ function render_mp_menu(){
               <p>Коллеги:</p>
               <div class="сolleagues-place" id="colleaguesplace"></div>
               
-              <input type="button" style="width: 13vw;" onclick="apply_right()" value="Применить"></input>
-              <input type="button" style="width: 13vw;" onclick="add_task()" value="Добавить"></input>
+              <input type="button" style="width: 13vw;" onclick="apply_right()" id="apply_right" value="Применить"></input>
+              <input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>
               <input type="button" style="width: 13vw;" onclick="logout()" value="Выйти"></input>
     
               
@@ -106,49 +106,46 @@ function render_mp_menu(){
  
    }
 
-   function mycalendar(){
-    var div = document.getElementById('mycalendar');
+function mycalendar(){
+  var div = document.getElementById('mycalendar');
 	for (i=0; i<100;i++){
 		div.insertAdjacentHTML("beforeend", `<li><a href="#">Проект ${i}</a></li>`);
-    }
-    
+  }  
 }
 
 
 function filters_left(){
-    r = filter
-    
     var div = document.getElementById('filters_left');
-    for (i=0;i<r.length;i++){
+    for (i=0;i<filter.length;i++){
         div.insertAdjacentHTML("beforeend", `<div class="filter-elem">
-        <p><input type="checkbox" name="${r[i]}" value="filter" checked>  ${r[i]}</p>
+        <p><input type="checkbox" name="${filter[i]}" value="filter" checked>${filter[i]}</p>
         </div>`);
     }
 }
 
 
 function render_calendar_m(){
-    let div = document.getElementById('calendar');
+    var div = document.getElementById('calendar');
     div.remove()
-    let div2 = document.getElementById('calendar-box');
-    div2.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
+    var div = document.getElementById('calendar-box');
+    div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
     var calendar = new Calendar('#calendar', tasks);
 }
 
 function render_calendar_w(){
-    let div = document.getElementById('calendar');
+    var div = document.getElementById('calendar');
     div.remove()
-    let div2 = document.getElementById('calendar-box');
-    div2.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
+    var div = document.getElementById('calendar-box');
+    div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
     var calendar = new Calendar_w('#calendar', tasks);
 
 }
 
 function render_calendar_d(){
-    let div = document.getElementById('calendar');
+    var div = document.getElementById('calendar');
     div.remove()
-    let div2 = document.getElementById('calendar-box');
-    div2.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
+    var div = document.getElementById('calendar-box');
+    div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
     var calendar = new Calendar('#calendar', tasks); //заменить на день
 }
 
@@ -166,21 +163,19 @@ function projectplace(){
     var div = document.getElementById('projectplace');
 
     var request = new XMLHttpRequest();
-    request.open('POST','http://85.142.164.100:5000/',true);//request.open('POST','/',false);
-	request.addEventListener('readystatechange', function() {
+    request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false);
+	  request.addEventListener('readystatechange', function() {
 	    if ((request.readyState==4) && (request.status==200)) {
-            responce = JSON.parse(request.responseText)
-			for (i=0;i<responce.length;i++){
-                div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project()">
-                    <div class="project-elem">
-                        <img src="icons/folder.png">
-                        <p>${responce[i]} </p>
-                    </div>
-                    </a>`);
-            }
-    
+        responce = JSON.parse(request.responseText)
+			  for (i=0;i<responce.length;i++){
+          div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project()">
+            <div class="project-elem">
+            <img src="icons/folder.png">
+            <p>${responce[i]} </p>
+            </div></a>`);
+        }
 		}
-	}); 
+	  }) 
     request.send(JSON.stringify({'type':'projectplace', 'sql':'something'})); 
 }
 
@@ -189,29 +184,30 @@ function colleaguesplace(){
     
     var request = new XMLHttpRequest();
     
-    request.open('POST','http://85.142.164.100:5000/',true);//request.open('POST','/',false);
-	request.addEventListener('readystatechange', function() {
+    request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false);
+	  request.addEventListener('readystatechange', function() {
 	    if ((request.readyState==4) && (request.status==200)) {
-            responce = JSON.parse(request.responseText)
-			for (i=0;i<responce.length;i++){
-                div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_colleague()">
-                    <div class="сolleagues-elem">
-                        <img src="icons/person.png">
-                        <p>${responce[i]}</p>
-                    </div>
-                    </a>`);
-            }
-		}
-	}); 
+        responce = JSON.parse(request.responseText)
+			  for (i=0;i<responce.length;i++){
+          div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_colleague()">
+            <div class="сolleagues-elem">
+            <img src="icons/person.png">
+            <p>${responce[i]}</p>
+            </div></a>`)
+        }
+		  }
+	  }); 
     request.send(JSON.stringify({'type':'colleaguesplace', 'sql':'something'})); 
 }
 
 
 function add_task(){
-    let div = document.getElementById('calendar');
+    var div = document.getElementById('add_task');
     div.remove()
-    let div2 = document.getElementById('calendar-box');
-    div2.insertAdjacentHTML("beforeend",`
+    var div = document.getElementById('calendar');
+    div.remove()
+    var div = document.getElementById('calendar-box');
+    div.insertAdjacentHTML("beforeend",`
         <div id="calendar">
 			<form>
 			  <div class="row">
@@ -260,7 +256,7 @@ function add_task(){
 				</div>
 			  </div>
 			  <div class="row">
-				<input onclick="render_calendar_m()" type="submit" value="Submit">
+				<input onclick="add_task_submit()" type="submit" value="Submit">
 			  </div>
 			</form>
 		  
@@ -271,7 +267,13 @@ function add_task(){
 
 }
 
-function delete_calendar(){
+function add_task_submit(){
+  var div = document.getElementById('apply_right');
+  div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>`)
+  render_calendar_m()
+}
+
+function delete_container(){
   document.getElementById("container").remove()
   render_login_page()
 }
@@ -281,7 +283,7 @@ function logout(){
   tasks = []
   filter = []
   localStorage.clear()
-  delete_calendar()
+  delete_container()
 }
 
 
@@ -325,19 +327,21 @@ function mp_menu_animate(){
   }
   
 
-  async function render_calendar(){
-    await collect_data()
-    document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
-    render_mp_menu()
+function render_calendar(){
+  get_tasks()
+  get_filters()
 
-    mycalendar()
-    filters_left()
-    render_calendar_m()
-    taskplace()
-    projectplace()
-    colleaguesplace()
+  document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
+  render_mp_menu()
 
-    mp_menu_animate()
+  mycalendar()
+  filters_left()
+  render_calendar_m()
+  taskplace()
+  projectplace()
+  colleaguesplace()
 
-  }
+  mp_menu_animate()
+
+}
 
