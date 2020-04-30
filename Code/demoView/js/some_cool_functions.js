@@ -1,13 +1,6 @@
 let filter = []
 let tasks = []
-let user_id = 0
-
-
-function render_successful_login (){  
-    delete_login_form()
-    render_calendar()
-}
-
+let user_id = 0 // при успешной авторизации отличен от 0
 
 function apply_filters(){
     //сработает при нажатии кнопки "применить" слева
