@@ -118,7 +118,7 @@ function filters_left(){
     var div = document.getElementById('filters_left');
     for (i=0;i<filter.length;i++){
         div.insertAdjacentHTML("beforeend", `<div class="filter-elem">
-        <p><input type="checkbox" name="${i}" value="filter" checked>${filter[i]}</p>
+        <p><input type="checkbox" name="${i}" value="${filter[i]}" checked>${filter[i]}</p>
         </div>`);
     }
 }
@@ -160,7 +160,6 @@ function taskplace(){
     }
 }
 
-
 function projectplace(){
     var div = document.getElementById('projectplace');
     div=`<div class="project-place" id ="projectplace"></div>`
@@ -174,8 +173,6 @@ function projectplace(){
       }
 }
 
-
-
 function colleaguesplace(){
     var div = document.getElementById('colleaguesplace');
     div=`<div class="сolleagues-place" id="colleaguesplace"></div>`
@@ -188,7 +185,6 @@ function colleaguesplace(){
         </div></a>`)
       }	  
 }
-
 
 function add_task(){
     var div = document.getElementById('add_task');
@@ -259,7 +255,6 @@ function add_task(){
 function add_task_submit(){
   //tasks.push() добавить новую задачу в глобальную переменную
   taskplace()
-  
   //отправить задачу на сервер
   var div = document.getElementById('apply_right');
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>`)

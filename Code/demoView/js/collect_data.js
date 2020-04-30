@@ -1,4 +1,4 @@
-function get_tasks(filters = filter,project_id = 0, u_id = 0){
+function get_tasks(project_id = 0, u_id = 0){
     tasks = []
     var request = new XMLHttpRequest();
     request.withCredentials = true;
@@ -6,9 +6,8 @@ function get_tasks(filters = filter,project_id = 0, u_id = 0){
     request.addEventListener('readystatechange', function() {
         if ((request.readyState==4) && (request.status==200)) {
             responce = JSON.parse(request.responseText)
-            for (i=0;i<responce.length;i++){
-                if (filters.indexOf(responce[i].calendar)!=-1){
-                tasks.push({eventName:responce[i].eventName, calendar:responce[i].calendar, color:responce[i].color, date:moment(responce[i].date)})}
+            for (i=0;i<responce.length;i++){    
+                tasks.push({eventName:responce[i].eventName, calendar:responce[i].calendar, color:responce[i].color, date:moment(responce[i].date)})
             }
         }
     }) 
@@ -30,7 +29,6 @@ function get_filters(){
     })
     request.send(JSON.stringify({'type':'filters'})); 
 }
-
 
 function get_colleagues(){
     var request = new XMLHttpRequest();

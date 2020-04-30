@@ -5,10 +5,20 @@ let colleagues = []
 let user_id = 0 // при успешной авторизации отличен от 0
 
 function apply_filters(){
-  //get_tasks(filters = ) /получить список фильтров с галочками
-  //taskplace()
-  //render_calendar_m()
-  
+  var new_filter = []
+  var div = document.getElementById("filters_left")
+  for(i=0;i<div.length;i++){
+    if(div[i].checked){
+      new_filter.push(div[i].value)
+    }
+  }
+  var new_tasks = []
+  for (i=0;i<tasks.length;i++){
+    if (new_filter.indexOf(tasks[i].calendar)!=-1){
+      new_tasks.push(tasks[i])
+    }
+  }
+  render_calendar_m(new_tasks)  
   //сработает при нажатии кнопки "применить" слева
 }
 

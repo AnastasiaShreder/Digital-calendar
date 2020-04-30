@@ -17,19 +17,23 @@ cors = CORS(app)
 
 def create_data(data):
     if data["type"]=="colleaguesplace":
-        #выдать отдел для data["user_id"]
-        #вернуть id и имена работников отдела
+        # в data["user_id"] находится id пользователя. Необходимо вернуть его коллег по отделу в виде [{id_коллеги,имя}]
         return json.dumps([{"id":1,"name":"Андрей Тагиев"},{"id":2,"name":"Марк Шерман"},{"id":3,"name":"Анастасия Шредер"},{"id":4,"name":"Иван Конев"},{"id":5,"name":"Данил Лялин"}])
     if data["type"]=="filters":
         return json.dumps(["Конференция","Форум","Фестиваль","Встреча","Совещание","Заказ","Прочее"])
     if data["type"]=="projectplace":
-        #data["user_id"] получить список проектов по user_id 
+        # в data["user_id"] находится id пользователя. Необходимо вернуть список его проектов[{id_проекта,имя_проекта}]
         #SELECT edgepoint.user_project.id_project FROM edgepoint.user_project WHERE edgepoint.user_project.id_user = %id пользователя%;
         #SELECT edgepoint.user_project.project_name FROM edgepoint.user_project WHERE edgepoint.user_project.id_user = %id пользователя%;
         return json.dumps([{"id":1,"name":"Проект 1"},{"id":2,"name":"Проект 2"},{"id":3,"name":"Проект 3"},{"id":4,"name":"Проект 4"},{"id":5,"name":"Проект 5"}])
     if data["type"]=="taskplace":
+        #есть 3 поля:
+        #   user_id - всегда непустое поле, содержит id пользователя
+        #   project_id - id проекта, на который пользователь тыкнул
+        #   second_user_id - id коллеги, на которого тыкнул пользователь
+        #
         #свой user_id, id проекта, id юзера 
-        return json.dumps([{"eventName":"Задача 1", "calendar":"Встреча", "color":"blue","date":"2020-04-27"},{"eventName":"Задача 3", "calendar":"Мероприятие", "color":"orange","date":"2020-04-04"}])
+        return json.dumps([{"eventName":"Задача 1", "calendar":"Встреча", "color":"blue","date":"2020-04-27"},{"eventName":"Задача 3", "calendar":"Совещание", "color":"orange","date":"2020-04-04"}])
     
     
     if data["type"] == "login":
