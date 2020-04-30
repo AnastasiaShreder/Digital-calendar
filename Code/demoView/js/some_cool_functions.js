@@ -40,7 +40,7 @@ function apply_right(){
 
 
 function apply_colleague(obj){
-  get_tasks(user_id = obj.name)
+  get_tasks(u_id = obj.name)
   taskplace()
   render_calendar_m()
   
