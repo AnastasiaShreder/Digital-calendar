@@ -83,8 +83,8 @@ function render_mp_menu(){
               </select>
               </p>
     
-              <div class="task-place" id="taskplace"></div>
-              <p>Проекты:</p>
+              <form class="task-place" id="task_place"></form>
+              <p id="aftertaskplace">Проекты:</p>
               <div class="project-place" id ="projectplace"></div>
               <p>Коллеги:</p>
               <div class="сolleagues-place" id="colleaguesplace"></div>
@@ -118,88 +118,73 @@ function filters_left(){
     var div = document.getElementById('filters_left');
     for (i=0;i<filter.length;i++){
         div.insertAdjacentHTML("beforeend", `<div class="filter-elem">
-        <p><input type="checkbox" name="${filter[i]}" value="filter" checked>${filter[i]}</p>
+        <p><input type="checkbox" name="${i}" value="${filter[i]}" checked>${filter[i]}</p>
         </div>`);
     }
 }
 
 
-function render_calendar_m(){
+function render_calendar_m(task = tasks){
     var div = document.getElementById('calendar');
     div.remove()
     var div = document.getElementById('calendar-box');
     div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
-    var calendar = new Calendar('#calendar', tasks);
+    var calendar = new Calendar('#calendar', task);
 }
 
-function render_calendar_w(){
+function render_calendar_w(task = tasks){
     var div = document.getElementById('calendar');
     div.remove()
     var div = document.getElementById('calendar-box');
     div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
-    var calendar = new Calendar_w('#calendar', tasks);
+    var calendar = new Calendar('#calendar', task);
 
 }
 
-function render_calendar_d(){
+function render_calendar_d(task = tasks){
     var div = document.getElementById('calendar');
     div.remove()
     var div = document.getElementById('calendar-box');
     div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
-    var calendar = new Calendar('#calendar', tasks); //заменить на день
+    var calendar = new Calendar('#calendar', task); //заменить на день
 }
 
 function taskplace(){
-    var div = document.getElementById('taskplace');
-	for (i=0;i<tasks.length;i++){
+    document.getElementById('task_place').remove()
+    document.getElementById("aftertaskplace").insertAdjacentHTML("beforebegin",`<form class="task-place" id="task_place"></form>`)
+    var div = document.getElementById('task_place');
+    for (i=0;i<tasks.length;i++){
         div.insertAdjacentHTML("beforeend", `<div class="task-elem">
-        <p><input type="checkbox" name="task${i}" value="task${i}">${tasks[i].eventName}</p>
+        <p><input type="checkbox" name="task${i}" value="${tasks[i].eventName}" checked>${tasks[i].eventName}</p>
         </div>`);
     }
 }
 
-
 function projectplace(){
     var div = document.getElementById('projectplace');
-
-    var request = new XMLHttpRequest();
-    request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false);
-	  request.addEventListener('readystatechange', function() {
-	    if ((request.readyState==4) && (request.status==200)) {
-        responce = JSON.parse(request.responseText)
-			  for (i=0;i<responce.length;i++){
-          div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project()">
-            <div class="project-elem">
-            <img src="icons/folder.png">
-            <p>${responce[i]} </p>
-            </div></a>`);
-        }
-		}
-	  }) 
-    request.send(JSON.stringify({'type':'projectplace', 'sql':'something'})); 
+    div=`<div class="project-place" id ="projectplace"></div>`
+    div = document.getElementById('projectplace');
+		for (i=0;i<projects.length;i++){
+      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="${projects[i].id}">
+        <div class="project-elem">
+        <img src="icons/folder.png">
+        <p>${projects[i].name} </p>
+        </div></a>`);
+      }
 }
 
 function colleaguesplace(){
     var div = document.getElementById('colleaguesplace');
-    
-    var request = new XMLHttpRequest();
-    
-    request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false);
-	  request.addEventListener('readystatechange', function() {
-	    if ((request.readyState==4) && (request.status==200)) {
-        responce = JSON.parse(request.responseText)
-			  for (i=0;i<responce.length;i++){
-          div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_colleague()">
-            <div class="сolleagues-elem">
-            <img src="icons/person.png">
-            <p>${responce[i]}</p>
-            </div></a>`)
-        }
-		  }
-	  }); 
-    request.send(JSON.stringify({'type':'colleaguesplace', 'sql':'something'})); 
+    div=`<div class="сolleagues-place" id="colleaguesplace"></div>`
+    div = document.getElementById('colleaguesplace');
+		for (i=0;i<colleagues.length;i++){
+      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_colleague(this)" name="${colleagues[i].id}">
+        <div class="сolleagues-elem">
+        <img src="icons/person.png">
+        <p>${colleagues[i].name}</p>
+        </div></a>`)
+      }	  
 }
-
 
 function add_task(){
     var div = document.getElementById('add_task');
@@ -268,6 +253,9 @@ function add_task(){
 }
 
 function add_task_submit(){
+  //tasks.push() добавить новую задачу в глобальную переменную
+  taskplace()
+  //отправить задачу на сервер
   var div = document.getElementById('apply_right');
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>`)
   render_calendar_m()
@@ -282,6 +270,8 @@ function logout(){
   user_id = 0
   tasks = []
   filter = []
+  projects = []
+  colleagues = []
   localStorage.clear()
   delete_container()
 }
@@ -323,13 +313,14 @@ function mp_menu_animate(){
         });
       });
     })(window);
-  
   }
   
 
 function render_calendar(){
-  get_tasks()
   get_filters()
+  get_tasks()
+  get_projects()
+  get_colleagues()
 
   document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
   render_mp_menu()
