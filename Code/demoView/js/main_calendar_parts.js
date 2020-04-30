@@ -197,7 +197,7 @@ function colleaguesplace(){
         }
 		  }
 	  }); 
-    request.send(JSON.stringify({'type':'colleaguesplace', 'sql':'something'})); 
+    request.send(JSON.stringify({'type':'colleaguesplace', 'user_id':user_id})); 
 }
 
 
