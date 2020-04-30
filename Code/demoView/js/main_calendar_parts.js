@@ -106,12 +106,11 @@ function render_mp_menu(){
  
    }
 
-   function mycalendar(){
-    var div = document.getElementById('mycalendar');
+function mycalendar(){
+  var div = document.getElementById('mycalendar');
 	for (i=0; i<100;i++){
 		div.insertAdjacentHTML("beforeend", `<li><a href="#">Проект ${i}</a></li>`);
-    }
-    
+  }  
 }
 
 
@@ -166,21 +165,19 @@ function projectplace(){
     var div = document.getElementById('projectplace');
 
     var request = new XMLHttpRequest();
-    request.open('POST','http://85.142.164.100:5000/',true);//request.open('POST','/',false);
-	request.addEventListener('readystatechange', function() {
+    request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false);
+	  request.addEventListener('readystatechange', function() {
 	    if ((request.readyState==4) && (request.status==200)) {
-            responce = JSON.parse(request.responseText)
-			for (i=0;i<responce.length;i++){
-                div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project()">
-                    <div class="project-elem">
-                        <img src="icons/folder.png">
-                        <p>${responce[i]} </p>
-                    </div>
-                    </a>`);
-            }
-    
+        responce = JSON.parse(request.responseText)
+			  for (i=0;i<responce.length;i++){
+          div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project()">
+            <div class="project-elem">
+            <img src="icons/folder.png">
+            <p>${responce[i]} </p>
+            </div></a>`);
+        }
 		}
-	}); 
+	  }) 
     request.send(JSON.stringify({'type':'projectplace', 'sql':'something'})); 
 }
 
@@ -189,20 +186,19 @@ function colleaguesplace(){
     
     var request = new XMLHttpRequest();
     
-    request.open('POST','http://85.142.164.100:5000/',true);//request.open('POST','/',false);
-	request.addEventListener('readystatechange', function() {
+    request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false);
+	  request.addEventListener('readystatechange', function() {
 	    if ((request.readyState==4) && (request.status==200)) {
-            responce = JSON.parse(request.responseText)
-			for (i=0;i<responce.length;i++){
-                div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_colleague()">
-                    <div class="сolleagues-elem">
-                        <img src="icons/person.png">
-                        <p>${responce[i]}</p>
-                    </div>
-                    </a>`);
-            }
-		}
-	}); 
+        responce = JSON.parse(request.responseText)
+			  for (i=0;i<responce.length;i++){
+          div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_colleague()">
+            <div class="сolleagues-elem">
+            <img src="icons/person.png">
+            <p>${responce[i]}</p>
+            </div></a>`)
+        }
+		  }
+	  }); 
     request.send(JSON.stringify({'type':'colleaguesplace', 'sql':'something'})); 
 }
 
@@ -325,19 +321,21 @@ function mp_menu_animate(){
   }
   
 
-  async function render_calendar(){
-    await collect_data()
-    document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
-    render_mp_menu()
+function render_calendar(){
+  get_tasks()
+  get_filters()
 
-    mycalendar()
-    filters_left()
-    render_calendar_m()
-    taskplace()
-    projectplace()
-    colleaguesplace()
+  document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
+  render_mp_menu()
 
-    mp_menu_animate()
+  mycalendar()
+  filters_left()
+  render_calendar_m()
+  taskplace()
+  projectplace()
+  colleaguesplace()
 
-  }
+  mp_menu_animate()
+
+}
 
