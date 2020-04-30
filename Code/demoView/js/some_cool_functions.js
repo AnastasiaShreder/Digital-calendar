@@ -39,16 +39,16 @@ function apply_right(){
 } 
 
 
-function apply_colleague(){
-  //get_tasks(user_id = )
+function apply_colleague(obj){
+  get_tasks(user_id = obj.name)
   taskplace()
   render_calendar_m()
   
   //сработает при нажатии на коллегу
 }
 
-function apply_project(){
-  //get_tasks(project_id = )
+function apply_project(obj){
+  get_tasks(project_id = obj.name)
   taskplace()
   render_calendar_m()
 
