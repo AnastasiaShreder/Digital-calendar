@@ -11,6 +11,22 @@
 Получить данные о пользователе по id:
 	SELECT (%surname/name/unit/email....%) FROM edgepoint.users where id=%id пользователя%;
 
+Добавить пользователя:
+	INSERT INTO `edgepoint`.`users`
+	(`name`,
+	`surname`,
+	`password`,
+	`unit`,
+	`email`,
+	`vk`)
+	VALUES
+	("Имя",
+	"Фамилия",
+	"Пароль",
+	"Отдел",
+	"почта",
+	"вк");
+
 --ЗАДАЧИ--
 Добавить задачу:
 	INSERT INTO `edgepoint`.`tasks` (
@@ -62,7 +78,8 @@
 	(%id пользователя%,
 	 %id проекта%,
 	 %этот пользователь владлец проекта?1-да 0 - нет%);
-	
+Все задачи проекта:
+	SELECT edgepoint.task_project.id_task FROM edgepoint.task_project WHERE edgepoint.task_project.id_project = %id проекта%
 Алгоритм удаления проекта:
 	Узнать все задачи в проекте:
 		SELECT edgepoint.task_project.id_task FROM edgepoint.task_project WHERE edgepoint.task_project.id_project = %id проекта%
@@ -99,3 +116,11 @@
 	SELECT edgepoint.user_project.id_project FROM edgepoint.user_project WHERE edgepoint.user_project.id_user = %id пользователя%;
 В каких проектах владелец:
 	SELECT edgepoint.user_project.id_project FROM edgepoint.user_project WHERE edgepoint.user_project.id_user = %id пользователя% and edgepoint.user_project.is_admin = True;
+	
+Задачи определенного пользователя в проекте(по id проекта и id юзера):
+	SELECT edgepoint.user_task.id_task FROM edgepoint.user_task WHERE edgepoint.user_task.id_user = %id пользователя)
+	and id_task in (SELECT edgepoint.task_project.id_task FROM edgepoint.task_project WHERE  edgepoint.task_project.id_project = %id проекта%)
+	
+Общие задачи двух пользователей:
+	SELECT edgepoint.user_task.id_task FROM edgepoint.user_task WHERE edgepoint.user_task.id_user = %id пользователя1%
+	and id_task in (SELECT edgepoint.user_task.id_task FROM edgepoint.user_task WHERE edgepoint.user_task.id_user = %id  пользователя2%)
