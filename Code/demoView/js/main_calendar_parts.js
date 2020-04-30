@@ -61,12 +61,6 @@ function render_mp_menu(){
                 </div>
                 <form name="filters_left" id="filters_left">
                 </form>
-                <div class="line">
-                <p><input type="checkbox" name="filter-supervisor" value="filter-supervisor"> Отображать по руководителю:</p>
-                </div>
-                <div class="filter-search">
-                  <input type="search" placeholder="Руководитель">
-                </div>
                 <input type="button" onclick="apply_filters()" value="Применить"></input>
               </div>
    
