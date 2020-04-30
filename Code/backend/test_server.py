@@ -5,18 +5,28 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 cors = CORS(app)
 
+
+#import pymysql as pms
+
+#conn = pms.connect(user = "root",passwd = "0000", host = "localhost", database = "EdgePoint")
+#cursor = conn.cursor()
+
+
+
+
+
 def create_data(data):
     if data["type"]=="colleaguesplace":
         #выдать отдел для data["user_id"]
         #вернуть id и имена работников отдела
-        return json.dumps([{"user_id": 2, "name":"Андрей Тагиев"},{"user_id": 3, "name":"Марк Шерман"},{"user_id": 4, "name":"Анастасия Шредер"},{"user_id": 5, "name":"Иван Конев"},{"user_id": 6, "name":"Данил Лялин"}])
+        return json.dumps([{"id":1,"name":"Андрей Тагиев"},{"id":2,"name":"Марк Шерман"},{"id":3,"name":"Анастасия Шредер"},{"id":4,"name":"Иван Конев"},{"id":5,"name":"Данил Лялин"}])
     if data["type"]=="filters":
         return json.dumps(["Конференция","Форум","Фестиваль","Встреча","Совещание","Заказ","Прочее"])
     if data["type"]=="projectplace":
         #data["user_id"] получить список проектов по user_id 
         #SELECT edgepoint.user_project.id_project FROM edgepoint.user_project WHERE edgepoint.user_project.id_user = %id пользователя%;
         #SELECT edgepoint.user_project.project_name FROM edgepoint.user_project WHERE edgepoint.user_project.id_user = %id пользователя%;
-        return json.dumps([{"id":1,"project":"Проект 1"},{"id":2,"project":"Проект 2"},{"id":3,"project":"Проект 3"},"Проект 4","Проект 5","Проект 6","Проект 7","Проект 8"])
+        return json.dumps([{"id":1,"name":"Проект 1"},{"id":2,"name":"Проект 2"},{"id":3,"name":"Проект 3"},{"id":4,"name":"Проект 4"},{"id":5,"name":"Проект 5"}])
     if data["type"]=="taskplace":
         #свой user_id, id проекта, id юзера 
         return json.dumps([{"eventName":"Задача 1", "calendar":"Встреча", "color":"blue","date":"2020-04-27"},{"eventName":"Задача 3", "calendar":"Мероприятие", "color":"orange","date":"2020-04-04"}])
@@ -49,4 +59,17 @@ def returnlist():
 
  
 if __name__ == "__main__":
+    
+
+    #cursor.execute("SELECT id FROM EdgePoint.users where password = 'qwejf;fdkdflknrty' and email = 'danil.lyalin@hh.ru';")
+    #for i in cursor.fetchall():
+    #    print(i)
+    	
+
+    
+    
+    
+    
+    
     app.run(host= '192.168.0.121',port='5000')
+    #conn.close()
