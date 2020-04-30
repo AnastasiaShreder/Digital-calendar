@@ -84,7 +84,7 @@ function render_mp_menu(){
               </p>
     
               <div class="task-place" id="taskplace"></div>
-              <p>Проекты:</p>
+              <p id="aftertaskplace">Проекты:</p>
               <div class="project-place" id ="projectplace"></div>
               <p>Коллеги:</p>
               <div class="сolleagues-place" id="colleaguesplace"></div>
@@ -150,9 +150,9 @@ function render_calendar_d(){
 }
 
 function taskplace(){
+    document.getElementById('taskplace').remove()
+    document.getElementById("aftertaskplace").insertAdjacentHTML("beforebegin",`<div class="task-place" id="taskplace"></div>`)
     var div = document.getElementById('taskplace');
-    div=`<div class="task-place" id="taskplace"></div>`
-    div = document.getElementById('taskplace');
     for (i=0;i<tasks.length;i++){
         div.insertAdjacentHTML("beforeend", `<div class="task-elem">
         <p><input type="checkbox" name="task${i}" value="task${i}" checked>${tasks[i].eventName}</p>
@@ -258,6 +258,8 @@ function add_task(){
 
 function add_task_submit(){
   //tasks.push() добавить новую задачу в глобальную переменную
+  taskplace()
+  
   //отправить задачу на сервер
   var div = document.getElementById('apply_right');
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>`)
