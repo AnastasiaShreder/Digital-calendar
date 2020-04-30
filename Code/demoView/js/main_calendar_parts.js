@@ -89,8 +89,8 @@ function render_mp_menu(){
               <p>Коллеги:</p>
               <div class="сolleagues-place" id="colleaguesplace"></div>
               
-              <input type="button" style="width: 13vw;" onclick="apply_right()" value="Применить"></input>
-              <input type="button" style="width: 13vw;" onclick="add_task()" value="Добавить"></input>
+              <input type="button" style="width: 13vw;" onclick="apply_right()" id="apply_right" value="Применить"></input>
+              <input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>
               <input type="button" style="width: 13vw;" onclick="logout()" value="Выйти"></input>
     
               
@@ -115,39 +115,37 @@ function mycalendar(){
 
 
 function filters_left(){
-    r = filter
-    
     var div = document.getElementById('filters_left');
-    for (i=0;i<r.length;i++){
+    for (i=0;i<filter.length;i++){
         div.insertAdjacentHTML("beforeend", `<div class="filter-elem">
-        <p><input type="checkbox" name="${r[i]}" value="filter" checked>  ${r[i]}</p>
+        <p><input type="checkbox" name="${filter[i]}" value="filter" checked>${filter[i]}</p>
         </div>`);
     }
 }
 
 
 function render_calendar_m(){
-    let div = document.getElementById('calendar');
+    var div = document.getElementById('calendar');
     div.remove()
-    let div2 = document.getElementById('calendar-box');
-    div2.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
+    var div = document.getElementById('calendar-box');
+    div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
     var calendar = new Calendar('#calendar', tasks);
 }
 
 function render_calendar_w(){
-    let div = document.getElementById('calendar');
+    var div = document.getElementById('calendar');
     div.remove()
-    let div2 = document.getElementById('calendar-box');
-    div2.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
+    var div = document.getElementById('calendar-box');
+    div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
     var calendar = new Calendar_w('#calendar', tasks);
 
 }
 
 function render_calendar_d(){
-    let div = document.getElementById('calendar');
+    var div = document.getElementById('calendar');
     div.remove()
-    let div2 = document.getElementById('calendar-box');
-    div2.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
+    var div = document.getElementById('calendar-box');
+    div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
     var calendar = new Calendar('#calendar', tasks); //заменить на день
 }
 
@@ -204,10 +202,12 @@ function colleaguesplace(){
 
 
 function add_task(){
-    let div = document.getElementById('calendar');
+    var div = document.getElementById('add_task');
     div.remove()
-    let div2 = document.getElementById('calendar-box');
-    div2.insertAdjacentHTML("beforeend",`
+    var div = document.getElementById('calendar');
+    div.remove()
+    var div = document.getElementById('calendar-box');
+    div.insertAdjacentHTML("beforeend",`
         <div id="calendar">
 			<form>
 			  <div class="row">
@@ -256,7 +256,7 @@ function add_task(){
 				</div>
 			  </div>
 			  <div class="row">
-				<input onclick="render_calendar_m()" type="submit" value="Submit">
+				<input onclick="add_task_submit()" type="submit" value="Submit">
 			  </div>
 			</form>
 		  
@@ -267,7 +267,13 @@ function add_task(){
 
 }
 
-function delete_calendar(){
+function add_task_submit(){
+  var div = document.getElementById('apply_right');
+  div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>`)
+  render_calendar_m()
+}
+
+function delete_container(){
   document.getElementById("container").remove()
   render_login_page()
 }
@@ -277,7 +283,7 @@ function logout(){
   tasks = []
   filter = []
   localStorage.clear()
-  delete_calendar()
+  delete_container()
 }
 
 
