@@ -13,8 +13,8 @@ function apply_filters(){
 }
 
 function apply_right(){
-  //tasks = оставить только задачи с галочками
-  //render_calendar_m()
+  
+  //render_calendar_m(...)оставить только задачи с галочками
   
  //сработает при нажатии кнопки "применить" справа
 } 
@@ -22,16 +22,16 @@ function apply_right(){
 
 function apply_colleague(){
   //get_tasks(user_id = )
-  //taskplace()
-  //render_calendar_m()
+  taskplace()
+  render_calendar_m()
   
   //сработает при нажатии на коллегу
 }
 
 function apply_project(){
   //get_tasks(project_id = )
-  //taskplace()
-  //render_calendar_m()
+  taskplace()
+  render_calendar_m()
 
   //сработает при нажатии на проект  
 }

@@ -124,29 +124,29 @@ function filters_left(){
 }
 
 
-function render_calendar_m(){
+function render_calendar_m(task = tasks){
     var div = document.getElementById('calendar');
     div.remove()
     var div = document.getElementById('calendar-box');
     div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
-    var calendar = new Calendar('#calendar', tasks);
+    var calendar = new Calendar('#calendar', task);
 }
 
-function render_calendar_w(){
+function render_calendar_w(task = tasks){
     var div = document.getElementById('calendar');
     div.remove()
     var div = document.getElementById('calendar-box');
     div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
-    var calendar = new Calendar_w('#calendar', tasks);
+    var calendar = new Calendar('#calendar', task);
 
 }
 
-function render_calendar_d(){
+function render_calendar_d(task = tasks){
     var div = document.getElementById('calendar');
     div.remove()
     var div = document.getElementById('calendar-box');
     div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
-    var calendar = new Calendar('#calendar', tasks); //заменить на день
+    var calendar = new Calendar('#calendar', task); //заменить на день
 }
 
 function taskplace(){
