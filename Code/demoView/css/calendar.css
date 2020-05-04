@@ -175,10 +175,15 @@
       margin: 0 1px;
     }
     
-    .blue { background: rgba(156, 202, 235, 1); }
-    .orange { background: rgba(247, 167, 0, 1); }
-    .green { background: rgba(153, 198, 109, 1); }
-    .yellow { background: rgba(249, 233, 0, 1); }
+    .orange { background: #fa7f2d; }
+    .red { background: #e35458; }
+    .purple { background: #f419e4; }
+    .green { background: #8ded43; }
+    .yellow { background: #f8d13c; }
+    .blue { background: #635abb; }
+    .lightblue { background: #1fa4f6; }
+    .darkgreen { background: #536856; }
+    .crimson { background: #b51c77;}
     
     .details {
       position: relative;
