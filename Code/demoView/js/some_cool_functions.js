@@ -9,7 +9,7 @@ colors = {
   "Форум":"red",
   "Фестиваль":"purple",
   "Встреча":"green",
-  "Совещание":"yellow",
+  "Совещание":"green2",
   "Заказ":"blue",
   "Прочее":"crimson",
 }
@@ -29,7 +29,7 @@ function apply_filters(){
     }
   }
   render_calendar_m(new_tasks)  
-  
+
   //сработает при нажатии кнопки "применить" слева
 }
 
