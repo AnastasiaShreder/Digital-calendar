@@ -332,36 +332,3 @@
 		return ele;
 	}
 }();
-
-  // пример того, как можно проверять галочки
-
-////////////////////////////////////////////////
-/*document.forms.filters_left.addEventListener('change', function () {
-	var chk = event.target
-	
-	if (chk.tagName === 'INPUT' && chk.type === 'checkbox') {
-		while(filter.length > 0)
-		{
-			filter.pop();
-		}
-		if (document.forms.filters_left.work.checked)
-		{
-			filter.push("Общее");
-		}	
-		if (document.forms.filters_left.sport.checked)
-		{
-			filter.push("Заказы");
-		}
-		if (document.forms.filters_left.kids.checked)
-		{
-			filter.push("Встречи");
-		}
-		if (document.forms.filters_left.other.checked)
-		{
-			filter.push("...");
-		}
-
-	}
-	})
-*/
-////////////////////////////////////////////////////////////

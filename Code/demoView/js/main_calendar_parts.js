@@ -41,16 +41,8 @@ function render_mp_menu(){
       
           <div class="content clearfix">
             <div class="block block-100 clearfix">
-              
                 <span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
                 <section class="section" id="Prospero">
-                  <nav class="menu menu--prospero">
-                    <ul class="menu__list">
-                      <li class="menu__item menu__item--current"><button style="background-color: transparent; border-color: transparent;" onclick="render_calendar_m()" class="menu__link">Месяц</button></li>
-                      <li class="menu__item"><button style="background-color: transparent; border-color: transparent;" onclick="render_calendar_w()" class="menu__link">Неделя</button></li>
-                      <li class="menu__item"><button style="background-color: transparent; border-color: transparent;" onclick="render_calendar_d()" class="menu__link">День</button></li>
-                    </ul>
-                  </nav>
                 </section>	
             </div>
                 
@@ -124,23 +116,6 @@ function render_calendar_m(task = tasks){
     var div = document.getElementById('calendar-box');
     div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
     var calendar = new Calendar('#calendar', task);
-}
-
-function render_calendar_w(task = tasks){
-    var div = document.getElementById('calendar');
-    div.remove()
-    var div = document.getElementById('calendar-box');
-    div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
-    var calendar = new Calendar('#calendar', task);
-
-}
-
-function render_calendar_d(task = tasks){
-    var div = document.getElementById('calendar');
-    div.remove()
-    var div = document.getElementById('calendar-box');
-    div.insertAdjacentHTML("beforeend",`<div id="calendar"></div>`)
-    var calendar = new Calendar('#calendar', task); //заменить на день
 }
 
 function taskplace(task = tasks){
