@@ -272,12 +272,6 @@ function add_task_submit(){
 
   var request = new XMLHttpRequest();
   request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false); //заменим, когда сайт обзаведется сервером
-  request.addEventListener('readystatechange', function() {
-      if ((request.readyState==4) && (request.status==200)) {
-          responce = JSON.parse(request.responseText)
-          alert("Успешно")
-      }
-  }) 
   request.send(JSON.stringify({'type':'add_task', "user_id":user_id, "eventName":form.elements.firstname.value, "calendar":form.elements.group.value, "date":form.elements.datapicker2.value, "mark": form.elements.mark.value, "person":form.elements.lastname.value, "descr":form.elements.characteristic.value})); 
   var div = document.getElementById('apply_right');
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>`)
