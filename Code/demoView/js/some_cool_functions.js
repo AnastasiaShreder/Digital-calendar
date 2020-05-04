@@ -4,6 +4,16 @@ let projects = []
 let colleagues = []
 let user_id = 0 // при успешной авторизации отличен от 0
 
+colors = {
+  "Конференция":"orange",
+  "Форум":"red",
+  "Фестиваль":"purple",
+  "Встреча":"green",
+  "Совещание":"yellow",
+  "Заказ":"blue",
+  "Прочее":"ligthblue",
+}
+
 function apply_filters(){
   var new_filter = []
   var div = document.getElementById("filters_left")
@@ -53,4 +63,10 @@ function apply_project(obj){
   render_calendar_m()
 
   //сработает при нажатии на проект  
+}
+
+
+function select_mark(){
+
+  // сработает при выборе метки
 }

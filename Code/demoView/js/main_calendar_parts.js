@@ -188,7 +188,7 @@ function add_task(){
     var div = document.getElementById('calendar-box');
     div.insertAdjacentHTML("beforeend",`
         <div id="calendar">
-			<form>
+			<form name="add_task_form">
 			  <div class="row">
 				<div class="col-25">
 				  <label for="fname">Название</label>
@@ -211,7 +211,7 @@ function add_task(){
 				</div>
 				<div class="col-75">
 					<!--<input type="text" value="dd-mm-yy" onfocus="this.select();lcs(this)" onclick="event.cancelBubble=true;this.select();lcs(this)">-->
-					<input type="date" value="ДД/ММ/ГГГГГ">
+					<input type="date" name="datapicker2" value="ДД/ММ/ГГГГГ">
 				</div>
 			  </div>
 			  <div class="row">
@@ -220,9 +220,25 @@ function add_task(){
 				</div>
 				<div class="col-75">
 				  <select id="mark" name="mark">
-					<option value="important">Важно</option>
-					<option value="attention">Внимание</option>
-					<option value="urgently">Срочно</option>
+					<option value="Важно">Важно</option>
+					<option value="Внимание">Внимание</option>
+					<option value="Срочно">Срочно</option>
+				  </select>
+				</div>
+        </div>
+        <div class="row">
+				<div class="col-25">
+				  <label for="group">Группа</label>
+				</div>
+				<div class="col-75">
+				  <select id="group" name="group">
+					<option value="Конференция">Конференция</option>
+					<option value="Форум">Форум</option>
+          <option value="Фестиваль">Фестиваль</option>
+          <option value="Встреча">Встреча</option>
+					<option value="Совещание">Совещание</option>
+          <option value="Заказ">Заказ</option>
+          <option value="Прочее">Прочее</option>
 				  </select>
 				</div>
 			  </div>
@@ -247,12 +263,33 @@ function add_task(){
 }
 
 function add_task_submit(){
-  //tasks.push() добавить новую задачу в глобальную переменную
+  var form = document.forms.add_task_form
+
+  if ((form.elements.firstname.value != "") && (form.elements.datapicker2.value != "") && (form.elements.lastname.value != "")) {
+
+  tasks.push({eventName:form.elements.firstname.value, calendar:form.elements.group.value, color:colors[form.elements.group.value], date:moment(form.elements.datapicker2.value), mark:form.elements.mark.value, person:form.elements.lastname.value, descr:form.elements.characteristic.value})
   taskplace()
-  //отправить задачу на сервер
+
+  var request = new XMLHttpRequest();
+  request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false); //заменим, когда сайт обзаведется сервером
+  request.addEventListener('readystatechange', function() {
+      if ((request.readyState==4) && (request.status==200)) {
+          responce = JSON.parse(request.responseText)
+          alert("Успешно")
+      }
+  }) 
+  request.send(JSON.stringify({'type':'add_task', "eventName":form.elements.firstname.value, "calendar":form.elements.group.value, "date":form.elements.datapicker2.value, "mark": form.elements.mark.value, "person":form.elements.lastname.value, "descr":form.elements.characteristic.value})); 
   var div = document.getElementById('apply_right');
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>`)
-  render_calendar_m()
+  render_calendar_m(tasks)
+  }
+  else{
+    alert("Ошибка при добавлении задачи")
+    var div = document.getElementById('apply_right');
+    div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>`)
+    render_calendar_m(tasks)
+  }
+
 }
 
 function delete_container(){

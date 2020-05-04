@@ -11,41 +11,41 @@ cors = CORS(app)
 #conn = pms.connect(user = "root",passwd = "0000", host = "localhost", database = "EdgePoint")
 #cursor = conn.cursor()
 
-tasks = [{"eventName":"Конференция 1", "calendar":"Конференция", "color":"orange",    "date":"2020-05-01"},
-         {"eventName":"Форум 1",       "calendar":"Форум",       "color":"red",       "date":"2020-05-02"},
-         {"eventName":"Фестиваль 1",   "calendar":"Фестиваль",   "color":"purple",    "date":"2020-05-10"},
-         {"eventName":"Встреча 1",     "calendar":"Встреча",     "color":"green",     "date":"2020-05-12"},
-         {"eventName":"Совещание 1",   "calendar":"Совещание",   "color":"yellow",    "date":"2020-05-23"},
-         {"eventName":"Заказ 1",       "calendar":"Заказ",       "color":"blue",      "date":"2020-05-12"},
-         {"eventName":"Прочее 1",      "calendar":"Прочее",      "color":"lightblue", "date":"2020-05-21"},
-         {"eventName":"Конференция 2", "calendar":"Конференция", "color":"orange",    "date":"2020-05-17"},
-         {"eventName":"Форум 2",       "calendar":"Форум",       "color":"red",       "date":"2020-05-09"},
-         {"eventName":"Фестиваль 2",   "calendar":"Фестиваль",   "color":"purple",    "date":"2020-05-11"},
-         {"eventName":"Встреча 2",     "calendar":"Встреча",     "color":"green",     "date":"2020-05-04"},
-         {"eventName":"Совещание 2",   "calendar":"Совещание",   "color":"yellow",    "date":"2020-05-28"},
-         {"eventName":"Заказ 2",       "calendar":"Заказ",       "color":"blue",      "date":"2020-05-25"},
-         {"eventName":"Прочее 2",      "calendar":"Прочее",      "color":"lightblue", "date":"2020-05-29"},
-         {"eventName":"Конференция 3", "calendar":"Конференция", "color":"orange",    "date":"2020-05-20"},
-         {"eventName":"Форум 3",       "calendar":"Форум",       "color":"red",       "date":"2020-05-05"},
-         {"eventName":"Фестиваль 3",   "calendar":"Фестиваль",   "color":"purple",    "date":"2020-05-24"},
-         {"eventName":"Встреча 3",     "calendar":"Встреча",     "color":"green",     "date":"2020-05-17"},
-         {"eventName":"Совещание 3",   "calendar":"Совещание",   "color":"yellow",    "date":"2020-05-13"},
-         {"eventName":"Заказ 3",       "calendar":"Заказ",       "color":"blue",      "date":"2020-05-26"},
-         {"eventName":"Прочее 3",      "calendar":"Прочее",      "color":"lightblue", "date":"2020-05-23"},
-         {"eventName":"Конференция 4", "calendar":"Конференция", "color":"orange",    "date":"2020-05-13"},
-         {"eventName":"Форум 4",       "calendar":"Форум",       "color":"red",       "date":"2020-05-07"},
-         {"eventName":"Фестиваль 4",   "calendar":"Фестиваль",   "color":"purple",    "date":"2020-05-14"},
-         {"eventName":"Встреча 4",     "calendar":"Встреча",     "color":"green",     "date":"2020-05-18"},
-         {"eventName":"Совещание 4",   "calendar":"Совещание",   "color":"yellow",    "date":"2020-05-19"},
-         {"eventName":"Заказ 4",       "calendar":"Заказ",       "color":"blue",      "date":"2020-05-20"},
-         {"eventName":"Прочее 4",      "calendar":"Прочее",      "color":"lightblue", "date":"2020-05-21"},
-         {"eventName":"Конференция 5", "calendar":"Конференция", "color":"orange",    "date":"2020-05-22"},
-         {"eventName":"Форум 5",       "calendar":"Форум",       "color":"red",       "date":"2020-05-23"},
-         {"eventName":"Фестиваль 5",   "calendar":"Фестиваль",   "color":"purple",    "date":"2020-05-24"},
-         {"eventName":"Встреча 5",     "calendar":"Встреча",     "color":"green",     "date":"2020-05-25"},
-         {"eventName":"Совещание 5",   "calendar":"Совещание",   "color":"yellow",    "date":"2020-05-26"},
-         {"eventName":"Заказ 5",       "calendar":"Заказ",       "color":"blue",      "date":"2020-05-27"},
-         {"eventName":"Прочее 5",      "calendar":"Прочее",      "color":"lightblue", "date":"2020-05-30"},
+tasks = [{"eventName":"Конференция 1", "calendar":"Конференция", "date":"2020-05-01", "mark":"Внимание","person":"", "descr":""},
+         {"eventName":"Форум 1",       "calendar":"Форум",       "date":"2020-05-02", "mark":"Внимание","person":"", "descr":""},
+         {"eventName":"Фестиваль 1",   "calendar":"Фестиваль",   "date":"2020-05-10", "mark":"Внимание","person":"", "descr":""},
+         {"eventName":"Встреча 1",     "calendar":"Встреча",     "date":"2020-05-12", "mark":"Внимание","person":"", "descr":""},
+         {"eventName":"Совещание 1",   "calendar":"Совещание",   "date":"2020-05-23", "mark":"Внимание","person":"", "descr":""},
+         {"eventName":"Заказ 1",       "calendar":"Заказ",       "date":"2020-05-12", "mark":"Внимание","person":"", "descr":""},
+         {"eventName":"Прочее 1",      "calendar":"Прочее",      "date":"2020-05-21", "mark":"Внимание","person":"", "descr":""},
+         {"eventName":"Конференция 2", "calendar":"Конференция", "date":"2020-05-17", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Форум 2",       "calendar":"Форум",       "date":"2020-05-09", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Фестиваль 2",   "calendar":"Фестиваль",   "date":"2020-05-11", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Встреча 2",     "calendar":"Встреча",     "date":"2020-05-04", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Совещание 2",   "calendar":"Совещание",   "date":"2020-05-28", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Заказ 2",       "calendar":"Заказ",       "date":"2020-05-25", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Прочее 2",      "calendar":"Прочее",      "date":"2020-05-29", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Конференция 3", "calendar":"Конференция", "date":"2020-05-20", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Форум 3",       "calendar":"Форум",       "date":"2020-05-05", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Фестиваль 3",   "calendar":"Фестиваль",   "date":"2020-05-24", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Встреча 3",     "calendar":"Встреча",     "date":"2020-05-17", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Совещание 3",   "calendar":"Совещание",   "date":"2020-05-13", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Заказ 3",       "calendar":"Заказ",       "date":"2020-05-26", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Прочее 3",      "calendar":"Прочее",      "date":"2020-05-23", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Конференция 4", "calendar":"Конференция", "date":"2020-05-13", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Форум 4",       "calendar":"Форум",       "date":"2020-05-07", "mark":"Важно","person":"", "descr":""},
+         {"eventName":"Фестиваль 4",   "calendar":"Фестиваль",   "date":"2020-05-14", "mark":"Срочно","person":"", "descr":""},
+         {"eventName":"Встреча 4",     "calendar":"Встреча",     "date":"2020-05-18", "mark":"Срочно","person":"", "descr":""},
+         {"eventName":"Совещание 4",   "calendar":"Совещание",   "date":"2020-05-19", "mark":"Срочно","person":"", "descr":""},
+         {"eventName":"Заказ 4",       "calendar":"Заказ",       "date":"2020-05-20", "mark":"Срочно","person":"", "descr":""},
+         {"eventName":"Прочее 4",      "calendar":"Прочее",      "date":"2020-05-21", "mark":"Срочно","person":"", "descr":""},
+         {"eventName":"Конференция 5", "calendar":"Конференция", "date":"2020-05-22", "mark":"Срочно","person":"", "descr":""},
+         {"eventName":"Форум 5",       "calendar":"Форум",       "date":"2020-05-23", "mark":"Срочно","person":"", "descr":""},
+         {"eventName":"Фестиваль 5",   "calendar":"Фестиваль",   "date":"2020-05-24", "mark":"Срочно","person":"", "descr":""},
+         {"eventName":"Встреча 5",     "calendar":"Встреча",     "date":"2020-05-25", "mark":"Срочно","person":"", "descr":""},
+         {"eventName":"Совещание 5",   "calendar":"Совещание",   "date":"2020-05-26", "mark":"Срочно","person":"", "descr":""},
+         {"eventName":"Заказ 5",       "calendar":"Заказ",       "date":"2020-05-27", "mark":"Срочно","person":"", "descr":""},
+         {"eventName":"Прочее 5",      "calendar":"Прочее",      "date":"2020-05-30", "mark":"Срочно","person":"", "descr":""},
          ]
 
 
@@ -78,6 +78,12 @@ def create_data(data):
         if data["email"] =="l" and data["password"] == "p":
             return json.dumps({'isTrue':"True", 'user_id' : 239})
         return json.dumps({'isTrue':"False", 'user_id' : 0})
+
+
+
+    if data["type"] == "add_task":
+        tasks.append({"eventName":data["eventName"], "calendar":data["calendar"], "date":data["date"], "mark":data["mark"], "person":data["person"], "descr":data["descr"]})
+        return True
     
     return json.dumps([])
 
