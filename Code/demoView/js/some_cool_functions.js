@@ -11,7 +11,7 @@ colors = {
   "Встреча":"green",
   "Совещание":"yellow",
   "Заказ":"blue",
-  "Прочее":"ligthblue",
+  "Прочее":"crimson",
 }
 
 function apply_filters(){
