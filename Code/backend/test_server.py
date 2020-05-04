@@ -82,6 +82,7 @@ def create_data(data):
 
 
     if data["type"] == "add_task":
+        # в запросе еще есть data["user_id"]
         tasks.append({"eventName":data["eventName"], "calendar":data["calendar"], "date":data["date"], "mark":data["mark"], "person":data["person"], "descr":data["descr"]})
         return True
     

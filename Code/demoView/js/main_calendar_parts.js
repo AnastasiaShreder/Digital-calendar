@@ -278,7 +278,7 @@ function add_task_submit(){
           alert("Успешно")
       }
   }) 
-  request.send(JSON.stringify({'type':'add_task', "eventName":form.elements.firstname.value, "calendar":form.elements.group.value, "date":form.elements.datapicker2.value, "mark": form.elements.mark.value, "person":form.elements.lastname.value, "descr":form.elements.characteristic.value})); 
+  request.send(JSON.stringify({'type':'add_task', "user_id":user_id, "eventName":form.elements.firstname.value, "calendar":form.elements.group.value, "date":form.elements.datapicker2.value, "mark": form.elements.mark.value, "person":form.elements.lastname.value, "descr":form.elements.characteristic.value})); 
   var div = document.getElementById('apply_right');
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>`)
   render_calendar_m(tasks)
