@@ -29,6 +29,7 @@ function apply_filters(){
     }
   }
   render_calendar_m(new_tasks)  
+  
   //сработает при нажатии кнопки "применить" слева
 }
 
@@ -39,12 +40,21 @@ function apply_right(){
     if(div[i].checked){     
       for (j=0;j<tasks.length;j++){
         if (tasks[j].eventName == div[i].value){
+          tasks[j].checked = "True"
           new_tasks.push(tasks[j])
+        }
+      }
+    }
+    else {
+      for (j=0;j<tasks.length;j++){
+        if (tasks[j].eventName == div[i].value){
+          tasks[j].checked = "False"
         }
       }
     }
   }
   render_calendar_m(new_tasks)
+
  //сработает при нажатии кнопки "применить" справа
 } 
 
@@ -67,6 +77,19 @@ function apply_project(obj){
 
 
 function select_mark(){
+  var new_tasks = []
+  var mark = document.getElementById("filter").value
+  if (mark == "Все"){
+    taskplace(tasks)
+  }
+  else{
+    for (i=0; i<tasks.length; i++){
+      if (tasks[i].mark == mark){
+        new_tasks.push(tasks[i])
+      }
+    }
+    taskplace(new_tasks)
+  }
 
   // сработает при выборе метки
 }

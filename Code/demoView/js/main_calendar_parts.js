@@ -69,11 +69,11 @@ function render_mp_menu(){
               </div>
                <div class="right-section">
               <p>Задачи из группы:
-              <select id="filter">
-                <option value="all">Все</option>
-                <option value="important">Важно</option>
-                <option value="attention">Внимание</option>
-                <option value="soon">Срочно</option>
+              <select id="filter" onChange="select_mark()">
+                <option value="Все">Все</option>
+                <option value="Важно">Важно</option>
+                <option value="Внимание">Внимание</option>
+                <option value="Срочно">Срочно</option>
               </select>
               </p>
     
@@ -143,15 +143,20 @@ function render_calendar_d(task = tasks){
     var calendar = new Calendar('#calendar', task); //заменить на день
 }
 
-function taskplace(){
-    document.getElementById('task_place').remove()
-    document.getElementById("aftertaskplace").insertAdjacentHTML("beforebegin",`<form class="task-place" id="task_place"></form>`)
-    var div = document.getElementById('task_place');
-    for (i=0;i<tasks.length;i++){
+function taskplace(task = tasks){
+  document.getElementById('task_place').remove()
+  document.getElementById("aftertaskplace").insertAdjacentHTML("beforebegin",`<form class="task-place" id="task_place"></form>`)
+  var div = document.getElementById('task_place');
+  for (i=0;i<task.length;i++){
+      if (task[i].checked == "True"){
         div.insertAdjacentHTML("beforeend", `<div class="task-elem">
-        <p><input type="checkbox" name="task${i}" value="${tasks[i].eventName}" checked>${tasks[i].eventName}</p>
-        </div>`);
-    }
+        <p><input type="checkbox" name="task${i}" value="${task[i].eventName}" checked>${task[i].eventName}</p>
+        </div>`);}
+      else{
+        div.insertAdjacentHTML("beforeend", `<div class="task-elem">
+        <p><input type="checkbox" name="task${i}" value="${task[i].eventName}">${task[i].eventName}</p>
+        </div>`);}
+  }
 }
 
 function projectplace(){
@@ -267,7 +272,7 @@ function add_task_submit(){
 
   if ((form.elements.firstname.value != "") && (form.elements.datapicker2.value != "") && (form.elements.lastname.value != "")) {
 
-  tasks.push({eventName:form.elements.firstname.value, calendar:form.elements.group.value, color:colors[form.elements.group.value], date:moment(form.elements.datapicker2.value), mark:form.elements.mark.value, person:form.elements.lastname.value, descr:form.elements.characteristic.value})
+  tasks.push({eventName:form.elements.firstname.value, calendar:form.elements.group.value, color:colors[form.elements.group.value], date:moment(form.elements.datapicker2.value), mark:form.elements.mark.value, person:form.elements.lastname.value, descr:form.elements.characteristic.value, checked:"True"})
   taskplace()
 
   var request = new XMLHttpRequest();
