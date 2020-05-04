@@ -1,7 +1,6 @@
 function get_tasks(project_id = 0, u_id = 0){
     tasks = []
     var request = new XMLHttpRequest();
-    request.withCredentials = true;
     request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false); //заменим, когда сайт обзаведется сервером
     request.addEventListener('readystatechange', function() {
         if ((request.readyState==4) && (request.status==200)) {
