@@ -181,9 +181,10 @@ function add_task(){
 				<div class="col-25">
 				  <label for="lname">Поручить</label>
 				</div>
-				<div class="col-75">
-				  <input type="text" id="lname" name="lastname" placeholder="Введите имя сотрудника..">
-				</div>
+        <div class="col-75">
+        <select id="colleague" name="colleague">
+        </select>
+        </div>
 			  </div>
 			  <div class="row">
 				<div class="col-25">
@@ -221,6 +222,15 @@ function add_task(){
           <option value="Прочее">Прочее</option>
 				  </select>
 				</div>
+        </div>
+        <div class="row">
+				<div class="col-25">
+				  <label for="group">Проект</label>
+				</div>
+				<div class="col-75">
+				  <select id="divproject" name="divproject">
+				  </select>
+				</div>
 			  </div>
 			  <div class="row">
 				<div class="col-25">
@@ -239,20 +249,30 @@ function add_task(){
     
   </div><!-- modal -->
   </div>`)
+  var a = document.getElementById("divproject")
+  for (i=0;i<projects.length;i++){
+    a.insertAdjacentHTML("beforeend",`<option value="${projects[i].name}">${projects[i].name}</option>`)
+  }
+  a = document.getElementById("colleague")
+  for (i=0;i<colleagues.length;i++){
+    a.insertAdjacentHTML("beforeend",`<option value="${colleagues[i].name}">${colleagues[i].name}</option>`)
+  }
 
 }
 
 function add_task_submit(){
   var form = document.forms.add_task_form
+  var u = true
+  for (i=0; i<tasks.length;i++){if (form.elements.firstname.value == tasks[i].eventName){u = false}}
 
-  if ((form.elements.firstname.value != "") && (form.elements.datapicker2.value != "") && (form.elements.lastname.value != "")) {
+  if ((form.elements.firstname.value != "") && (form.elements.datapicker2.value != "") && u) {
 
-  tasks.push({eventName:form.elements.firstname.value, calendar:form.elements.group.value, color:colors[form.elements.group.value], date:moment(form.elements.datapicker2.value), mark:form.elements.mark.value, person:form.elements.lastname.value, descr:form.elements.characteristic.value, checked:"True"})
+  tasks.push({eventName:form.elements.firstname.value, calendar:form.elements.group.value, color:colors[form.elements.group.value], date:moment(form.elements.datapicker2.value), mark:form.elements.mark.value, person:form.elements.colleague.value, descr:form.elements.characteristic.value, checked:"True", project:form.elements.divproject.value})
   taskplace()
 
   var request = new XMLHttpRequest();
   request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false); //заменим, когда сайт обзаведется сервером
-  request.send(JSON.stringify({'type':'add_task', "user_id":user_id, "eventName":form.elements.firstname.value, "calendar":form.elements.group.value, "date":form.elements.datapicker2.value, "mark": form.elements.mark.value, "person":form.elements.lastname.value, "descr":form.elements.characteristic.value})); 
+  request.send(JSON.stringify({'type':'add_task', "user_id":user_id, "eventName":form.elements.firstname.value, "calendar":form.elements.group.value, "date":form.elements.datapicker2.value, "mark": form.elements.mark.value, "person":form.elements.colleague.value, "descr":form.elements.characteristic.value, "project":form.elements.divproject.value})); 
   var div = document.getElementById('apply_right');
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>`)
   render_calendar_m(tasks)
