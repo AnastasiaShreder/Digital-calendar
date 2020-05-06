@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, request, make_response
 import json
 
@@ -6,10 +7,10 @@ app = Flask(__name__)
 cors = CORS(app)
 
 
-#import pymysql as pms
+import pymysql as pms
 
-#conn = pms.connect(user = "root",passwd = "0000", host = "localhost", database = "EdgePoint")
-#cursor = conn.cursor()
+conn = pms.connect(user = "root",passwd = "password", host = "localhost", database = "EdgePoint")
+cursor = conn.cursor()
 
 tasks = [{"eventName":"Конференция 1", "calendar":"Конференция", "date":"2020-05-01", "mark":"Внимание","person":"", "descr":"", "project":"Проект 1"},
          {"eventName":"Форум 1",       "calendar":"Форум",       "date":"2020-05-02", "mark":"Внимание","person":"", "descr":"", "project":"Проект 1"},
@@ -52,39 +53,102 @@ tasks = [{"eventName":"Конференция 1", "calendar":"Конференц
 
 def create_data(data):
     if data["type"]=="colleaguesplace":
-        # в data["user_id"] находится id пользователя. Необходимо вернуть его коллег по отделу в виде [{id_коллеги,имя}]
-        return json.dumps([{"id":1,"name":"Андрей Тагиев"},{"id":2,"name":"Марк Шерман"},{"id":3,"name":"Анастасия Шредер"},{"id":4,"name":"Иван Конев"},{"id":5,"name":"Данил Лялин"}])
+	    cursor.execute("SELECT id FROM EdgePoint.users where EdgePoint.users.unit = (SELECT unit FROM EdgePoint.users where EdgePoint.users.id = "+ str(data["user_id"])+") AND EdgePoint.users.id != "+str(data["user_id"])+";")
+	    colleagues = []   
+	    col_ids = cursor.fetchall()
+	    if (len(col_ids) == 0):
+			return colleagues
+
+	    query = "SELECT id,name,surname FROM EdgePoint.users where id="+str(col_ids[0][0])
+	    for i in range(1,len(col_ids)):
+	    	query += " OR id=" + str(col_ids[i][0])
+	    query+=";"
+
+	    cursor.execute(query)
+	    col_names = cursor.fetchall()
+	    for i in col_names:
+	    	colleagues.append({"id":i[0],"name":i[1]+" "+i[2]})
+
+	    return json.dumps(colleagues)
+
     if data["type"]=="filters":
-        return json.dumps(["Конференция","Форум","Фестиваль","Встреча","Совещание","Заказ","Прочее"])
+    		cursor.execute("SELECT tag FROM EdgePoint.tag_task;")
+    		filters_set = set(cursor.fetchall())
+    		return json.dumps(map(lambda x: x[0], filters_set))
+
     if data["type"]=="projectplace":
-        # в data["user_id"] находится id пользователя. Необходимо вернуть список его проектов[{id_проекта,имя_проекта}]
-        #SELECT edgepoint.user_project.id_project FROM edgepoint.user_project WHERE edgepoint.user_project.id_user = %id пользователя%;
-        #SELECT edgepoint.user_project.project_name FROM edgepoint.user_project WHERE edgepoint.user_project.id_user = %id пользователя%;
-        return json.dumps([{"id":1,"name":"Проект 1"},{"id":2,"name":"Проект 2"},{"id":3,"name":"Проект 3"},{"id":4,"name":"Проект 4"},{"id":5,"name":"Проект 5"}])
+		cursor.execute("SELECT EdgePoint.user_project.id_project FROM EdgePoint.user_project WHERE EdgePoint.user_project.id_user = "+str(data["user_id"])+";")
+		proj_ids = cursor.fetchall()
+		user_projects = []
+		if (len(proj_ids) == 0):
+				return user_projects
+
+		proj_ids = map(lambda x: x[0], proj_ids)
+
+		query = "SELECT id,name FROM EdgePoint.projects where id="+str(proj_ids[0])
+		for i in range(1,len(proj_ids)):
+			query += " OR id=" + str(proj_ids[i])
+		query+=";"
+		cursor.execute(query)
+
+		proj_names = cursor.fetchall()
+		for i in proj_names:
+				user_projects.append({"id":i[0],"name":i[1]})
+		return json.dumps(user_projects)
+
     if data["type"]=="taskplace":
-        #есть 3 поля:
-        #   user_id - всегда непустое поле, содержит id пользователя
-        #   project_id - id проекта, на который пользователь тыкнул
-        #   second_user_id - id коллеги, на которого тыкнул пользователь
-        #
-        #свой user_id, id проекта, id юзера 
-        return json.dumps(tasks)
-    
-    
+    	#здесь возвращаются ВООБЩЕ все задачи пользователя,аналогично projectplace
+		cursor.execute("SELECT EdgePoint.user_task.id_task FROM EdgePoint.user_task WHERE EdgePoint.user_task.id_user = 5"+str(data["user_id"])+";")
+		task_ids = cursor.fetchall()
+		user_tasks = []
+		if (len(task_ids) == 0):
+			return user_tasks
+		task_ids = map(lambda x: x[0], task_ids)
+		query = "SELECT id,name FROM EdgePoint.tasks where id="+str(task_ids[0])
+		for i in range(1,len(task_ids)):
+			query += " OR id=" + str(task_ids[i])
+		query+=";"
+		cursor.execute(query)
+		task_names = cursor.fetchall()
+		for i in task_names:
+			user_tasks.append({"id":i[0],"name":i[1]})
+		return json.dumps(user_tasks)
+		
     if data["type"] == "login":
-        if data["email"] =="user" and data["password"] == "user":
-            return json.dumps({'isTrue':"True", 'user_id' : 1})
-        
-        if data["email"] =="l" and data["password"] == "p":
-            return json.dumps({'isTrue':"True", 'user_id' : 239})
-        return json.dumps({'isTrue':"False", 'user_id' : 0})
+		if data["email"] =="user" and data["password"] == "user":
+			return json.dumps({'isTrue':"True", 'user_id' : 0})
+		#if data["email"] =="l" and data["password"] == "p":
+		 #   return json.dumps({'isTrue':"True", 'user_id' : 239})
+		cursor.execute("select id from EdgePoint.users where password = '"+str(data["password"])+"' and email = '"+str(data["email"])+"';")
+		res =cursor.fetchall()
+		if len(res) == 0:
+			return json.dumps({'isTrue':"False", 'user_id' : 0})
+		else:
+			return json.dumps({'isTrue':"True", 'user_id' : res[0][0]})
+        	
 
 
 
     if data["type"] == "add_task":
-        # в запросе еще есть data["user_id"]
-        tasks.append({"eventName":data["eventName"], "calendar":data["calendar"], "date":data["date"], "mark":data["mark"], "person":data["person"], "descr":data["descr"], "project":data["project"]})
-        return "True"
+		#Примечания:
+		#Дата в формате ГГГГ-ММ-ДД
+		#data["calendar"] нигде не используется,а то,глобальная или не глобальная задача зависит от проекта
+        # в запросе еще есть data["user_id"],но я его не использую
+
+		cursor.execute("INSERT INTO `EdgePoint`.`tasks` (		`name`,		`deadline`,		`color`,		`description`) VALUES ("+data["eventName"]+","+data["date"]+",ff00ff,"+data["descr"]+");")
+		conn.commit()
+		cursor.execute("SELECT LAST_INSERT_ID();")
+		new_task_id = cursor.fetchall()[0][0]
+		print(new_task_id)
+		#пердполагаю,что в data["person"] список из всех,кого надо прикрепить к задаче
+		for i in data["person"]:
+			cursor.execute("INSERT INTO `EdgePoint`.`user_task` (`id_user`, `id_task`) VALUES ("+str(i)+", "+str(new_task_id)+");")
+		cursor.execute("INSERT INTO `EdgePoint`.`task_project`	(`id_task`,	`id_project`) VALUES ("+str(new_task_id)+", "+str(data["project"])+");")
+		#пердполагаю,что в #data["mark"] хранится 1 элемент - тэг задачи
+		cursor.execute("INSERT INTO `EdgePoint`.`tag_task`	(`tag`,	`id_task`)	VALUES	("+str(data["mark"])+","+str(new_task_id)+");")
+		conn.commit()
+        #tasks.append({"eventName":data["eventName"], "calendar":data["calendar"], "date":data["date"], "mark":data["mark"], "person":data["person"], "descr":data["descr"], "project":data["project"]})
+		return "True"
     
     return json.dumps([])
 
@@ -97,25 +161,14 @@ def simple():
 @app.route("/",methods = ['POST'])
 @cross_origin()
 def returnlist():
-    data = create_data(json.loads(request.data))
-    response = make_response(data)
-    response.headers.add("Access-Control-Allow-Credentials", "true")
-    return response
+	data = create_data(json.loads(request.data))
+	response = make_response(data)
+	response.headers.add("Access-Control-Allow-Credentials", "true")
+	return response
 
 
  
 if __name__ == "__main__":
-    
 
-    #cursor.execute("SELECT id FROM EdgePoint.users where password = 'qwejf;fdkdflknrty' and email = 'danil.lyalin@hh.ru';")
-    #for i in cursor.fetchall():
-    #    print(i)
-    	
-
-    
-    
-    
-    
-    
-    app.run(host= '192.168.0.121',port='5000')
-    #conn.close()
+    app.run(host= '127.0.0.1',port='5000')
+    conn.close()
