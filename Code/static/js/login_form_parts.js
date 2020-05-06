@@ -67,7 +67,7 @@ function check_login(){
         
 
     var request = new XMLHttpRequest();
-    request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false);
+    /*request.open('POST','http://85.142.164.100:5000/',false);*/request.open('POST','/',false);
     request.addEventListener('readystatechange', function() {
         if ((request.readyState==4) && (request.status==200)) {
             responce = JSON.parse(request.responseText)

@@ -1,7 +1,7 @@
 function get_tasks(){
     tasks = []
     var request = new XMLHttpRequest();
-    request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false); //заменим, когда сайт обзаведется сервером
+    /*request.open('POST','http://85.142.164.100:5000/',false);*/request.open('POST','/',false);
     request.addEventListener('readystatechange', function() {
         if ((request.readyState==4) && (request.status==200)) {
             responce = JSON.parse(request.responseText)
@@ -15,7 +15,7 @@ function get_tasks(){
 
 function get_filters(){
     var request = new XMLHttpRequest();
-    request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false);
+    /*request.open('POST','http://85.142.164.100:5000/',false);*/request.open('POST','/',false);
 	request.addEventListener('readystatechange', function() {
 	    if ((request.readyState==4) && (request.status==200)) {
             ret = []
@@ -32,7 +32,7 @@ function get_filters(){
 function get_colleagues(){
     var request = new XMLHttpRequest();
     
-    request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false);
+    /*request.open('POST','http://85.142.164.100:5000/',false);*/request.open('POST','/',false);
 	request.addEventListener('readystatechange', function() {
 	    if ((request.readyState==4) && (request.status==200)) {
         responce = JSON.parse(request.responseText)
@@ -46,7 +46,7 @@ function get_colleagues(){
 function get_projects(){
     var request = new XMLHttpRequest();
     
-    request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false);
+    /*request.open('POST','http://85.142.164.100:5000/',false);*/request.open('POST','/',false);
 	request.addEventListener('readystatechange', function() {
         if ((request.readyState==4) && (request.status==200)) {
             responce = JSON.parse(request.responseText)
