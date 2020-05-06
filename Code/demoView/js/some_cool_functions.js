@@ -61,27 +61,38 @@ function apply_right(){
 
 function apply_colleague(obj){
   var new_tasks = []
-  for (i = 0; i< tasks.length;i++){
-    if (obj.name == tasks[i].person){
-      new_tasks.push(tasks[i])
-    }
+  if (obj.name == "Все коллеги"){
+    taskplace(tasks)
+    render_calendar_m(tasks)
   }
-  taskplace(new_tasks)
-  render_calendar_m(new_tasks)
-  
+  else{
+    for (i = 0; i< tasks.length;i++){
+      if (obj.name == tasks[i].person){
+        new_tasks.push(tasks[i])
+      }
+    }
+    taskplace(new_tasks)
+    render_calendar_m(new_tasks)
+  }
+
   //сработает при нажатии на коллегу
 }
 
 function apply_project(obj){
   var new_tasks = []
-  for (i = 0; i< tasks.length;i++){
-    if (obj.name == tasks[i].project){
-      new_tasks.push(tasks[i])
-    }
+  if (obj.name == "Все проекты"){
+    taskplace(tasks)
+    render_calendar_m(tasks)
   }
-  taskplace(new_tasks)
-  render_calendar_m(new_tasks)
-
+    else{
+    for (i = 0; i< tasks.length;i++){
+      if (obj.name == tasks[i].project){
+        new_tasks.push(tasks[i])
+      }
+    }
+    taskplace(new_tasks)
+    render_calendar_m(new_tasks)
+  }
   //сработает при нажатии на проект  
 }
 
