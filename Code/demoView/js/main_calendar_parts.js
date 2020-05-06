@@ -165,7 +165,7 @@ function projectplace(){
     div=`<div class="project-place" id ="projectplace"></div>`
     div = document.getElementById('projectplace');
 		for (i=0;i<projects.length;i++){
-      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="${projects[i].id}">
+      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="${projects[i].name}">
         <div class="project-elem">
         <img src="icons/folder.png">
         <p>${projects[i].name} </p>
@@ -178,7 +178,7 @@ function colleaguesplace(){
     div=`<div class="сolleagues-place" id="colleaguesplace"></div>`
     div = document.getElementById('colleaguesplace');
 		for (i=0;i<colleagues.length;i++){
-      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_colleague(this)" name="${colleagues[i].id}">
+      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_colleague(this)" name="${colleagues[i].name}">
         <div class="сolleagues-elem">
         <img src="icons/person.png">
         <p>${colleagues[i].name}</p>

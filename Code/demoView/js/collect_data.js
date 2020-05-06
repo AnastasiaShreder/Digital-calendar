@@ -1,4 +1,4 @@
-function get_tasks(project_id = 0, u_id = 0){
+function get_tasks(){
     tasks = []
     var request = new XMLHttpRequest();
     request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false); //заменим, когда сайт обзаведется сервером
@@ -10,7 +10,7 @@ function get_tasks(project_id = 0, u_id = 0){
             }
         }
     }) 
-    request.send(JSON.stringify({'type':'taskplace', 'user_id':user_id, 'project_id':project_id, 'second_user_id': u_id})); 
+    request.send(JSON.stringify({'type':'taskplace', 'user_id':user_id})); 
 }
 
 function get_filters(){

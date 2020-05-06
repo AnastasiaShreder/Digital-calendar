@@ -60,17 +60,27 @@ function apply_right(){
 
 
 function apply_colleague(obj){
-  get_tasks(u_id = obj.name)
-  taskplace()
-  render_calendar_m()
+  var new_tasks = []
+  for (i = 0; i< tasks.length;i++){
+    if (obj.name == tasks[i].person){
+      new_tasks.push(tasks[i])
+    }
+  }
+  taskplace(new_tasks)
+  render_calendar_m(new_tasks)
   
   //сработает при нажатии на коллегу
 }
 
 function apply_project(obj){
-  get_tasks(project_id = obj.name)
-  taskplace()
-  render_calendar_m()
+  var new_tasks = []
+  for (i = 0; i< tasks.length;i++){
+    if (obj.name == tasks[i].project){
+      new_tasks.push(tasks[i])
+    }
+  }
+  taskplace(new_tasks)
+  render_calendar_m(new_tasks)
 
   //сработает при нажатии на проект  
 }
