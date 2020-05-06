@@ -76,9 +76,13 @@ function render_mp_menu(){
               <div class="сolleagues-place" id="colleaguesplace"></div>
               
               <input type="button" style="width: 13vw;" onclick="apply_right()" id="apply_right" value="Применить"></input>
-              <input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>
+              <input type="button" style="width: 13vw;" onclick="showDropdown()" id="drop_down" value="Добавить"></input>
+              <div id="dropdownAdds" class="dropdown-content">
+                <a href="#" onclick="add_task()" id="add_task">Задача</a>
+                <a href="#" onclick="add_project()" id="add_project">Проект</a>
+                <a href="#">Коллега</a>
+              </div>
               <input type="button" style="width: 13vw;" onclick="logout()" value="Выйти"></input>
-    
               
             </div>
           </div>
@@ -89,8 +93,30 @@ function render_mp_menu(){
       </div><!-- /scroller -->
    
     </div><!-- /pusher -->`)
- 
+    
    }
+
+function showDropdown(){
+  //document.getElementById("dropdownAdds").classList.toggle("show");
+  document.getElementById("dropdownAdds").classList.add('show');
+}
+
+function removeDropdown() {
+  window.onclick = function(event) {
+    if (!event.target.id.matches('drop_down') || !event.target.id.matches('add_task')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+}
+
+
 
 function mycalendar(){
   var div = document.getElementById('mycalendar');
@@ -161,6 +187,15 @@ function colleaguesplace(){
 }
 
 function add_task(){
+  var dropdowns = document.getElementsByClassName("dropdown-content");
+  var i;
+  for (i = 0; i < dropdowns.length; i++) {
+    var openDropdown = dropdowns[i];
+    if (openDropdown.classList.contains('show')) {
+      openDropdown.classList.remove('show');
+    }
+  }
+
     var div = document.getElementById('add_task');
     div.remove()
     var div = document.getElementById('calendar');
@@ -189,6 +224,114 @@ function add_task(){
 			  <div class="row">
 				<div class="col-25">
 				  <label for="datapicker">Дата</label>
+				</div>
+				<div class="col-75">
+					<!--<input type="text" value="dd-mm-yy" onfocus="this.select();lcs(this)" onclick="event.cancelBubble=true;this.select();lcs(this)">-->
+					<input type="date" name="datapicker2" value="ДД/ММ/ГГГГГ">
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col-25">
+				  <label for="mark">Метки</label>
+				</div>
+				<div class="col-75">
+				  <select id="mark" name="mark">
+					<option value="Важно">Важно</option>
+					<option value="Внимание">Внимание</option>
+					<option value="Срочно">Срочно</option>
+				  </select>
+				</div>
+        </div>
+        <div class="row">
+				<div class="col-25">
+				  <label for="group">Группа</label>
+				</div>
+				<div class="col-75">
+				  <select id="group" name="group">
+					<option value="Конференция">Конференция</option>
+					<option value="Форум">Форум</option>
+          <option value="Фестиваль">Фестиваль</option>
+          <option value="Встреча">Встреча</option>
+					<option value="Совещание">Совещание</option>
+          <option value="Заказ">Заказ</option>
+          <option value="Прочее">Прочее</option>
+				  </select>
+				</div>
+        </div>
+        <div class="row">
+				<div class="col-25">
+				  <label for="group">Проект</label>
+				</div>
+				<div class="col-75">
+				  <select id="divproject" name="divproject">
+				  </select>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col-25">
+				  <label for="characteristic">Описание задачи</label>
+				</div>
+				<div class="col-75">
+				  <textarea id="characteristic" name="characteristic" placeholder="Введите описание задачи..." style="height:200px"></textarea>
+				</div>
+			  </div>
+			  <div class="row">
+				<input onclick="add_task_submit()" type="submit" value="Submit">
+			  </div>
+			</form>
+		  
+    </div><!-- content -->
+    
+  </div><!-- modal -->
+  </div>`)
+  var a = document.getElementById("divproject")
+  for (i=0;i<projects.length;i++){
+    a.insertAdjacentHTML("beforeend",`<option value="${projects[i].name}">${projects[i].name}</option>`)
+  }
+  a = document.getElementById("colleague")
+  for (i=0;i<colleagues.length;i++){
+    a.insertAdjacentHTML("beforeend",`<option value="${colleagues[i].name}">${colleagues[i].name}</option>`)
+  }
+
+}
+
+function add_project(){
+  var dropdowns = document.getElementsByClassName("dropdown-content");
+  var i;
+  for (i = 0; i < dropdowns.length; i++) {
+    var openDropdown = dropdowns[i];
+    if (openDropdown.classList.contains('show')) {
+      openDropdown.classList.remove('show');
+    }
+  }
+
+    var div = document.getElementById('add_project');
+    div.remove()
+    var div = document.getElementById('calendar');
+    div.remove()
+    var div = document.getElementById('calendar-box');
+    div.insertAdjacentHTML("beforeend",`
+        <div id="calendar">
+			<form name="add_project_form">
+			  <div class="row">
+				<div class="col-25">
+				  <label for="fname">Название</label>
+				</div>
+				<div class="col-75">
+				  <input type="text" id="fname" name="firstname" placeholder="Название проекта..">
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col-25">
+				  <label for="lname">Место</label>
+				</div>
+        <div class="col-75">
+          <input type="text" id="place" name="place" placeholder="Место проведения...">
+        </div>
+			  </div>
+			  <div class="row">
+				<div class="col-25">
+				  <label for="datapicker">Дедлайн</label>
 				</div>
 				<div class="col-75">
 					<!--<input type="text" value="dd-mm-yy" onfocus="this.select();lcs(this)" onclick="event.cancelBubble=true;this.select();lcs(this)">-->
@@ -358,6 +501,7 @@ function render_calendar(){
   colleaguesplace()
 
   mp_menu_animate()
+  removeDropdown()
 
 }
 
