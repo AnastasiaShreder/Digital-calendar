@@ -166,13 +166,13 @@ function projectplace(){
     div = document.getElementById('projectplace');
     div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="Все проекты">
         <div class="project-elem">
-        <img src="icons/folder.png">
+        <img src="../static/icons/folder.png">
         <p>Все проекты</p>
         </div></a>`);
 		for (i=0;i<projects.length;i++){
       div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="${projects[i].name}">
         <div class="project-elem">
-        <img src="icons/folder.png">
+        <img src="../static/icons/folder.png">
         <p>${projects[i].name} </p>
         </div></a>`);
       }
