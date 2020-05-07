@@ -98,6 +98,21 @@ function apply_project(obj){
   //сработает при нажатии на проект  
 }
 
+function apply_project_task_list(obj) {
+  var new_tasks = []
+
+  if (obj.name == "Все проекты"){
+    render_task_list_tasks(tasks)
+  }
+    else{
+    for (i = 0; i< tasks.length;i++){
+      if (obj.name == tasks[i].project){
+        new_tasks.push(tasks[i])
+      }
+    }
+    render_task_list_tasks(new_tasks)
+  }
+}
 
 function select_mark(){
   var new_tasks = []
@@ -117,8 +132,7 @@ function select_mark(){
   // сработает при выборе метки
 }
 
-function click_on_task(obj){
-  taskname = obj.innerHTML
+function click_on_task(taskname){
   for (i=0;i<tasks.length;i++){
     if (tasks[i].eventName == taskname){
       alert("Название : "+tasks[i].eventName+"\nГруппа : "+tasks[i].calendar+"\nПроект : "+tasks[i].project+"\nКому поручено : "+tasks[i].person+"\nОписание : "+tasks[i].descr+"\nМетка : "+tasks[i].mark+"\nДата : "+moment(tasks[i].date).format('YYYY-MM-DD'))
