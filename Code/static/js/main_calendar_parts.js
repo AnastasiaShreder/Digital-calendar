@@ -32,7 +32,6 @@ function render_mp_menu(switcher){
     projects = []
     colleagues = []
     document.getElementById("container").remove()
-    document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
     render_calendar("local")
   }
   function b(){
@@ -41,7 +40,6 @@ function render_mp_menu(switcher){
     projects = []
     colleagues = [] 
     document.getElementById("container").remove()
-    document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
     render_calendar("global")
   }
 
