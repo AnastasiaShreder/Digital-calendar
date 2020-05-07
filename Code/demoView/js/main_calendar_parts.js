@@ -1,5 +1,12 @@
-function render_mp_menu(){
-    render_mp_pusher()
+function render_mp_menu(switcher){
+    if (switcher == "local")
+    {
+      render_mp_pusher();
+    }
+    else if (switcher == "global")
+    {
+      render_mp_pusher_for_global();
+    }
     var div = document.getElementById('mp-pusher');
     div.insertAdjacentHTML("beforeend", `<!-- mp-menu -->
     <nav id="mp-menu" class="mp-menu">
@@ -7,22 +14,10 @@ function render_mp_menu(){
         <h2 class="icon icon-world">Календарь</h2>
         <ul>
           <li class="icon icon-arrow-left">
-            <a class="icon icon-display" href="#">Общий календарь</a>
-            <div class="mp-level">
-              <h2 class="icon icon-display">Общий календарь</h2>
-              <a class="mp-back" href="#">назад</a>
-              <ul>
-                <li><a href="#">Фильтры</a></li>
-              </ul>
-            </div>
+            <a class="icon icon-display" href="Global.html">Общий календарь</a>
           </li>
           <li class="icon icon-arrow-left">
-            <a class="icon icon-news" href="#">Мой календарь</a>
-            <div class="mp-level">
-              <h2 class="icon icon-news">Мой календарь</h2>
-              <a class="mp-back" href="#">назад</a>
-              <ul id="mycalendar"></ul>
-            </div>
+            <a class="icon icon-news" href="index3.html">Мой календарь</a>
           </li>
           <li><a class="icon icon-wallet" href="#">Список задач</a></li>
         </ul>
@@ -45,7 +40,7 @@ function render_mp_menu(){
                 <section class="section" id="Prospero">
                 </section>	
             </div>
-                
+            
             <div class="surround-calendar">
               <div class="left-section">
                 <div class="filter-header">
@@ -53,77 +48,93 @@ function render_mp_menu(){
                 </div>
                 <form name="filters_left" id="filters_left">
                 </form>
-                <input type="button" onclick="apply_filters()" value="Применить"></input>
+                <input type="button" id="DO_IT" onclick="apply_filters()" value="Применить"></input>
               </div>
-   
+  
               <div class="calendar-box" id="calendar-box">
-                   <div id="calendar"></div>
-              </div>
-               <div class="right-section">
-              <p>Задачи из группы:
-              <select id="filter" onChange="select_mark()">
-                <option value="Все">Все</option>
-                <option value="Важно">Важно</option>
-                <option value="Внимание">Внимание</option>
-                <option value="Срочно">Срочно</option>
-              </select>
-              </p>
-    
-              <form class="task-place" id="task_place"></form>
-              <p id="aftertaskplace">Проекты:</p>
-              <div class="project-place" id ="projectplace"></div>
-              <p>Коллеги:</p>
-              <div class="сolleagues-place" id="colleaguesplace"></div>
+                  <div id="calendar"></div>
+              </div> 
+
+              <div class="right-section">
+                <p>Задачи из группы:
+                <select id="filter" onChange="select_mark()">
+                  <option value="Все">Все</option>
+                  <option value="Важно">Важно</option>
+                  <option value="Внимание">Внимание</option>
+                  <option value="Срочно">Срочно</option>
+                </select>
+                </p>
+      
+                <form class="task-place" id="task_place"></form>
+                <p id="aftertaskplace">Проекты:</p>
+                <div class="project-place" id ="projectplace"></div>
+                <p>Коллеги:</p> 
+                <div class="сolleagues-place" id="colleaguesplace"></div>
+                
+                <input type="button" onclick="apply_right()" id="apply_right" value="Применить"></input>
+                <input type="button" onclick="add_task()" id="add_task" value="Добавить"></input>   
+              </div> 
               
-              <input type="button" style="width: 13vw;" onclick="apply_right()" id="apply_right" value="Применить"></input>
-              <input type="button" style="width: 13vw;" onclick="showDropdown()" id="drop_down" value="Добавить"></input>
-              <div id="dropdownAdds" class="dropdown-content">
-                <a href="#" onclick="add_task()" id="add_task">Задача</a>
-                <a href="#" onclick="add_project()" id="add_project">Проект</a>
-                <a href="#">Коллега</a>
-              </div>
-              <input type="button" style="width: 13vw;" onclick="logout()" value="Выйти"></input>
-              
+              <button id="GO_AWAY" onclick="logout()"><img src="icons/logout2.png"></input>
+
             </div>
           </div>
-          </div>
-        </div><!-- /scroller-inner -->
-        
-                  
+        </div>
+      </div><!-- /scroller-inner -->
       </div><!-- /scroller -->
-   
     </div><!-- /pusher -->`)
-    
    }
 
-function showDropdown(){
-  //document.getElementById("dropdownAdds").classList.toggle("show");
-  document.getElementById("dropdownAdds").classList.add('show');
-}
+   function render_mp_pusher_for_global(){
+    var div = document.getElementById("container");
+    div.insertAdjacentHTML("beforeend", `			<!-- Push Wrapper -->
+    <div class="mp-pusher" id="mp-pusher">
+      <div class="scroller">
+        <div class="scroller-inner">
+      
+          <div class="content clearfix">
+            <div class="block block-100 clearfix">
+                <span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
+                <section class="section" id="Prospero">
+                </section>	
+            </div>
+            
+            <div class="surround-calendar">
+              <div class="left-section">
+                <div class="filter-header">
+                <p><u>Фильтры:</u><p>
+                </div>
+                <form name="filters_left" id="filters_left">
+                </form>
+                <input type="button" id="DO_IT" onclick="apply_filters()" value="Применить"></input>
+              </div>
+  
+              <div class="calendar-box" id="calendar-box">
+                  <div id="calendar"></div>
+              </div> 
 
-function removeDropdown() {
-  window.onclick = function(event) {
-    if (!event.target.id.matches('drop_down') || !event.target.id.matches('add_task')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
-      }
-    }
-  }
-}
+              <div class="right-section">
+                <p>Отделы:</p>
+      
+                <div class="group-place" style="height: 260px;" id="group_place">
+                Андрей, запихни сюда рандомные отделы как во вкладке проектов.
+                </div>
+                <p id="afterGroupPlace">Проекты:</p>
+                <div class="project-place" style="height: 260px;" id ="projectplace"></div>
+                
+                <input type="button" onclick="apply_right()" id="apply_right" value="Применить"></input>
+                <input type="button" onclick="add_task()" id="add_task" value="Добавить"></input>   
+              </div> 
+              
+              <button id="GO_AWAY" onclick="logout()"><img src="icons/logout2.png"></input>
 
-
-
-function mycalendar(){
-  var div = document.getElementById('mycalendar');
-	for (i=0; i<100;i++){
-		div.insertAdjacentHTML("beforeend", `<li><a href="#">Проект ${i}</a></li>`);
-  }  
-}
+            </div>
+          </div>
+        </div>
+      </div><!-- /scroller-inner -->
+      </div><!-- /scroller -->
+    </div><!-- /pusher -->`)
+   }
 
 
 function filters_left(){
@@ -164,13 +175,8 @@ function projectplace(){
     var div = document.getElementById('projectplace');
     div=`<div class="project-place" id ="projectplace"></div>`
     div = document.getElementById('projectplace');
-    div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="Все проекты">
-        <div class="project-elem">
-        <img src="icons/folder.png">
-        <p>Все проекты</p>
-        </div></a>`);
 		for (i=0;i<projects.length;i++){
-      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="${projects[i].name}">
+      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="${projects[i].id}">
         <div class="project-elem">
         <img src="icons/folder.png">
         <p>${projects[i].name} </p>
@@ -182,13 +188,8 @@ function colleaguesplace(){
     var div = document.getElementById('colleaguesplace');
     div=`<div class="сolleagues-place" id="colleaguesplace"></div>`
     div = document.getElementById('colleaguesplace');
-    div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_colleague(this)" name="Все коллеги">
-        <div class="сolleagues-elem">
-        <img src="icons/person.png">
-        <p>Все коллеги</p>
-        </div></a>`)
 		for (i=0;i<colleagues.length;i++){
-      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_colleague(this)" name="${colleagues[i].name}">
+      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_colleague(this)" name="${colleagues[i].id}">
         <div class="сolleagues-elem">
         <img src="icons/person.png">
         <p>${colleagues[i].name}</p>
@@ -197,15 +198,6 @@ function colleaguesplace(){
 }
 
 function add_task(){
-  var dropdowns = document.getElementsByClassName("dropdown-content");
-  var i;
-  for (i = 0; i < dropdowns.length; i++) {
-    var openDropdown = dropdowns[i];
-    if (openDropdown.classList.contains('show')) {
-      openDropdown.classList.remove('show');
-    }
-  }
-
     var div = document.getElementById('add_task');
     div.remove()
     var div = document.getElementById('calendar');
@@ -234,114 +226,6 @@ function add_task(){
 			  <div class="row">
 				<div class="col-25">
 				  <label for="datapicker">Дата</label>
-				</div>
-				<div class="col-75">
-					<!--<input type="text" value="dd-mm-yy" onfocus="this.select();lcs(this)" onclick="event.cancelBubble=true;this.select();lcs(this)">-->
-					<input type="date" name="datapicker2" value="ДД/ММ/ГГГГГ">
-				</div>
-			  </div>
-			  <div class="row">
-				<div class="col-25">
-				  <label for="mark">Метки</label>
-				</div>
-				<div class="col-75">
-				  <select id="mark" name="mark">
-					<option value="Важно">Важно</option>
-					<option value="Внимание">Внимание</option>
-					<option value="Срочно">Срочно</option>
-				  </select>
-				</div>
-        </div>
-        <div class="row">
-				<div class="col-25">
-				  <label for="group">Группа</label>
-				</div>
-				<div class="col-75">
-				  <select id="group" name="group">
-					<option value="Конференция">Конференция</option>
-					<option value="Форум">Форум</option>
-          <option value="Фестиваль">Фестиваль</option>
-          <option value="Встреча">Встреча</option>
-					<option value="Совещание">Совещание</option>
-          <option value="Заказ">Заказ</option>
-          <option value="Прочее">Прочее</option>
-				  </select>
-				</div>
-        </div>
-        <div class="row">
-				<div class="col-25">
-				  <label for="group">Проект</label>
-				</div>
-				<div class="col-75">
-				  <select id="divproject" name="divproject">
-				  </select>
-				</div>
-			  </div>
-			  <div class="row">
-				<div class="col-25">
-				  <label for="characteristic">Описание задачи</label>
-				</div>
-				<div class="col-75">
-				  <textarea id="characteristic" name="characteristic" placeholder="Введите описание задачи..." style="height:200px"></textarea>
-				</div>
-			  </div>
-			  <div class="row">
-				<input onclick="add_task_submit()" type="submit" value="Submit">
-			  </div>
-			</form>
-		  
-    </div><!-- content -->
-    
-  </div><!-- modal -->
-  </div>`)
-  var a = document.getElementById("divproject")
-  for (i=0;i<projects.length;i++){
-    a.insertAdjacentHTML("beforeend",`<option value="${projects[i].name}">${projects[i].name}</option>`)
-  }
-  a = document.getElementById("colleague")
-  for (i=0;i<colleagues.length;i++){
-    a.insertAdjacentHTML("beforeend",`<option value="${colleagues[i].name}">${colleagues[i].name}</option>`)
-  }
-
-}
-
-function add_project(){
-  var dropdowns = document.getElementsByClassName("dropdown-content");
-  var i;
-  for (i = 0; i < dropdowns.length; i++) {
-    var openDropdown = dropdowns[i];
-    if (openDropdown.classList.contains('show')) {
-      openDropdown.classList.remove('show');
-    }
-  }
-
-    var div = document.getElementById('add_project');
-    div.remove()
-    var div = document.getElementById('calendar');
-    div.remove()
-    var div = document.getElementById('calendar-box');
-    div.insertAdjacentHTML("beforeend",`
-        <div id="calendar">
-			<form name="add_project_form">
-			  <div class="row">
-				<div class="col-25">
-				  <label for="fname">Название</label>
-				</div>
-				<div class="col-75">
-				  <input type="text" id="fname" name="firstname" placeholder="Название проекта..">
-				</div>
-			  </div>
-			  <div class="row">
-				<div class="col-25">
-				  <label for="lname">Место</label>
-				</div>
-        <div class="col-75">
-          <input type="text" id="place" name="place" placeholder="Место проведения...">
-        </div>
-			  </div>
-			  <div class="row">
-				<div class="col-25">
-				  <label for="datapicker">Дедлайн</label>
 				</div>
 				<div class="col-75">
 					<!--<input type="text" value="dd-mm-yy" onfocus="this.select();lcs(this)" onclick="event.cancelBubble=true;this.select();lcs(this)">-->
@@ -494,24 +378,26 @@ function mp_menu_animate(){
   }
   
 
-function render_calendar(){
+function render_calendar(switcher){
   get_filters()
   get_tasks()
   get_projects()
   get_colleagues()
 
   document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
-  render_mp_menu()
+  render_mp_menu(switcher)
 
-  mycalendar()
   filters_left()
   render_calendar_m()
-  taskplace()
+  if (switcher == "local")
+  {
+    taskplace();
+    colleaguesplace();
+  }
   projectplace()
-  colleaguesplace()
+
 
   mp_menu_animate()
-  removeDropdown()
 
 }
 

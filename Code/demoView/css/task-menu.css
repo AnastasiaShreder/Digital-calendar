@@ -2,13 +2,14 @@
 .surround-calendar{
 	display: flex;
 	justify-content: space-between;
-	width: 1050px;
+	width: 97vw;
 	height: 650px;
 }
 
 .calendar-box
 {
-	margin: 5px;
+	display: block;
+	margin: auto;
 }
 
 /*Плашка слева*/
@@ -17,11 +18,16 @@
 	/*background-color: #ffffffff;*/
 	border:2px outset #FDCF78;
 	border-radius: 7px;
-	width: 14.5vw;
-	height: 280px;
+	width: 10vw;
+	height: 320px;
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-top: 160px;
+}
+
+#DO_IT{
+	display: block;
+	margin: auto;
 }
 
 .left-section .line{
@@ -49,12 +55,30 @@
 
 }
 
-.right-section p, .left-section p{
+#GO_AWAY{
+	display: block;
+	margin-bottom: auto;
+	margin-top: -65px;
+}
+
+.left-section p{
 	margin: 10px;
 }
 
+.right-section p{
+	margin: 3px;
+	margin-left: 10px;
+}
+
+#apply_right, #add_task{
+	width: 13vw;
+	display: block;
+	margin: auto;
+	margin-top: 3px;
+}
+
 /*Описание вкладок на плашке*/
-.filter-place, .task-place, .project-place, .сolleagues-place{
+.filter-place, .task-place, .project-place, .сolleagues-place, .group-place{
 	overflow-y: auto;
 	position: relative;
 	margin: 5px;
