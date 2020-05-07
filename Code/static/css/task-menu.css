@@ -12,11 +12,97 @@
 	margin: auto;
 }
 
+/*Список задач*/
+.surround-task{
+	display: flex;
+	justify-content: space-around;
+	width: 97vw;
+	height: 650px;
+}
+
+.My-tasks
+{
+	overflow-y: auto;
+	color: #72512C;
+	border:2px solid #FDCF78;
+	border-radius: 7px;
+	width: 40vw;
+	height: 650px;
+	margin-left: 20vw;
+	margin-right: 10px;
+	background-color: white;
+}
+
+#LilCrutch{
+	background-color: #F5DA81;
+	display: flex;
+	border-bottom:2px solid #FDCF78;
+	justify-content: space-around;
+	height: 60px;
+}
+
+#TaskSearchInput{
+	border:1px solid #FDCF78;
+	width: 28vw;
+	height: 30px;
+	margin-top: 13px;
+	margin-right: 10px;
+}
+
+#TaskSearchButton{
+	width: 7vw;
+	height: 3.5vh;
+}
+
+.right-task-section{	
+	color: #72512C;
+	background-color: #ffffffff;
+	border:2px solid #FDCF78;
+	border-radius: 7px;
+	width: 14.5vw;
+	height: 490px;
+	margin-right: 10px;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+#GO_AWAY_from_task{
+	display: block;
+	margin-bottom: auto;
+	margin-top: -65px;
+	margin-right: 15vw;
+}
+
+.marks-elem img{
+	width: 30px;
+	height: 30px;
+	margin-left: 8px;
+}
+
+.task-list-elem{
+	background: rgba(214, 170, 129, 0.4);
+	border:2px solid #FDCF78;
+	border-radius: 7px;
+	width: 37vw;
+	margin: auto;
+	height: auto;
+	margin-top: 2vh;
+	padding-left: 1vw;
+}
+
+.move_task_lil_up{
+	display: inline-block;
+	margin-bottom: 1vh;
+	font-size: 18px;
+}
+
+/*Конец списка задач*/
+
 /*Плашка слева*/
 .left-section{	
 	color: #72512C;
 	/*background-color: #ffffffff;*/
-	border:2px outset #FDCF78;
+	border:2px solid #FDCF78;
 	border-radius: 7px;
 	width: 10vw;
 	height: 320px;
@@ -31,7 +117,7 @@
 }
 
 .left-section .line{
-	border-top:2px outset #FDCF78;
+	border-top:2px solid #FDCF78;
 }
 
 .left-section .filter-search input{
@@ -46,7 +132,7 @@
  .right-section{	
 	color: #72512C;
 	background-color: #ffffffff;
-	border:2px outset #FDCF78;
+	border:2px solid #FDCF78;
 	border-radius: 7px;
 	width: 14.5vw;
 	height: 650px;
@@ -65,12 +151,12 @@
 	margin: 10px;
 }
 
-.right-section p{
+.right-section p, .right-task-section p{
 	margin: 3px;
 	margin-left: 10px;
 }
 
-#apply_right, #add_task{
+#apply_right, #add_task, #drop_down{
 	width: 13vw;
 	display: block;
 	margin: auto;
@@ -78,7 +164,7 @@
 }
 
 /*Описание вкладок на плашке*/
-.filter-place, .task-place, .project-place, .сolleagues-place, .group-place{
+.filter-place, .task-place, .project-place, .сolleagues-place, .group-place, .marks-place{
 	overflow-y: auto;
 	position: relative;
 	margin: 5px;
@@ -86,7 +172,7 @@
 	height: 185px;
 	color: #72512C;
 	background-color: #FDCF78;
-	border:2px outset #FDCF78;
+	border:2px solid #FDCF78;
 }
 
 .сolleagues-place{
@@ -106,7 +192,7 @@
 /*Конец описания кнопки*/
 
 /*Описание элементов*/
- .task-elem, .project-elem, .сolleagues-elem{
+ .task-elem, .project-elem, .сolleagues-elem, .marks-elem{
 	width: auto;
 	height: auto;
 	border-bottom:2px solid #FDCF78;
@@ -122,7 +208,7 @@
 	height: 25px;
 	margin-left: 8px;
 }
-.project-elem p, .сolleagues-elem p{
+.project-elem p, .сolleagues-elem p, .marks-elem p{
 	display: inline;
 	color: #72512C;
 	margin: 15px;

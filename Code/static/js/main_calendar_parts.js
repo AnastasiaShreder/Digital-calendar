@@ -7,6 +7,10 @@ function render_mp_menu(switcher){
     {
       render_mp_pusher_for_global();
     }
+    else if (switcher == "task_list")
+    {
+      render_mp_pusher_for_task_list();
+    }
     var div = document.getElementById('mp-pusher');
     div.insertAdjacentHTML("beforeend", `<!-- mp-menu -->
     <nav id="mp-menu" class="mp-menu">
@@ -44,7 +48,12 @@ function render_mp_menu(switcher){
   }
 
   function c(){
-    alert("Будет позже, подождите")
+    tasks = []
+    filter = []
+    projects = []
+    colleagues = [] 
+    document.getElementById("container").remove()
+    render_calendar("task_list")
   }
   
   
@@ -156,6 +165,124 @@ function render_mp_menu(switcher){
       </div><!-- /scroller -->
     </div><!-- /pusher -->`)
    }
+
+   function render_mp_pusher_for_task_list(){
+    var div = document.getElementById("container");
+    div.insertAdjacentHTML("beforeend", `			<!-- Push Wrapper -->
+    <div class="mp-pusher" id="mp-pusher">
+      <div class="scroller">
+        <div class="scroller-inner">
+      
+          <div class="content clearfix">
+            <div class="block block-100 clearfix">
+                <span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
+                <section class="section" id="Prospero">
+                </section>	
+            </div>
+            
+            <div class="surround-task">
+
+              <div class="My-tasks">
+                <form id="LilCrutch">
+                  <p><input type="search" id="TaskSearchInput" placeholder=" Введите название задачи"> 
+                  <input type="submit" id="TaskSearchButton" value="Найти задачу"></p>
+                </form>  
+
+                
+                <div class="task-list-elem">
+                  <img src="../static/icons/redmark.png">
+                  <div class="move_task_lil_up">
+                    <input type="checkbox" name="task1" value="task1">
+                    Задача 1
+                  </div>
+                </div>
+                
+                <div class="task-list-elem">
+                  <img src="../static/icons/greenmark.png">
+                  <div class="move_task_lil_up">
+                    <input type="checkbox" name="task2" value="task1">
+                    Задача 2
+                  </div>
+                </div>
+
+                <div class="task-list-elem">
+                  <img src="../static/icons/yellowmark.png">
+                  <div class="move_task_lil_up">
+                    <input type="checkbox" name="task3" value="task1">
+                    Задача 3
+                  </div>
+                </div>
+
+                <div class="task-list-elem">
+                  <img src="../static/icons/yellowmark.png">
+                  <div class="move_task_lil_up">
+                    <input type="checkbox" name="task4" value="task1">
+                    Задача 4
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="right-task-section">
+                <p id="marks">Метки:</p>
+                <div class="marks-place" style="height: 110px;" id ="marksplace">
+                  
+                <a class="button" href="index3.html">
+									<div class="project-elem">
+										<img src="../static/icons/redmark.png">
+										<p>СРОЧНО! </p>
+									</div>
+                </a>  
+                
+                <a class="button" href="index3.html">
+									<div class="project-elem">
+										<img src="../static/icons/yellowmark.png">
+										<p>ВАЖНО! </p>
+									</div>
+                </a>  
+                
+                <a class="button" href="index3.html">
+									<div class="project-elem">
+										<img src="../static/icons/greenmark.png">
+										<p>ВНИМАНИЕ! </p>
+									</div>
+								</a>  
+
+                </div> 
+
+                <p id="afterGroupPlace">Мои проекты:</p>
+                <div class="project-place" style="height: 300px;" id ="projectplace"></div> 
+              </div> 
+              
+              <button id="GO_AWAY_from_task" onclick="logout()"><img src="../static/icons/logout2.png"></input>
+
+            </div>
+          </div>
+        </div>
+      </div><!-- /scroller-inner -->
+      </div><!-- /scroller -->
+    </div><!-- /pusher -->`)
+   }
+
+   function showDropdown(){
+    //document.getElementById("dropdownAdds").classList.toggle("show");
+    document.getElementById("dropdownAdds").classList.add('show');
+  }
+  
+  function removeDropdown() {
+    window.onclick = function(event) {
+      if (!event.target.id.matches('drop_down') || !event.target.id.matches('add_task')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  }
 
 function filters_left(){
     var div = document.getElementById('filters_left');
@@ -535,8 +662,12 @@ function render_calendar(switcher){
   document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
   render_mp_menu(switcher)
 
-  filters_left()
-  render_calendar_m()
+  if (switcher != "task_list")
+  {
+    filters_left()
+    render_calendar_m();
+  }
+
   if (switcher == "local")
   {
     taskplace();
