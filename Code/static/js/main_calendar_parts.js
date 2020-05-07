@@ -7,6 +7,10 @@ function render_mp_menu(switcher){
     {
       render_mp_pusher_for_global();
     }
+    else if (switcher == "task_list")
+    {
+      render_mp_pusher_for_task_list();
+    }
     var div = document.getElementById('mp-pusher');
     div.insertAdjacentHTML("beforeend", `<!-- mp-menu -->
     <nav id="mp-menu" class="mp-menu">
@@ -44,7 +48,12 @@ function render_mp_menu(switcher){
   }
 
   function c(){
-    alert("Будет позже, подождите")
+    tasks = []
+    filter = []
+    projects = []
+    colleagues = [] 
+    document.getElementById("container").remove()
+    render_calendar("task_list")
   }
   
   
@@ -80,6 +89,7 @@ function render_mp_menu(switcher){
                 <p>Задачи из группы:
                 <select id="filter" onChange="select_mark()">
                   <option value="Все">Все</option>
+                  <option value="Без метки">Без метки</option>
                   <option value="Важно">Важно</option>
                   <option value="Внимание">Внимание</option>
                   <option value="Срочно">Срочно</option>
@@ -157,6 +167,97 @@ function render_mp_menu(switcher){
     </div><!-- /pusher -->`)
    }
 
+   function render_mp_pusher_for_task_list(){
+    var div = document.getElementById("container");
+    //FIXME рамку с метками надо расширить
+    div.insertAdjacentHTML("beforeend", `			<!-- Push Wrapper -->
+    <div class="mp-pusher" id="mp-pusher">
+      <div class="scroller">
+        <div class="scroller-inner">
+      
+          <div class="content clearfix">
+            <div class="block block-100 clearfix">
+                <span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
+                <section class="section" id="Prospero">
+                </section>	
+            </div>
+            
+            <div class="surround-task">
+
+              <div class="My-tasks">
+                <form id="LilCrutch">
+                  <p><input type="search" onkeypress = "if (event.keyCode==13){ return false}" id="TaskSearchInput" placeholder=" Введите название задачи"> 
+                  <input type="button" id="TaskSearchButton" onClick="find_task()" value="Найти задачу"></p>
+                </form>  
+
+                <div id = "task_list_tasks"></div>
+              </div>
+
+              <div class="right-task-section">
+                <p id="marks">Метки:</p>
+                <div class="marks-place" style="height: 110px;" id ="marksplace">
+                
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/whitemark.png"><p>Все</p></div></a>  
+
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/whitemark.png"><p>Без метки</p></div></a>  
+
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/redmark.png"><p>Срочно</p></div></a>  
+                
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/yellowmark.png"><p>Важно</p></div></a>  
+                
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/greenmark.png"><p>Внимание</p></div></a>  
+
+                </div> 
+
+                <p id="afterGroupPlace">Мои проекты:</p>
+                <div class="project-place" style="height: 300px;" id ="projectplace"></div> 
+              </div> 
+              
+              <button id="GO_AWAY_from_task" onclick="logout()"><img src="../static/icons/logout2.png"></input>
+
+            </div>
+          </div>
+        </div>
+      </div><!-- /scroller-inner -->
+      </div><!-- /scroller -->
+    </div><!-- /pusher -->`)
+
+    render_task_list_tasks(tasks)
+
+   }
+
+function render_task_list_tasks(task = tasks){
+  document.getElementById("task_list_tasks").remove()
+  document.getElementById("LilCrutch").insertAdjacentHTML("afterend",`<div id = "task_list_tasks"></div>`)
+  var div = document.getElementById("task_list_tasks")
+  for (i = 0 ; i < task.length ; i++){
+      if (task[i].mark == "Важно"){
+        div.insertAdjacentHTML("beforeend",`<div class="task-list-elem">
+        <img src="../static/icons/yellowmark.png">
+        <div class="move_task_lil_up" name="${task[i].eventName}" onClick="click_on_task(this.textContent)">${task[i].eventName}</div>
+        </div>`)
+      }
+      if (task[i].mark == "Внимание"){
+        div.insertAdjacentHTML("beforeend",`<div class="task-list-elem">
+        <img src="../static/icons/greenmark.png">
+        <div class="move_task_lil_up" name="${task[i].eventName}" onClick="click_on_task(this.textContent)">${task[i].eventName}</div>
+        </div>`)
+      }
+      if (task[i].mark == "Срочно"){
+        div.insertAdjacentHTML("beforeend",`<div class="task-list-elem">
+        <img src="../static/icons/redmark.png">
+        <div class="move_task_lil_up" name="${task[i].eventName}" onClick="click_on_task(this.textContent)">${task[i].eventName}</div>
+        </div>`)
+      }
+      if (task[i].mark == "Без метки"){
+        div.insertAdjacentHTML("beforeend",`<div class="task-list-elem">
+        <img src="../static/icons/whitemark.png">
+        <div class="move_task_lil_up" name="${task[i].eventName}" onClick="click_on_task(this.textContent)">${task[i].eventName}</div>
+        </div>`)
+      }
+    }
+}
+
 function filters_left(){
     var div = document.getElementById('filters_left');
     for (i=0;i<filter.length;i++){
@@ -191,10 +292,28 @@ function taskplace(task = tasks){
   }
 }
 
-function projectplace(){
-    var div = document.getElementById('projectplace');
-    div=`<div class="project-place" id ="projectplace"></div>`
-    div = document.getElementById('projectplace');
+function projectplace(switcher){
+  var div = document.getElementById('projectplace');
+  div=`<div class="project-place" id ="projectplace"></div>`
+  div = document.getElementById('projectplace');
+  if (switcher == "task_list"){
+//TODO приделать сюда кнопки удаления проекта и показа инфы о нем
+    div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this)" name="Все проекты">
+    <div class="project-elem">
+    <img src="../static/icons/folder.png">
+    <p>Все проекты</p>
+    </div></a>`);
+		for (i=0;i<projects.length;i++){
+      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this)" name="${projects[i].name}">
+        <div class="project-elem">
+        <img src="../static/icons/folder.png">
+        <p>${projects[i].name} </p>
+        </div></a>`);
+      }
+
+  }
+  else{
+//TODO приделать сюда кнопки удаления проекта и показа инфы о нем
     div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="Все проекты">
     <div class="project-elem">
     <img src="../static/icons/folder.png">
@@ -207,6 +326,7 @@ function projectplace(){
         <p>${projects[i].name} </p>
         </div></a>`);
       }
+  }
 }
 
 function colleaguesplace(){
@@ -232,7 +352,8 @@ function add_button(){
   var div = document.getElementById('apply_right');
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_project()" id="add_project" value="Добавить проект"></input>`)
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить задачу"></input>`)
-  
+  //FIXME кнопка "добавить проект" все равно съезжает влево
+  //FIXME рамка не расширяется, когда появляется 2я кнопка
 }
 
 
@@ -279,7 +400,8 @@ function add_task(){
 				  <label for="mark">Метки</label>
 				</div>
 				<div class="col-75">
-				  <select id="mark" name="mark">
+          <select id="mark" name="mark">
+          <option value="Без метки">Без метки</option>
 					<option value="Важно">Важно</option>
 					<option value="Внимание">Внимание</option>
 					<option value="Срочно">Срочно</option>
@@ -339,6 +461,7 @@ function add_task(){
 
 }
 
+//TODO сделать форму для проекта
 function add_project(){
     var div = document.getElementById('add_task');
     div.remove()
@@ -380,7 +503,8 @@ function add_project(){
 				  <label for="mark">Метки</label>
 				</div>
 				<div class="col-75">
-				  <select id="mark" name="mark">
+          <select id="mark" name="mark">
+          <option value="Без метки">Важно</option>
 					<option value="Важно">Важно</option>
 					<option value="Внимание">Внимание</option>
 					<option value="Срочно">Срочно</option>
@@ -468,7 +592,7 @@ function add_task_submit(){
 
 }
 
-//TODO add_project_submit()   
+//TODO сделать функцию когда будет форма для проекта add_project_submit()   
 
 
 function delete_container(){
@@ -535,14 +659,18 @@ function render_calendar(switcher){
   document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
   render_mp_menu(switcher)
 
-  filters_left()
-  render_calendar_m()
+  if (switcher != "task_list")
+  {
+    filters_left()
+    render_calendar_m();
+  }
+
   if (switcher == "local")
   {
     taskplace();
     colleaguesplace();
   }
-  projectplace()
+  projectplace(switcher)
 
 
   mp_menu_animate()

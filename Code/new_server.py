@@ -73,7 +73,7 @@ def create_data(data):
 		
 		for i in task_names:
 			cursor.execute("(SELECT tag FROM EdgePoint.tag_task where id_task = "+str(i[0])+" AND tag IN ('Конференция','Форум','Фестиваль','Встреча','Совещание','Заказ','Прочее'))"+
-				"UNION (SELECT tag FROM EdgePoint.tag_task where id_task = "+str(i[0])+" AND tag IN ('Важно','Внимание','Срочно'))")
+				"UNION (SELECT tag FROM EdgePoint.tag_task where id_task = "+str(i[0])+" AND tag IN ('Важно','Внимание','Срочно','Без метки'))")
 			tags=cursor.fetchall()
 			cursor.execute("SELECT name FROM EdgePoint.projects WHERE id = (SELECT id_project FROM EdgePoint.task_project where id_task = "+str(i[0])+" )")
 			task_project_name = cursor.fetchall()[0][0]

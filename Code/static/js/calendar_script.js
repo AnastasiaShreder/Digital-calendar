@@ -251,7 +251,7 @@
 			var div = createElement('div', 'event');
 			var square = createElement('div', 'event-category ' + ev.color);
 			var span = createElement('span', '', ev.eventName);
-			span.onclick = function(obj){click_on_task(this)}
+			span.onclick = function(obj){click_on_task(this.innerHTML)}
 
 			div.appendChild(square);
 			div.appendChild(span);
