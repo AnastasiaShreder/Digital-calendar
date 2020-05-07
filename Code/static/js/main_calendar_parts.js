@@ -89,6 +89,7 @@ function render_mp_menu(switcher){
                 <p>Задачи из группы:
                 <select id="filter" onChange="select_mark()">
                   <option value="Все">Все</option>
+                  <option value="Без метки">Без метки</option>
                   <option value="Важно">Важно</option>
                   <option value="Внимание">Внимание</option>
                   <option value="Срочно">Срочно</option>
@@ -196,23 +197,30 @@ function render_mp_menu(switcher){
                 <div class="marks-place" style="height: 110px;" id ="marksplace">
                   
                 <a class="button" href="index.html">
+                <div class="project-elem">
+                  <img src="../static/icons/whitemark.png">
+                  <p>Без метки</p>
+                </div>
+                </a>  
+
+                <a class="button" href="index.html">
 									<div class="project-elem">
 										<img src="../static/icons/redmark.png">
-										<p>СРОЧНО! </p>
+										<p>Срочно</p>
 									</div>
                 </a>  
                 
                 <a class="button" href="index.html">
 									<div class="project-elem">
 										<img src="../static/icons/yellowmark.png">
-										<p>ВАЖНО! </p>
+										<p>Важно</p>
 									</div>
                 </a>  
                 
                 <a class="button" href="index.html">
 									<div class="project-elem">
 										<img src="../static/icons/greenmark.png">
-										<p>ВНИМАНИЕ! </p>
+										<p>Внимание</p>
 									</div>
 								</a>  
 
@@ -255,6 +263,12 @@ function render_task_list_tasks(task = tasks){
       if (task[i].mark == "Срочно"){
         div.insertAdjacentHTML("beforeend",`<div class="task-list-elem">
         <img src="../static/icons/redmark.png">
+        <div class="move_task_lil_up" name="${task[i].eventName}" onClick="click_on_task(this.textContent)">${task[i].eventName}</div>
+        </div>`)
+      }
+      if (task[i].mark == "Без метки"){
+        div.insertAdjacentHTML("beforeend",`<div class="task-list-elem">
+        <img src="../static/icons/whitemark.png">
         <div class="move_task_lil_up" name="${task[i].eventName}" onClick="click_on_task(this.textContent)">${task[i].eventName}</div>
         </div>`)
       }
@@ -402,7 +416,8 @@ function add_task(){
 				  <label for="mark">Метки</label>
 				</div>
 				<div class="col-75">
-				  <select id="mark" name="mark">
+          <select id="mark" name="mark">
+          <option value="Без метки">Без метки</option>
 					<option value="Важно">Важно</option>
 					<option value="Внимание">Внимание</option>
 					<option value="Срочно">Срочно</option>
@@ -503,7 +518,8 @@ function add_project(){
 				  <label for="mark">Метки</label>
 				</div>
 				<div class="col-75">
-				  <select id="mark" name="mark">
+          <select id="mark" name="mark">
+          <option value="Без метки">Важно</option>
 					<option value="Важно">Важно</option>
 					<option value="Внимание">Внимание</option>
 					<option value="Срочно">Срочно</option>
