@@ -188,38 +188,6 @@ function render_mp_menu(switcher){
                   <input type="submit" id="TaskSearchButton" value="Найти задачу"></p>
                 </form>  
 
-                
-                <div class="task-list-elem">
-                  <img src="../static/icons/redmark.png">
-                  <div class="move_task_lil_up">
-                    <input type="checkbox" name="task1" value="task1">
-                    Задача 1
-                  </div>
-                </div>
-                
-                <div class="task-list-elem">
-                  <img src="../static/icons/greenmark.png">
-                  <div class="move_task_lil_up">
-                    <input type="checkbox" name="task2" value="task1">
-                    Задача 2
-                  </div>
-                </div>
-
-                <div class="task-list-elem">
-                  <img src="../static/icons/yellowmark.png">
-                  <div class="move_task_lil_up">
-                    <input type="checkbox" name="task3" value="task1">
-                    Задача 3
-                  </div>
-                </div>
-
-                <div class="task-list-elem">
-                  <img src="../static/icons/yellowmark.png">
-                  <div class="move_task_lil_up">
-                    <input type="checkbox" name="task4" value="task1">
-                    Задача 4
-                  </div>
-                </div>
 
               </div>
 
@@ -262,27 +230,31 @@ function render_mp_menu(switcher){
       </div><!-- /scroller-inner -->
       </div><!-- /scroller -->
     </div><!-- /pusher -->`)
-   }
 
-   function showDropdown(){
-    //document.getElementById("dropdownAdds").classList.toggle("show");
-    document.getElementById("dropdownAdds").classList.add('show');
-  }
-  
-  function removeDropdown() {
-    window.onclick = function(event) {
-      if (!event.target.id.matches('drop_down') || !event.target.id.matches('add_task')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
+    var div = document.getElementById("LilCrutch")
+    for (i = tasks.length - 1 ; i >=0 ; i--){
+        if (tasks[i].mark == "Важно"){
+          div.insertAdjacentHTML("afterend",`<div class="task-list-elem">
+          <img src="../static/icons/yellowmark.png">
+          <div class="move_task_lil_up" name="${tasks[i].eventName}" onClick="click_on_task(this.textContent)">${tasks[i].eventName}</div>
+          </div>`)
+        }
+        if (tasks[i].mark == "Внимание"){
+          div.insertAdjacentHTML("afterend",`<div class="task-list-elem">
+          <img src="../static/icons/greenmark.png">
+          <div class="move_task_lil_up" name="${tasks[i].eventName}" onClick="click_on_task(this.textContent)">${tasks[i].eventName}</div>
+          </div>`)
+        }
+        if (tasks[i].mark == "Срочно"){
+          div.insertAdjacentHTML("afterend",`<div class="task-list-elem">
+          <img src="../static/icons/redmark.png">
+          <div class="move_task_lil_up" name="${tasks[i].eventName}" onClick="click_on_task(this.textContent)">${tasks[i].eventName}</div>
+          </div>`)
         }
       }
-    }
-  }
+
+
+   }
 
 function filters_left(){
     var div = document.getElementById('filters_left');
