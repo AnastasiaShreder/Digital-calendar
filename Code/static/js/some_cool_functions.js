@@ -148,6 +148,7 @@ function select_mark_task_list(mark){
 
 }
 
+//TODO Сделать нормальную форму с кнопкой удаления задачи
 function click_on_task(taskname){
   for (i=0;i<tasks.length;i++){
     if (tasks[i].eventName == taskname){
@@ -155,4 +156,17 @@ function click_on_task(taskname){
       break
     }
   }
+}
+
+function find_task(){
+  var div = document.getElementById("TaskSearchInput")
+  var find = div.value
+  var new_tasks = []
+  for (i = 0;i<tasks.length;i++){
+    if (tasks[i].eventName.indexOf(find) != -1){
+      new_tasks.push(tasks[i])
+    }
+  }
+  render_task_list_tasks(new_tasks)
+
 }

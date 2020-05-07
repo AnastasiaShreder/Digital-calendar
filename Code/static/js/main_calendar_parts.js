@@ -169,6 +169,7 @@ function render_mp_menu(switcher){
 
    function render_mp_pusher_for_task_list(){
     var div = document.getElementById("container");
+    //FIXME рамку с метками надо расширить
     div.insertAdjacentHTML("beforeend", `			<!-- Push Wrapper -->
     <div class="mp-pusher" id="mp-pusher">
       <div class="scroller">
@@ -185,8 +186,8 @@ function render_mp_menu(switcher){
 
               <div class="My-tasks">
                 <form id="LilCrutch">
-                  <p><input type="search" id="TaskSearchInput" placeholder=" Введите название задачи"> 
-                  <input type="submit" id="TaskSearchButton" value="Найти задачу"></p>
+                  <p><input type="search" onkeypress = "if (event.keyCode==13){ return false}" id="TaskSearchInput" placeholder=" Введите название задачи"> 
+                  <input type="button" id="TaskSearchButton" onClick="find_task()" value="Найти задачу"></p>
                 </form>  
 
                 <div id = "task_list_tasks"></div>
@@ -296,7 +297,7 @@ function projectplace(switcher){
   div=`<div class="project-place" id ="projectplace"></div>`
   div = document.getElementById('projectplace');
   if (switcher == "task_list"){
-
+//TODO приделать сюда кнопки удаления проекта и показа инфы о нем
     div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this)" name="Все проекты">
     <div class="project-elem">
     <img src="../static/icons/folder.png">
@@ -312,7 +313,7 @@ function projectplace(switcher){
 
   }
   else{
-
+//TODO приделать сюда кнопки удаления проекта и показа инфы о нем
     div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="Все проекты">
     <div class="project-elem">
     <img src="../static/icons/folder.png">
@@ -351,7 +352,8 @@ function add_button(){
   var div = document.getElementById('apply_right');
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_project()" id="add_project" value="Добавить проект"></input>`)
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить задачу"></input>`)
-  
+  //FIXME кнопка "добавить проект" все равно съезжает влево
+  //FIXME рамка не расширяется, когда появляется 2я кнопка
 }
 
 
@@ -459,6 +461,7 @@ function add_task(){
 
 }
 
+//TODO сделать форму для проекта
 function add_project(){
     var div = document.getElementById('add_task');
     div.remove()
@@ -589,7 +592,7 @@ function add_task_submit(){
 
 }
 
-//TODO add_project_submit()   
+//TODO сделать функцию когда будет форма для проекта add_project_submit()   
 
 
 function delete_container(){
