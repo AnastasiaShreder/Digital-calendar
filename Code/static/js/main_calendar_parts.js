@@ -197,7 +197,7 @@ function render_mp_menu(switcher){
                 <p id="marks">Метки:</p>
                 <div class="marks-place" style="height: 110px;" id ="marksplace">
                 
-                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/whitemark.png"><p>Все</p></div></a>  
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/gaymark.png"><p>Все</p></div></a>  
 
                 <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/whitemark.png"><p>Без метки</p></div></a>  
 
