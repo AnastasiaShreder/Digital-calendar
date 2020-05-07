@@ -93,12 +93,7 @@ function render_mp_menu(switcher){
                 <div class="сolleagues-place" id="colleaguesplace"></div>
                 
                 <input type="button" onclick="apply_right()" id="apply_right" value="Применить"></input>
-                <input type="button" style="width: 13vw;" onclick="showDropdown()" id="drop_down" value="Добавить"></input>
-                <div id="dropdownAdds" class="dropdown-content">
-                  <a href="#" onclick="add_task()" id="add_task">Задача</a>
-                  <a href="#" onclick="add_project()" id="add_project">Проект</a>
-                  <a href="#">Коллега</a>
-                </div>
+                <input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>   
                  </div> 
               
               <button id="GO_AWAY" onclick="logout()"><img src="../static/icons/logout2.png"></input>
@@ -149,7 +144,7 @@ function render_mp_menu(switcher){
                 <div class="project-place" style="height: 260px;" id ="projectplace"></div>
                 
                 <input type="button" onclick="apply_right()" id="apply_right" value="Применить"></input>
-                <input type="button" onclick="add_task()" id="add_task" value="Добавить"></input>   
+                <input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>   
               </div> 
               
               <button id="GO_AWAY" onclick="logout()"><img src="../static/icons/logout2.png"></input>
@@ -161,26 +156,6 @@ function render_mp_menu(switcher){
       </div><!-- /scroller -->
     </div><!-- /pusher -->`)
    }
-
-   function showDropdown(){
-    //document.getElementById("dropdownAdds").classList.toggle("show");
-    document.getElementById("dropdownAdds").classList.add('show');
-  }
-  
-  function removeDropdown() {
-    window.onclick = function(event) {
-      if (!event.target.id.matches('drop_down') || !event.target.id.matches('add_task')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
-        }
-      }
-    }
-  }
 
 function filters_left(){
     var div = document.getElementById('filters_left');
@@ -251,17 +226,21 @@ function colleaguesplace(){
         </div></a>`)
       }	  
 }
+function add_button(){
+  var div = document.getElementById('add_button');
+  div.remove()
+  var div = document.getElementById('apply_right');
+  div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_project()" id="add_project" value="Добавить проект"></input>`)
+  div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить задачу"></input>`)
+  
+}
+
 
 function add_task(){
-  var dropdowns = document.getElementsByClassName("dropdown-content");
-  var i;
-  for (i = 0; i < dropdowns.length; i++) {
-    var openDropdown = dropdowns[i];
-    if (openDropdown.classList.contains('show')) {
-      openDropdown.classList.remove('show');
-    }
-  }
+  
     var div = document.getElementById('add_task');
+    div.remove()
+    var div = document.getElementById('add_project');
     div.remove()
     var div = document.getElementById('calendar');
     div.remove()
@@ -361,15 +340,8 @@ function add_task(){
 }
 
 function add_project(){
-  var dropdowns = document.getElementsByClassName("dropdown-content");
-  var i;
-  for (i = 0; i < dropdowns.length; i++) {
-    var openDropdown = dropdowns[i];
-    if (openDropdown.classList.contains('show')) {
-      openDropdown.classList.remove('show');
-    }
-  }
-
+    var div = document.getElementById('add_task');
+    div.remove()
     var div = document.getElementById('add_project');
     div.remove()
     var div = document.getElementById('calendar');
@@ -484,17 +456,20 @@ function add_task_submit(){
   request.open('POST',url,false);
   request.send(JSON.stringify({'type':'add_task', "user_id":user_id, "eventName":form.elements.firstname.value, "calendar":form.elements.group.value, "date":form.elements.datapicker2.value, "mark": form.elements.mark.value, "person":form.elements.colleague.value, "descr":form.elements.characteristic.value, "project":form.elements.divproject.value})); 
   var div = document.getElementById('apply_right');
-  div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>`)
+  div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>`)
   render_calendar_m(tasks)
   }
   else{
     alert("Ошибка при добавлении задачи")
     var div = document.getElementById('apply_right');
-    div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>`)
+    div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>`)
     render_calendar_m(tasks)
   }
 
 }
+
+//TODO add_project_submit()   
+
 
 function delete_container(){
   document.getElementById("container").remove()
@@ -571,6 +546,5 @@ function render_calendar(switcher){
 
 
   mp_menu_animate()
-  removeDropdown()
 }
 
