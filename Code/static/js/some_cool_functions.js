@@ -3,7 +3,8 @@ let tasks = []
 let projects = []
 let colleagues = []
 let user_id = 0 // при успешной авторизации отличен от 0
-let url = "85.142.164.100:5000"
+let url = "http://85.142.164.100:5000/"
+//let url = "/"
 
 colors = {
   "Конференция":"orange",
