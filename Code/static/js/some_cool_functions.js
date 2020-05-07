@@ -98,6 +98,21 @@ function apply_project(obj){
   //сработает при нажатии на проект  
 }
 
+function apply_project_task_list(obj) {
+  var new_tasks = []
+
+  if (obj.name == "Все проекты"){
+    render_task_list_tasks(tasks)
+  }
+    else{
+    for (i = 0; i< tasks.length;i++){
+      if (obj.name == tasks[i].project){
+        new_tasks.push(tasks[i])
+      }
+    }
+    render_task_list_tasks(new_tasks)
+  }
+}
 
 function select_mark(){
   var new_tasks = []

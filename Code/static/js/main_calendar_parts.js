@@ -188,28 +188,28 @@ function render_mp_menu(switcher){
                   <input type="submit" id="TaskSearchButton" value="Найти задачу"></p>
                 </form>  
 
-
+                <div id = "task_list_tasks"></div>
               </div>
 
               <div class="right-task-section">
                 <p id="marks">Метки:</p>
                 <div class="marks-place" style="height: 110px;" id ="marksplace">
                   
-                <a class="button" href="index3.html">
+                <a class="button" href="index.html">
 									<div class="project-elem">
 										<img src="../static/icons/redmark.png">
 										<p>СРОЧНО! </p>
 									</div>
                 </a>  
                 
-                <a class="button" href="index3.html">
+                <a class="button" href="index.html">
 									<div class="project-elem">
 										<img src="../static/icons/yellowmark.png">
 										<p>ВАЖНО! </p>
 									</div>
                 </a>  
                 
-                <a class="button" href="index3.html">
+                <a class="button" href="index.html">
 									<div class="project-elem">
 										<img src="../static/icons/greenmark.png">
 										<p>ВНИМАНИЕ! </p>
@@ -231,30 +231,35 @@ function render_mp_menu(switcher){
       </div><!-- /scroller -->
     </div><!-- /pusher -->`)
 
-    var div = document.getElementById("LilCrutch")
-    for (i = tasks.length - 1 ; i >=0 ; i--){
-        if (tasks[i].mark == "Важно"){
-          div.insertAdjacentHTML("afterend",`<div class="task-list-elem">
-          <img src="../static/icons/yellowmark.png">
-          <div class="move_task_lil_up" name="${tasks[i].eventName}" onClick="click_on_task(this.textContent)">${tasks[i].eventName}</div>
-          </div>`)
-        }
-        if (tasks[i].mark == "Внимание"){
-          div.insertAdjacentHTML("afterend",`<div class="task-list-elem">
-          <img src="../static/icons/greenmark.png">
-          <div class="move_task_lil_up" name="${tasks[i].eventName}" onClick="click_on_task(this.textContent)">${tasks[i].eventName}</div>
-          </div>`)
-        }
-        if (tasks[i].mark == "Срочно"){
-          div.insertAdjacentHTML("afterend",`<div class="task-list-elem">
-          <img src="../static/icons/redmark.png">
-          <div class="move_task_lil_up" name="${tasks[i].eventName}" onClick="click_on_task(this.textContent)">${tasks[i].eventName}</div>
-          </div>`)
-        }
-      }
-
+    render_task_list_tasks(tasks)
 
    }
+
+function render_task_list_tasks(task = tasks){
+  document.getElementById("task_list_tasks").remove()
+  document.getElementById("LilCrutch").insertAdjacentHTML("afterend",`<div id = "task_list_tasks"></div>`)
+  var div = document.getElementById("task_list_tasks")
+  for (i = 0 ; i < task.length ; i++){
+      if (task[i].mark == "Важно"){
+        div.insertAdjacentHTML("beforeend",`<div class="task-list-elem">
+        <img src="../static/icons/yellowmark.png">
+        <div class="move_task_lil_up" name="${task[i].eventName}" onClick="click_on_task(this.textContent)">${task[i].eventName}</div>
+        </div>`)
+      }
+      if (task[i].mark == "Внимание"){
+        div.insertAdjacentHTML("beforeend",`<div class="task-list-elem">
+        <img src="../static/icons/greenmark.png">
+        <div class="move_task_lil_up" name="${task[i].eventName}" onClick="click_on_task(this.textContent)">${task[i].eventName}</div>
+        </div>`)
+      }
+      if (task[i].mark == "Срочно"){
+        div.insertAdjacentHTML("beforeend",`<div class="task-list-elem">
+        <img src="../static/icons/redmark.png">
+        <div class="move_task_lil_up" name="${task[i].eventName}" onClick="click_on_task(this.textContent)">${task[i].eventName}</div>
+        </div>`)
+      }
+    }
+}
 
 function filters_left(){
     var div = document.getElementById('filters_left');
@@ -290,10 +295,28 @@ function taskplace(task = tasks){
   }
 }
 
-function projectplace(){
-    var div = document.getElementById('projectplace');
-    div=`<div class="project-place" id ="projectplace"></div>`
-    div = document.getElementById('projectplace');
+function projectplace(switcher){
+  var div = document.getElementById('projectplace');
+  div=`<div class="project-place" id ="projectplace"></div>`
+  div = document.getElementById('projectplace');
+  if (switcher == "task_list"){
+
+    div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this)" name="Все проекты">
+    <div class="project-elem">
+    <img src="../static/icons/folder.png">
+    <p>Все проекты</p>
+    </div></a>`);
+		for (i=0;i<projects.length;i++){
+      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this)" name="${projects[i].name}">
+        <div class="project-elem">
+        <img src="../static/icons/folder.png">
+        <p>${projects[i].name} </p>
+        </div></a>`);
+      }
+
+  }
+  else{
+
     div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="Все проекты">
     <div class="project-elem">
     <img src="../static/icons/folder.png">
@@ -306,6 +329,7 @@ function projectplace(){
         <p>${projects[i].name} </p>
         </div></a>`);
       }
+  }
 }
 
 function colleaguesplace(){
@@ -645,7 +669,7 @@ function render_calendar(switcher){
     taskplace();
     colleaguesplace();
   }
-  projectplace()
+  projectplace(switcher)
 
 
   mp_menu_animate()
