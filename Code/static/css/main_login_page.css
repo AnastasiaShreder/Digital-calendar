@@ -131,7 +131,8 @@ button, input {
 button {
 	outline: none !important;
 	border: none;
-	background: transparent;
+  background: transparent;
+  border-radius: 7px;
 }
 
 button:hover {
