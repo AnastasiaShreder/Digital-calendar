@@ -195,34 +195,16 @@ function render_mp_menu(switcher){
               <div class="right-task-section">
                 <p id="marks">Метки:</p>
                 <div class="marks-place" style="height: 110px;" id ="marksplace">
-                  
-                <a class="button" href="index.html">
-                <div class="project-elem">
-                  <img src="../static/icons/whitemark.png">
-                  <p>Без метки</p>
-                </div>
-                </a>  
+                
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/whitemark.png"><p>Все</p></div></a>  
 
-                <a class="button" href="index.html">
-									<div class="project-elem">
-										<img src="../static/icons/redmark.png">
-										<p>Срочно</p>
-									</div>
-                </a>  
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/whitemark.png"><p>Без метки</p></div></a>  
+
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/redmark.png"><p>Срочно</p></div></a>  
                 
-                <a class="button" href="index.html">
-									<div class="project-elem">
-										<img src="../static/icons/yellowmark.png">
-										<p>Важно</p>
-									</div>
-                </a>  
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/yellowmark.png"><p>Важно</p></div></a>  
                 
-                <a class="button" href="index.html">
-									<div class="project-elem">
-										<img src="../static/icons/greenmark.png">
-										<p>Внимание</p>
-									</div>
-								</a>  
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/greenmark.png"><p>Внимание</p></div></a>  
 
                 </div> 
 

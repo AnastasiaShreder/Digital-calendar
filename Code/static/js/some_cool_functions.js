@@ -132,6 +132,22 @@ function select_mark(){
   // сработает при выборе метки
 }
 
+function select_mark_task_list(mark){
+  var new_tasks = []
+  if (mark == "Все"){
+    render_task_list_tasks(tasks)
+  }
+  else{
+    for (i=0; i<tasks.length; i++){
+      if (tasks[i].mark == mark){
+        new_tasks.push(tasks[i])
+      }
+    }
+    render_task_list_tasks(new_tasks)
+  }
+
+}
+
 function click_on_task(taskname){
   for (i=0;i<tasks.length;i++){
     if (tasks[i].eventName == taskname){
