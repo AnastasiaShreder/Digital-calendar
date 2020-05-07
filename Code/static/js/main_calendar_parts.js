@@ -1,5 +1,12 @@
-function render_mp_menu(){
-    render_mp_pusher()
+function render_mp_menu(switcher){
+    if (switcher == "local")
+    {
+      render_mp_pusher();
+    }
+    else if (switcher == "global")
+    {
+      render_mp_pusher_for_global();
+    }
     var div = document.getElementById('mp-pusher');
     div.insertAdjacentHTML("beforeend", `<!-- mp-menu -->
     <nav id="mp-menu" class="mp-menu">
@@ -7,30 +14,41 @@ function render_mp_menu(){
         <h2 class="icon icon-world">Календарь</h2>
         <ul>
           <li class="icon icon-arrow-left">
-            <a class="icon icon-display" href="#">Общий календарь</a>
-            <div class="mp-level">
-              <h2 class="icon icon-display">Общий календарь</h2>
-              <a class="mp-back" href="#">назад</a>
-              <ul>
-                <li><a href="#">Фильтры</a></li>
-              </ul>
-            </div>
+            <a class="icon icon-display" onClick="b()">Общий календарь</a>
           </li>
           <li class="icon icon-arrow-left">
-            <a class="icon icon-news" href="#">Мой календарь</a>
-            <div class="mp-level">
-              <h2 class="icon icon-news">Мой календарь</h2>
-              <a class="mp-back" href="#">назад</a>
-              <ul id="mycalendar"></ul>
-            </div>
+            <a class="icon icon-news" onClick="a()">Мой календарь</a>
           </li>
-          <li><a class="icon icon-wallet" href="#">Список задач</a></li>
+          <li><a class="icon icon-wallet" onClick="c()">Список задач</a></li>
         </ul>
           
       </div>
     </nav>`);
   }
 
+  function a(){
+    tasks = []
+    filter = []
+    projects = []
+    colleagues = []
+    document.getElementById("container").remove()
+    document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
+    render_calendar("local")
+  }
+  function b(){
+    tasks = []
+    filter = []
+    projects = []
+    colleagues = [] 
+    document.getElementById("container").remove()
+    document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
+    render_calendar("global")
+  }
+
+  function c(){
+    alert("Будет позже, подождите")
+  }
+  
   
   function render_mp_pusher(){
     var div = document.getElementById("container");
@@ -45,7 +63,7 @@ function render_mp_menu(){
                 <section class="section" id="Prospero">
                 </section>	
             </div>
-                
+            
             <div class="surround-calendar">
               <div class="left-section">
                 <div class="filter-header">
@@ -53,78 +71,118 @@ function render_mp_menu(){
                 </div>
                 <form name="filters_left" id="filters_left">
                 </form>
-                <input type="button" onclick="apply_filters()" value="Применить"></input>
+                <input type="button" id="DO_IT" onclick="apply_filters()" value="Применить"></input>
               </div>
-   
+  
               <div class="calendar-box" id="calendar-box">
-                   <div id="calendar"></div>
-              </div>
-               <div class="right-section">
-              <p>Задачи из группы:
-              <select id="filter" onChange="select_mark()">
-                <option value="Все">Все</option>
-                <option value="Важно">Важно</option>
-                <option value="Внимание">Внимание</option>
-                <option value="Срочно">Срочно</option>
-              </select>
-              </p>
-    
-              <form class="task-place" id="task_place"></form>
-              <p id="aftertaskplace">Проекты:</p>
-              <div class="project-place" id ="projectplace"></div>
-              <p>Коллеги:</p>
-              <div class="сolleagues-place" id="colleaguesplace"></div>
+                  <div id="calendar"></div>
+              </div> 
+
+              <div class="right-section">
+                <p>Задачи из группы:
+                <select id="filter" onChange="select_mark()">
+                  <option value="Все">Все</option>
+                  <option value="Важно">Важно</option>
+                  <option value="Внимание">Внимание</option>
+                  <option value="Срочно">Срочно</option>
+                </select>
+                </p>
+      
+                <form class="task-place" id="task_place"></form>
+                <p id="aftertaskplace">Проекты:</p>
+                <div class="project-place" id ="projectplace"></div>
+                <p>Коллеги:</p> 
+                <div class="сolleagues-place" id="colleaguesplace"></div>
+                
+                <input type="button" onclick="apply_right()" id="apply_right" value="Применить"></input>
+                <input type="button" style="width: 13vw;" onclick="showDropdown()" id="drop_down" value="Добавить"></input>
+                <div id="dropdownAdds" class="dropdown-content">
+                  <a href="#" onclick="add_task()" id="add_task">Задача</a>
+                  <a href="#" onclick="add_project()" id="add_project">Проект</a>
+                  <a href="#">Коллега</a>
+                </div>
+                 </div> 
               
-              <input type="button" style="width: 13vw;" onclick="apply_right()" id="apply_right" value="Применить"></input>
-              <input type="button" style="width: 13vw;" onclick="showDropdown()" id="drop_down" value="Добавить"></input>
-              <div id="dropdownAdds" class="dropdown-content">
-                <a href="#" onclick="add_task()" id="add_task">Задача</a>
-                <a href="#" onclick="add_project()" id="add_project">Проект</a>
-                <a href="#">Коллега</a>
-              </div>
-              <input type="button" style="width: 13vw;" onclick="logout()" value="Выйти"></input>
-              
+              <button id="GO_AWAY" onclick="logout()"><img src="../static/icons/logout2.png"></input>
+
             </div>
           </div>
-          </div>
-        </div><!-- /scroller-inner -->
-        
-                  
+        </div>
+      </div><!-- /scroller-inner -->
       </div><!-- /scroller -->
-   
     </div><!-- /pusher -->`)
-    
    }
 
-function showDropdown(){
-  //document.getElementById("dropdownAdds").classList.toggle("show");
-  document.getElementById("dropdownAdds").classList.add('show');
-}
+   function render_mp_pusher_for_global(){
+    var div = document.getElementById("container");
+    div.insertAdjacentHTML("beforeend", `			<!-- Push Wrapper -->
+    <div class="mp-pusher" id="mp-pusher">
+      <div class="scroller">
+        <div class="scroller-inner">
+      
+          <div class="content clearfix">
+            <div class="block block-100 clearfix">
+                <span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
+                <section class="section" id="Prospero">
+                </section>	
+            </div>
+            
+            <div class="surround-calendar">
+              <div class="left-section">
+                <div class="filter-header">
+                <p><u>Фильтры:</u><p>
+                </div>
+                <form name="filters_left" id="filters_left">
+                </form>
+                <input type="button" id="DO_IT" onclick="apply_filters()" value="Применить"></input>
+              </div>
+  
+              <div class="calendar-box" id="calendar-box">
+                  <div id="calendar"></div>
+              </div> 
 
-function removeDropdown() {
-  window.onclick = function(event) {
-    if (!event.target.id.matches('drop_down') || !event.target.id.matches('add_task')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
+              <div class="right-section">
+                <p>Отделы:</p>
+      
+                <div class="group-place" style="height: 260px;" id="group_place">
+                Андрей, запихни сюда рандомные отделы как во вкладке проектов.
+                </div>
+                <p id="afterGroupPlace">Проекты:</p>
+                <div class="project-place" style="height: 260px;" id ="projectplace"></div>
+                
+                <input type="button" onclick="apply_right()" id="apply_right" value="Применить"></input>
+                <input type="button" onclick="add_task()" id="add_task" value="Добавить"></input>   
+              </div> 
+              
+              <button id="GO_AWAY" onclick="logout()"><img src="../static/icons/logout2.png"></input>
+
+            </div>
+          </div>
+        </div>
+      </div><!-- /scroller-inner -->
+      </div><!-- /scroller -->
+    </div><!-- /pusher -->`)
+   }
+
+   function showDropdown(){
+    //document.getElementById("dropdownAdds").classList.toggle("show");
+    document.getElementById("dropdownAdds").classList.add('show');
+  }
+  
+  function removeDropdown() {
+    window.onclick = function(event) {
+      if (!event.target.id.matches('drop_down') || !event.target.id.matches('add_task')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
         }
       }
     }
   }
-}
-
-
-
-function mycalendar(){
-  var div = document.getElementById('mycalendar');
-	for (i=0; i<100;i++){
-		div.insertAdjacentHTML("beforeend", `<li><a href="#">Проект ${i}</a></li>`);
-  }  
-}
-
 
 function filters_left(){
     var div = document.getElementById('filters_left');
@@ -165,10 +223,10 @@ function projectplace(){
     div=`<div class="project-place" id ="projectplace"></div>`
     div = document.getElementById('projectplace');
     div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="Все проекты">
-        <div class="project-elem">
-        <img src="../static/icons/folder.png">
-        <p>Все проекты</p>
-        </div></a>`);
+    <div class="project-elem">
+    <img src="../static/icons/folder.png">
+    <p>Все проекты</p>
+    </div></a>`);
 		for (i=0;i<projects.length;i++){
       div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="${projects[i].name}">
         <div class="project-elem">
@@ -183,10 +241,10 @@ function colleaguesplace(){
     div=`<div class="сolleagues-place" id="colleaguesplace"></div>`
     div = document.getElementById('colleaguesplace');
     div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_colleague(this)" name="Все коллеги">
-        <div class="сolleagues-elem">
-        <img src="../static/icons/person.png">
-        <p>Все коллеги</p>
-        </div></a>`)
+    <div class="сolleagues-elem">
+    <img src="../static/icons/person.png">
+    <p>Все коллеги</p>
+    </div></a>`)
 		for (i=0;i<colleagues.length;i++){
       div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_colleague(this)" name="${colleagues[i].name}">
         <div class="сolleagues-elem">
@@ -205,7 +263,6 @@ function add_task(){
       openDropdown.classList.remove('show');
     }
   }
-
     var div = document.getElementById('add_task');
     div.remove()
     var div = document.getElementById('calendar');
@@ -413,6 +470,8 @@ function add_project(){
 
 }
 
+
+
 function add_task_submit(){
   var form = document.forms.add_task_form
   var u = true
@@ -424,7 +483,7 @@ function add_task_submit(){
   taskplace()
 
   var request = new XMLHttpRequest();
-  /*request.open('POST','http://85.142.164.100:5000/',false);*/request.open('POST','/',false);
+  request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false); //заменим, когда сайт обзаведется сервером
   request.send(JSON.stringify({'type':'add_task', "user_id":user_id, "eventName":form.elements.firstname.value, "calendar":form.elements.group.value, "date":form.elements.datapicker2.value, "mark": form.elements.mark.value, "person":form.elements.colleague.value, "descr":form.elements.characteristic.value, "project":form.elements.divproject.value})); 
   var div = document.getElementById('apply_right');
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить"></input>`)
@@ -494,24 +553,26 @@ function mp_menu_animate(){
   }
   
 
-function render_calendar(){
+function render_calendar(switcher){
   get_filters()
   get_tasks()
   get_projects()
   get_colleagues()
 
   document.body.insertAdjacentHTML("beforeend",`<div class="container" id = "container"></div>`)
-  render_mp_menu()
+  render_mp_menu(switcher)
 
-  mycalendar()
   filters_left()
   render_calendar_m()
-  taskplace()
+  if (switcher == "local")
+  {
+    taskplace();
+    colleaguesplace();
+  }
   projectplace()
-  colleaguesplace()
+
 
   mp_menu_animate()
   removeDropdown()
-
 }
 

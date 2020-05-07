@@ -74,7 +74,7 @@ function apply_colleague(obj){
     taskplace(new_tasks)
     render_calendar_m(new_tasks)
   }
-
+  
   //сработает при нажатии на коллегу
 }
 

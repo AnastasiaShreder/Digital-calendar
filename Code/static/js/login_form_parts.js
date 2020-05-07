@@ -54,7 +54,7 @@ function render_login_page(){
     }
     else {
       user_id = localStorage.getItem("user_id")
-      render_calendar()
+      render_calendar("local")
     }
   
   }
@@ -67,7 +67,7 @@ function check_login(){
         
 
     var request = new XMLHttpRequest();
-    /*request.open('POST','http://85.142.164.100:5000/',false);*/request.open('POST','/',false);
+    request.open('POST','http://85.142.164.100:5000/',false);//request.open('POST','/',false);
     request.addEventListener('readystatechange', function() {
         if ((request.readyState==4) && (request.status==200)) {
             responce = JSON.parse(request.responseText)
@@ -76,7 +76,7 @@ function check_login(){
                 user_id = responce.user_id
                 localStorage.setItem("user_id", user_id)
                 delete_login_form()
-                render_calendar()
+                render_calendar("local")
             }
             else {
                 alert("Неправильный логин или пароль")
