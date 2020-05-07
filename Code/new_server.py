@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, render_template
 import json
 
 from flask_cors import CORS, cross_origin
@@ -155,8 +155,7 @@ def create_data(data):
 
 @app.route("/",methods=['GET'])
 def simple():
-    print(request.args)
-    return '<a>ТУТ НИЧЕГО НЕТ</a>'
+    return render_template('index.html')
 
 @app.route("/",methods = ['POST'])
 @cross_origin()
