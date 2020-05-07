@@ -14,19 +14,7 @@ function get_tasks(){
 }
 
 function get_filters(){
-    var request = new XMLHttpRequest();
-    request.open('POST',url,false);
-	request.addEventListener('readystatechange', function() {
-	    if ((request.readyState==4) && (request.status==200)) {
-            ret = []
-            responce = JSON.parse(request.responseText)
-			for (i=0;i<responce.length;i++){
-                ret.push(responce[i])
-            }
-            filter = ret
-		}
-    })
-    request.send(JSON.stringify({'type':'filters'})); 
+    filters = ["Конференция", "Форум", "Фестиваль", "Встреча", "Совещание", "Заказ", "Прочее"]
 }
 
 function get_colleagues(){

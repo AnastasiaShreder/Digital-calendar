@@ -2,9 +2,7 @@
 from flask import Flask, request, make_response, render_template
 import json
 
-#from flask_cors import CORS, cross_origin
 app = Flask(__name__)
-#cors = CORS(app)
 
 
 import pymysql as pms
@@ -32,10 +30,6 @@ def create_data(data):
 
 		return json.dumps(colleagues)
 
-	if data["type"]=="filters":
-			cursor.execute("SELECT tag FROM EdgePoint.tag_task;")
-			filters_set = set(cursor.fetchall())
-			return json.dumps(list(map(lambda x: x[0], filters_set)))
 
 	if data["type"]=="projectplace":
 		cursor.execute("SELECT EdgePoint.user_project.id_project FROM EdgePoint.user_project WHERE EdgePoint.user_project.id_user = "+str(data["user_id"])+";")
@@ -127,11 +121,9 @@ def simple():
 	return render_template('index.html')
 
 @app.route("/",methods = ['POST'])
-#@cross_origin()
 def returnlist():
 	data = create_data(json.loads(request.data))
 	response = make_response(data)
-	#response.headers.add("Access-Control-Allow-Credentials", "true")
 	return response
  
 if __name__ == "__main__":
