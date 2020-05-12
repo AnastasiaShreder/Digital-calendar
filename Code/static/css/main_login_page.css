@@ -211,7 +211,8 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #e9faff;
+  /*background: #e9faff;*/
+  background: url(../background/back.jpg) no-repeat;
 }
 
 .wrap-login100 {

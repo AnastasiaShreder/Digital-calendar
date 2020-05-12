@@ -128,9 +128,9 @@ function render_mp_menu(switcher){
       
           <div class="content clearfix">
             <div class="block1 block-100 clearfix">
-                <span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
-                <section class="section" id="Prospero">
-                </section>	
+              <button id="trigger">
+                <img height="45px" width="45px" src="../static/icons/menu.png">
+              </button>	
             </div>
             
             <div class="surround-calendar">
@@ -179,9 +179,9 @@ function render_mp_menu(switcher){
       
           <div class="content clearfix">
             <div class="block1 block-100 clearfix">
-                <span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
-                <section class="section" id="Prospero">
-                </section>	
+              <button id="trigger">
+                <img height="45px" width="45px" src="../static/icons/menu.png">
+              </button>	
             </div>
             
             <div class="surround-task">
