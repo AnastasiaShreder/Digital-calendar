@@ -65,7 +65,7 @@ function render_mp_menu(switcher){
         <div class="scroller-inner">
       
           <div class="content clearfix">
-            <div class="block block-100 clearfix">
+            <div class="block1 block-100 clearfix">
                 <span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
                 <section class="section" id="Prospero">
                 </section>	
@@ -84,8 +84,8 @@ function render_mp_menu(switcher){
               <div class="calendar-box" id="calendar-box">
                   <div id="calendar"></div>
               </div> 
-
-              <div class="right-section">
+              
+              <div class="right-section" id="right-section" style="height: 650px;">
                 <p>Задачи из группы:
                 <select id="filter" onChange="select_mark()">
                   <option value="Все">Все</option>
@@ -104,9 +104,9 @@ function render_mp_menu(switcher){
                 
                 <input type="button" onclick="apply_right()" id="apply_right" value="Применить"></input>
                 <input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>   
-                 </div> 
+              </div> 
               
-              <button id="GO_AWAY" onclick="logout()"><img src="../static/icons/logout2.png"></input>
+              <button id="GO_AWAY" onclick="logout()"><img src="../static/icons/logout2.png"></button>
 
             </div>
           </div>
@@ -124,7 +124,7 @@ function render_mp_menu(switcher){
         <div class="scroller-inner">
       
           <div class="content clearfix">
-            <div class="block block-100 clearfix">
+            <div class="block1 block-100 clearfix">
                 <span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
                 <section class="section" id="Prospero">
                 </section>	
@@ -144,7 +144,7 @@ function render_mp_menu(switcher){
                   <div id="calendar"></div>
               </div> 
 
-              <div class="right-section">
+              <div class="right-section" id="right-section" style="height: 650px;">
                 <p>Отделы:</p>
       
                 <div class="group-place" style="height: 260px;" id="group_place">
@@ -169,14 +169,13 @@ function render_mp_menu(switcher){
 
    function render_mp_pusher_for_task_list(){
     var div = document.getElementById("container");
-    //FIXME рамку с метками надо расширить
     div.insertAdjacentHTML("beforeend", `			<!-- Push Wrapper -->
     <div class="mp-pusher" id="mp-pusher">
       <div class="scroller">
         <div class="scroller-inner">
       
           <div class="content clearfix">
-            <div class="block block-100 clearfix">
+            <div class="block1 block-100 clearfix">
                 <span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
                 <section class="section" id="Prospero">
                 </section>	
@@ -195,7 +194,7 @@ function render_mp_menu(switcher){
 
               <div class="right-task-section">
                 <p id="marks">Метки:</p>
-                <div class="marks-place" style="height: 110px;" id ="marksplace">
+                <div class="marks-place" style="height: 180px;' id ="marksplace">
                 
                 <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/gaymark.png"><p>Все</p></div></a>  
 
@@ -210,7 +209,7 @@ function render_mp_menu(switcher){
                 </div> 
 
                 <p id="afterGroupPlace">Мои проекты:</p>
-                <div class="project-place" style="height: 300px;" id ="projectplace"></div> 
+                <div class="project-place-task-list" id ="projectplace"></div> 
               </div> 
               
               <button id="GO_AWAY_from_task" onclick="logout()"><img src="../static/icons/logout2.png"></input>
@@ -297,7 +296,7 @@ function projectplace(switcher){
   div=`<div class="project-place" id ="projectplace"></div>`
   div = document.getElementById('projectplace');
   if (switcher == "task_list"){
-//TODO приделать сюда кнопки удаления проекта и показа инфы о нем
+//TODO заставить кнопки удаления проекта и показа инфы о нем работать!
     div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this)" name="Все проекты">
     <div class="project-elem">
     <img src="../static/icons/folder.png">
@@ -308,12 +307,14 @@ function projectplace(switcher){
         <div class="project-elem">
         <img src="../static/icons/folder.png">
         <p>${projects[i].name} </p>
+        <button id="info">?</button>
+        <button id="close">X</button>
         </div></a>`);
       }
 
   }
   else{
-//TODO приделать сюда кнопки удаления проекта и показа инфы о нем
+//TODO заставить кнопки удаления проекта и показа инфы о нем работать!
     div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="Все проекты">
     <div class="project-elem">
     <img src="../static/icons/folder.png">
@@ -324,6 +325,8 @@ function projectplace(switcher){
         <div class="project-elem">
         <img src="../static/icons/folder.png">
         <p>${projects[i].name} </p>
+        <button id="info">?</button>
+        <button id="close">X</button>
         </div></a>`);
       }
   }
@@ -352,8 +355,8 @@ function add_button(){
   var div = document.getElementById('apply_right');
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_project()" id="add_project" value="Добавить проект"></input>`)
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить задачу"></input>`)
-  //FIXME кнопка "добавить проект" все равно съезжает влево
-  //FIXME рамка не расширяется, когда появляется 2я кнопка
+  var div = document.getElementById('right-section');
+  div.style = `height: 678px;`
 }
 
 

@@ -27,7 +27,6 @@ a:hover, a:focus {
 	outline: none;
 }
 
-/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
 .clearfix:before,
 .clearfix:after {
 	display: table;
@@ -64,47 +63,9 @@ a:hover, a:focus {
 	opacity: 0.7;
 }
 
-/* To Navigation Style */
-.codrops-top {   /*удалить*/
-	width: 100%;
-	background: #91cfa1;
-	background: rgba(255, 255, 255, 0.1);
-	text-transform: uppercase;
-	font-size: 0.69em;
-	line-height: 2.2;
-}
-
-.codrops-top a {  /*удалить*/
-	display: inline-block;
-	padding: 0 1em;
-	color: #fff;
-	text-decoration: none;
-	letter-spacing: 0.1em;
-}
-
 .codrops-top a:hover {
 	background: rgba(255,255,255,0.95);
 	color: #333;
-}
-
-.codrops-top span.right {  /*удалить*/
-	float: right;
-}
-
-.codrops-top span.right a {  /*удалить*/
-	display: block;
-	float: left;
-}
-
-.codrops-icon:before { /*удалить*/
-	margin: 0 4px;
-	text-transform: none;
-	font-weight: normal;
-	font-style: normal;
-	font-variant: normal;
-	font-family: 'codropsicons';
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
 }
 
 .codrops-icon-drop:before {
@@ -115,33 +76,6 @@ a:hover, a:focus {
 	content: "\e004";
 }
 
-/* Demo Buttons Style */
-.codrops-demos {    /*удалить*/
-	padding-top: 1em;
-	font-size: 1.1em;
-}
-
-.codrops-demos a {   /*удалить*/
-	display: block;
-	float: left;
-	clear: both;
-	margin: 0.5em 0.5em 0.5em 1.9em;
-	padding: 1em 1.1em;
-	width: 280px;
-	outline: none;
-	color: #fff;
-	background: #336ca6;
-	text-align: center;
-	text-decoration: none;
-	font-weight: 700;
-}
-
-.codrops-demos a:hover,  /*удалить*/
-.codrops-demos a.current-demo,
-.codrops-demos a.current-demo:hover {
-	opacity: 0.6;
-}
-
 .content {
 	padding: 2em 1em; /*4 2*/
 	/*max-width: 1200px;*/
@@ -149,20 +83,15 @@ a:hover, a:focus {
 	margin: 0 auto;
 }
 
-.block {
+.block1 {
 	float: left;
 	padding-bottom: 0px;
 	margin-top: -30px;
+	height: 30px;
 }
-
-
-.block-100 {
-	width: 100%;
-}
-
 
 @media screen and (max-width: 69em) {
-	.block {
+	.block1 {
 		float: none;
 		width: 100% !important;
 		padding: 1em;
