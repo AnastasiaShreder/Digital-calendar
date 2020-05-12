@@ -4,18 +4,13 @@ import json
 
 app = Flask(__name__)
 
-#TODO запрос на сервер с удалением проекта
-#TODO Сделать у проектов name, location, date, descr, members(через запятую имена коллег), isglobal(строка "True" or "False")
-
-
 import pymysql as pms
 
-#conn = pms.connect(user = "root",passwd = "0000", host = "localhost", database = "EdgePoint")
-#cursor = conn.cursor()
+database_pass = "0000"
 
 def create_data(data):
     if data["type"]=="colleaguesplace":
-        conn = pms.connect(user = "root",passwd = "0000", host = "localhost", database = "EdgePoint")
+        conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
         cursor = conn.cursor()
         cursor.execute("SELECT id FROM EdgePoint.users where EdgePoint.users.unit = (SELECT unit FROM EdgePoint.users where EdgePoint.users.id = "+ str(data["user_id"])+") AND EdgePoint.users.id != "+str(data["user_id"])+";")
         colleagues = []   
@@ -38,17 +33,17 @@ def create_data(data):
 
 
     if data["type"]=="projectplace":
-        conn = pms.connect(user = "root",passwd = "0000", host = "localhost", database = "EdgePoint")
+        conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
         cursor = conn.cursor()
         cursor.execute("SELECT EdgePoint.user_project.id_project FROM EdgePoint.user_project WHERE EdgePoint.user_project.id_user = "+str(data["user_id"])+";")
         proj_ids = cursor.fetchall()
         user_projects = []
         if (len(proj_ids) == 0):
-                return user_projects
+            return user_projects
 
         proj_ids = list(map(lambda x: x[0], proj_ids))
 
-        query = "SELECT id,name FROM EdgePoint.projects where id="+str(proj_ids[0])
+        query = "SELECT id,name,deadline,description,global,location FROM EdgePoint.projects where id="+str(proj_ids[0])
         for i in range(1,len(proj_ids)):
             query += " OR id=" + str(proj_ids[i])
         query+=";"
@@ -56,12 +51,42 @@ def create_data(data):
 
         proj_names = cursor.fetchall()
         cursor.close()
+
         for i in proj_names:
-                user_projects.append({"id":i[0],"name":i[1]})
+            project_data = {"id":i[0],"name":i[1],"date":str(i[2]),"descr":i[3]}
+            if i[4] == 1 :
+                project_data.update({"isglobal" : "True"})
+            else:
+                project_data.update({"isglobal" : "False"})
+            if i[5] == None :
+                project_data.update({"location" : ""})
+            else:
+                project_data.update({"location" : i[5]})
+            conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
+            cursor = conn.cursor()
+            cursor.execute("SELECT name,surname FROM `EdgePoint`.`users` WHERE id in (SELECT id_user FROM EdgePoint.user_project WHERE EdgePoint.user_project.id_project = "+str(i[0])+");")
+            names_fetched = cursor.fetchall()
+            names = []
+            for j in names_fetched:
+                names.append(" ".join(j))
+            cursor.close()
+            project_data.update({"members":names})
+            user_projects.append(project_data)
         return json.dumps(user_projects)
 
+    if data["type"] == "deleteproject":
+        conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
+        cursor = conn.cursor()
+        cursor.execute("SELECT id FROM `EdgePoint`.`projects` WHERE name = '"+str(data["project_name"])+"';")
+        proj_id = cursor.fetchall()[0][0]
+        cursor.execute("DELETE FROM `EdgePoint`.`tasks` WHERE id in (SELECT EdgePoint.task_project.id_task FROM EdgePoint.task_project WHERE EdgePoint.task_project.id_project = "+str(proj_id)+");")
+        cursor.execute("DELETE FROM `EdgePoint`.`projects` WHERE id = "+str(proj_id)+";")
+        conn.commit()
+        cursor.close()
+        return "True"
+
     if data["type"]=="taskplace":
-        conn = pms.connect(user = "root",passwd = "0000", host = "localhost", database = "EdgePoint")
+        conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
         cursor = conn.cursor()
         cursor.execute("SELECT EdgePoint.user_task.id_task FROM EdgePoint.user_task WHERE EdgePoint.user_task.id_user = "+str(data["user_id"])+";")#data["user_id"])+";")
         task_ids = cursor.fetchall()
@@ -87,27 +112,13 @@ def create_data(data):
             user_tasks.append({"eventName":i[1],"date":str(i[2]),"descr":i[3],"mark":tags[1][0],"calendar":tags[0][0],"project":task_project_name,"person":pers[0] + " " + pers[1]})
         cursor.close()
         return json.dumps(user_tasks)
-        
-    if data["type"] == "login":
-        conn = pms.connect(user = "root",passwd = "0000", host = "localhost", database = "EdgePoint")
-        cursor = conn.cursor()
-        cursor.execute("select id from EdgePoint.users where password = '"+str(data["password"])+"' and email = '"+str(data["email"])+"';")
-        res =cursor.fetchall()
-        cursor.close()
-        if len(res) == 0:
-            return json.dumps({'isTrue':"False", 'user_id' : 0})
-        else:
-            return json.dumps({'isTrue':"True", 'user_id' : res[0][0]})
-            
-
-
 
     if data["type"] == "add_task":
         #Примечания:
         #Дата в формате ГГГГ-ММ-ДД
         #data["calendar"] нигде не используется,а то,глобальная или не глобальная задача зависит от проекта
         # в запросе еще есть data["user_id"],но я его не использую
-        conn = pms.connect(user = "root",passwd = "0000", host = "localhost", database = "EdgePoint")
+        conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
         cursor = conn.cursor()
         cursor.execute("INSERT INTO `EdgePoint`.`tasks` (       `name`,     `deadline`,     `color`,        `description`) VALUES ("+data["eventName"]+","+data["date"]+",ff00ff,"+data["descr"]+");")
         conn.commit()
@@ -122,9 +133,19 @@ def create_data(data):
         cursor.execute("INSERT INTO `EdgePoint`.`tag_task`  (`tag`, `id_task`)  VALUES  ("+str(data["mark"])+","+str(new_task_id)+");")
         conn.commit()
         cursor.close()
-        #tasks.append({"eventName":data["eventName"], "calendar":data["calendar"], "date":data["date"], "mark":data["mark"], "person":data["person"], "descr":data["descr"], "project":data["project"]})
         return "True"
-    
+
+    if data["type"] == "login":
+        conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
+        cursor = conn.cursor()
+        cursor.execute("select id from EdgePoint.users where password = '"+str(data["password"])+"' and email = '"+str(data["email"])+"';")
+        res =cursor.fetchall()
+        cursor.close()
+        if len(res) == 0:
+            return json.dumps({'isTrue':"False", 'user_id' : 0})
+        else:
+            return json.dumps({'isTrue':"True", 'user_id' : res[0][0]})
+
     return json.dumps([])
 
 
@@ -141,4 +162,4 @@ def returnlist():
 if __name__ == "__main__":
 
 	app.run(host= '192.168.0.121',port='5001')
-	#conn.close()
+	conn.close()
