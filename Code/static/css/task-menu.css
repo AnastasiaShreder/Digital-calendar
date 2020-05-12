@@ -12,6 +12,7 @@
 {
 	display: block;
 	margin: auto;
+	font-size: 15pt;
 }
 
 #info, #close{

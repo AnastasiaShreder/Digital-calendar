@@ -1,4 +1,4 @@
-.modal-overlay input[type=text], .modal-overlay .col-75 select, .modal-overlay textarea {
+input[type=text], .col-75 select, textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -6,7 +6,7 @@
     resize: vertical;
   }
 
-  .modal-overlay input[type=date], .modal-overlay .col-75 select, .modal-overlay textarea {
+   input[type=date], .col-75 select, textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -14,12 +14,12 @@
     resize: vertical;
   }
   
-  .modal-overlay label {
+   label {
     padding: 12px 12px 12px 0;
     display: inline-block;
   }
   
-  .modal-overlay input[type=submit] {
+   input[type=submit] {
     background-color: #4CAF50;
     color: black;
     padding: 12px 20px;
@@ -30,29 +30,29 @@
     margin-top: 1em;
   }
   
-  .modal-overlay input[type=submit]:hover {
+   input[type=submit]:hover {
     background-color: #45a049;
   }
   
-  .modal-overlay .make-form {
+   .make-form {
     border-radius: 5px;
     background-color: #f2f2f2;
   }
   
-  .modal-overlay .col-25 {
+   .col-25 {
     float: left;
     width: 25%;
     margin-top: 6px;
   }
   
-  .modal-overlay .col-75 {
+   .col-75 {
     float: left;
     width: 75%;
     margin-top: 6px;
   }
   
   /* Clear floats after the columns */
-  .modal-overlay .row:after {
+   .row:after {
     content: "";
     display: table;
     clear: both;
@@ -60,7 +60,7 @@
   
   /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
   @media screen and (max-width: 600px) {
-    .modal-overlay .col-25, .modal-overlay .col-75, .modal-overlay input[type=submit] {
+     .col-25,  .col-75,  input[type=submit] {
       width: 100%;
       margin-top: 0;
     }

@@ -57,6 +57,26 @@ a, button, input {
   touch-action: manipulation;
 }
 
+button, html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+  border-radius: 3px;
+  background: #FFB273;
+}
+
+button:hover,
+html input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+  background: #FF9640;
+}
+
+#GO_AWAY {
+  background: none;
+}
+
 a {
 	font-family: OpenSans-Regular;
 	font-size: 14px;
