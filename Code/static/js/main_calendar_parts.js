@@ -293,40 +293,39 @@ function taskplace(task = tasks){
 
 function projectplace(switcher){
   var div = document.getElementById('projectplace');
-  div=`<div class="project-place" id ="projectplace"></div>`
-  div = document.getElementById('projectplace');
+  div.textContent = ""
   if (switcher == "task_list"){
 //TODO заставить кнопки удаления проекта и показа инфы о нем работать!
-    div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this)" name="Все проекты">
+    div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this.name)" name="Все проекты">
     <div class="project-elem">
     <img src="../static/icons/folder.png">
     <p>Все проекты</p>
     </div></a>`);
 		for (i=0;i<projects.length;i++){
-      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this)" name="${projects[i].name}">
+      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this.name)" name="${projects[i].name}">
         <div class="project-elem">
         <img src="../static/icons/folder.png">
         <p>${projects[i].name} </p>
-        <button id="info">?</button>
-        <button id="close">X</button>
+        <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
+        <button id="close" onClick = "delete_project(this.name,'tl')" name="${projects[i].name}">X</button>
         </div></a>`);
       }
 
   }
   else{
 //TODO заставить кнопки удаления проекта и показа инфы о нем работать!
-    div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="Все проекты">
+    div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this.name)" name="Все проекты">
     <div class="project-elem">
     <img src="../static/icons/folder.png">
     <p>Все проекты</p>
     </div></a>`);
 		for (i=0;i<projects.length;i++){
-      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this)" name="${projects[i].name}">
+      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this.name)" name="${projects[i].name}">
         <div class="project-elem">
         <img src="../static/icons/folder.png">
-        <p>${projects[i].name} </p>
-        <button id="info">?</button>
-        <button id="close">X</button>
+        <p onclick="apply_project(this.name)" >${projects[i].name} </p>
+        <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
+        <button id="close" onClick = "delete_project(this.name,'cl')" name="${projects[i].name}">X</button>
         </div></a>`);
       }
   }

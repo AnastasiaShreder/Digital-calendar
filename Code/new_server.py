@@ -4,6 +4,8 @@ import json
 
 app = Flask(__name__)
 
+#TODO запрос на сервер с удалением проекта
+#TODO Сделать у проектов name, location, date, descr, members(через запятую имена коллег), isglobal(строка "True" or "False")
 
 
 import pymysql as pms

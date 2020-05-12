@@ -80,15 +80,15 @@ function apply_colleague(obj){
   //сработает при нажатии на коллегу
 }
 
-function apply_project(obj){
+function apply_project(name){
   var new_tasks = []
-  if (obj.name == "Все проекты"){
+  if (name == "Все проекты"){
     taskplace(tasks)
     render_calendar_m(tasks)
   }
     else{
     for (i = 0; i< tasks.length;i++){
-      if (obj.name == tasks[i].project){
+      if (name == tasks[i].project){
         new_tasks.push(tasks[i])
       }
     }
@@ -98,15 +98,14 @@ function apply_project(obj){
   //сработает при нажатии на проект  
 }
 
-function apply_project_task_list(obj) {
+function apply_project_task_list(name) {
   var new_tasks = []
-
-  if (obj.name == "Все проекты"){
+  if (name == "Все проекты"){
     render_task_list_tasks(tasks)
   }
     else{
     for (i = 0; i< tasks.length;i++){
-      if (obj.name == tasks[i].project){
+      if (name == tasks[i].project){
         new_tasks.push(tasks[i])
       }
     }
@@ -169,4 +168,34 @@ function find_task(){
   }
   render_task_list_tasks(new_tasks)
 
+}
+
+function project_info(name){
+  for (i=0;i<projects.length;i++){
+    if (projects[i].name == name){
+      alert("Название : "+projects[i].name+"\nМесто : "+projects[i].location+"\nДедлайн : "+moment(projects[i].date).format('YYYY-MM-DD')+"\nОписание : "+projects[i].descr+"\nУчастники : "+projects[i].members)
+      break
+    }
+  }
+}
+
+function delete_project(obj,a){
+  for (i=0;i<projects.length;i++){
+    if (projects[i].name == obj){
+      var request = new XMLHttpRequest();
+
+      projects.splice(i,1)
+      request.open('POST',url,false);
+      request.send(JSON.stringify({'type':'deleteproject', 'project_name':projects[i].name})); 
+
+      break
+    }
+  }
+  tasks = tasks.filter(function (e){ return e.project != obj})
+  if (a=="tl"){
+    projectplace("task_list")
+    apply_project_task_list("Все проекты")}
+  else {
+    projectplace("local")
+    apply_project("Все проекты")}
 }
