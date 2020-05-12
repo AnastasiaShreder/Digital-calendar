@@ -304,13 +304,15 @@ function projectplace(switcher){
     <p>Все проекты</p>
     </div></a>`);
 		for (i=0;i<projects.length;i++){
-      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this.name)" name="${projects[i].name}">
-        <div class="project-elem">
+      div.insertAdjacentHTML("beforeend", `<a name="${projects[i].name}">
+      <div class="project-elem">
+      <button id="project" onClick = "apply_project(this.name)" style="width:8vw;" name="${projects[i].name}">
         <img src="../static/icons/folder.png">
-        <p>${projects[i].name} </p>
-        <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
-        <button id="close" onClick = "delete_project(this.name,'tl')" name="${projects[i].name}">X</button>
-        </div></a>`);
+        <p>${projects[i].name}</p>
+      </button> 
+      <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
+      <button id="close" onClick = "delete_project(this.name,'cl')" name="${projects[i].name}">X</button>
+      </div></a>`);
       }
 
   }
@@ -322,13 +324,15 @@ function projectplace(switcher){
     <p>Все проекты</p>
     </div></a>`);
 		for (i=0;i<projects.length;i++){
-      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this.name)" name="${projects[i].name}">
-        <div class="project-elem">
+      div.insertAdjacentHTML("beforeend", `<a name="${projects[i].name}">
+      <div class="project-elem">
+      <button id="project" onClick = "apply_project(this.name)" style="width:8vw;" name="${projects[i].name}">
         <img src="../static/icons/folder.png">
-        <p onclick="apply_project(this.name)" >${projects[i].name} </p>
-        <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
-        <button id="close" onClick = "delete_project(this.name,'cl')" name="${projects[i].name}">X</button>
-        </div></a>`);
+        <p>${projects[i].name}</p>
+      </button> 
+      <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
+      <button id="close" onClick = "delete_project(this.name,'cl')" name="${projects[i].name}">X</button>
+      </div></a>`);
       }
   }
 }
