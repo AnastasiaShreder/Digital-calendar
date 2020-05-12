@@ -131,11 +131,11 @@
 /*Плашка слева*/
 .left-section{	
 	color: #72512C;
-	/*background-color: #ffffffff;*/
+	background-color: #ffffffff;
 	border:2px solid #FDCF78;
 	border-radius: 7px;
 	width: 10vw;
-	height: 320px;
+	height: 330px;
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-top: 160px;
@@ -187,6 +187,13 @@
 
 #apply_right, #add_task, #drop_down, #add_button, #add_project, #back_button{
 	width: 13vw;
+	display: block;
+	margin: auto;
+	margin-top: 3px;
+}
+
+#DO_IT {
+	width: 8vw;
 	display: block;
 	margin: auto;
 	margin-top: 3px;
