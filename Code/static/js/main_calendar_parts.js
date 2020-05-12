@@ -360,8 +360,19 @@ function add_button(){
   div.style = `height: 678px;`
 }
 
+function delete_back_button(){
+  var div = document.getElementById('back_button');
+  div.remove()
+  var div = document.getElementById('apply_right');
+  div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>`);
+  render_calendar_m(tasks);
+}
 
 function add_task(){
+    var div = document.getElementById('right-section');
+    div.style = `height: 650px`;
+    var div = document.getElementById('apply_right');
+    div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="delete_back_button()" id="back_button" value="Назад"></input>`)
   
     var div = document.getElementById('add_task');
     div.remove()
@@ -468,6 +479,12 @@ function add_task(){
 
 //TODO сделать форму для проекта
 function add_project(){
+    var div = document.getElementById('right-section');
+    div.style = `height: 650px`;
+
+    var div = document.getElementById('apply_right');
+    div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="delete_back_button()" id="back_button" value="Назад"></input>`);
+
     var div = document.getElementById('add_task');
     div.remove()
     var div = document.getElementById('add_project');
@@ -585,14 +602,16 @@ function add_task_submit(){
   request.open('POST',url,false);
   request.send(JSON.stringify({'type':'add_task', "user_id":user_id, "eventName":form.elements.firstname.value, "calendar":form.elements.group.value, "date":form.elements.datapicker2.value, "mark": form.elements.mark.value, "person":form.elements.colleague.value, "descr":form.elements.characteristic.value, "project":form.elements.divproject.value})); 
   var div = document.getElementById('apply_right');
-  div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>`)
-  render_calendar_m(tasks)
+  //div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>`)
+  //render_calendar_m(tasks)
+  delete_back_button()
   }
   else{
     alert("Ошибка при добавлении задачи")
     var div = document.getElementById('apply_right');
-    div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>`)
-    render_calendar_m(tasks)
+    //div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>`)
+    //render_calendar_m(tasks)
+    delete_back_button()
   }
 
 }

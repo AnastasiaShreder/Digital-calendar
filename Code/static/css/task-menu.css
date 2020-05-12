@@ -181,7 +181,7 @@
 	margin-left: 10px;
 }
 
-#apply_right, #add_task, #drop_down, #add_button, #add_project{
+#apply_right, #add_task, #drop_down, #add_button, #add_project, #back_button{
 	width: 13vw;
 	display: block;
 	margin: auto;
