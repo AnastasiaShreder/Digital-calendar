@@ -35,8 +35,9 @@ input[type=text], .col-75 select, textarea {
   }
   
    .make-form {
-    border-radius: 5px;
-    background-color: #f2f2f2;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
   }
   
    .col-25 {
