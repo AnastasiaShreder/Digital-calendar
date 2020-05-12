@@ -21,6 +21,12 @@
 	border-radius: 100%;
 }
 
+.GO_local img, .GO_global img, .GO_list img{
+	margin-right: 10px;
+	margin-left: -10px;
+	margin-bottom: -6px;
+}
+
 /*Список задач*/
 .surround-task{
 	display: flex;

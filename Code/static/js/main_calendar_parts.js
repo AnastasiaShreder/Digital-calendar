@@ -17,13 +17,15 @@ function render_mp_menu(switcher){
       <div class="mp-level">
         <h2 class="icon icon-world">Календарь</h2>
         <ul>
-          <li class="icon icon-arrow-left">
-            <a class="icon icon-display" onClick="b()">Общий календарь</a>
+          <li>
+            <a class="GO_global" onClick="b()"><img src="../static/icons/global.png">Общий календарь</a>
           </li>
-          <li class="icon icon-arrow-left">
-            <a class="icon icon-news" onClick="a()">Мой календарь</a>
+          <li>
+            <a class="GO_local" onClick="a()"><img src="../static/icons/local.png">Мой календарь</a>
           </li>
-          <li><a class="icon icon-wallet" onClick="c()">Список задач</a></li>
+          <li>
+            <a class="GO_list" onClick="c()"><img src="../static/icons/task.png">Список задач</a>
+          </li>
         </ul>
           
       </div>
