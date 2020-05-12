@@ -376,7 +376,7 @@ function add_task(){
     var div = document.getElementById('calendar-box');
     div.insertAdjacentHTML("beforeend",`
         <div id="calendar"> 
-        <div class="modal">
+        <div class="make-form">
 			<form name="add_task_form">
 			  <div class="row">
 				<div class="col-25">
