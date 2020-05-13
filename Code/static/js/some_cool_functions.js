@@ -83,7 +83,9 @@ function apply_colleague(obj){
 function apply_project(name){
   var new_tasks = []
   if (name == "Все проекты"){
-    taskplace(tasks)
+    try{
+    taskplace(tasks)}
+    catch (e){}
     render_calendar_m(tasks)
   }
     else{
@@ -92,7 +94,9 @@ function apply_project(name){
         new_tasks.push(tasks[i])
       }
     }
-    taskplace(new_tasks)
+    try{
+    taskplace(new_tasks)}
+    catch (e){}
     render_calendar_m(new_tasks)
   }
   //сработает при нажатии на проект  
@@ -183,10 +187,10 @@ function delete_project(obj,a){
   for (i=0;i<projects.length;i++){
     if (projects[i].name == obj){
       var request = new XMLHttpRequest();
-
-      projects.splice(i,1)
       request.open('POST',url,false);
       request.send(JSON.stringify({'type':'deleteproject', 'project_name':projects[i].name})); 
+      projects.splice(i,1)
+
 
       break
     }
@@ -197,5 +201,6 @@ function delete_project(obj,a){
     apply_project_task_list("Все проекты")}
   else {
     projectplace("local")
+    projectplace("global")
     apply_project("Все проекты")}
 }
