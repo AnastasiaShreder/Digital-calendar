@@ -151,7 +151,6 @@ function select_mark_task_list(mark){
 
 }
 
-//TODO Сделать нормальную форму с кнопкой удаления задачи
 function click_on_task(taskname){
   for (i=0;i<tasks.length;i++){
     if (tasks[i].eventName == taskname){
@@ -166,7 +165,7 @@ function find_task(){
   var find = div.value
   var new_tasks = []
   for (i = 0;i<tasks.length;i++){
-    if (tasks[i].eventName.indexOf(find) != -1){
+    if ((tasks[i].eventName.toLowerCase()).indexOf(find.toLowerCase()) != -1){
       new_tasks.push(tasks[i])
     }
   }
