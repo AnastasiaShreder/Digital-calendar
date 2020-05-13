@@ -58,7 +58,10 @@ class MultiInput extends HTMLElement {
     }
     </style>
     <slot></slot>`;
-
+    var s = document.getElementById("speakers")
+    for (i=0;i<colleagues.length;i++){
+      s.insertAdjacentHTML("beforeend", `<option value="${colleagues[i].name}"></option>\n`)
+    }
     this._datalist = this.querySelector('datalist');
     this._allowedValues = [];
     for (const option of this._datalist.options) {

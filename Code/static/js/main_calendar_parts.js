@@ -534,16 +534,7 @@ function add_project(){
         <div class="col-75">
           <multi-input>
             <input type=text list="speakers">
-            <datalist id="speakers">
-            
-              <option value="Иван"></option>
-              <option value="Андрей"></option>
-              <option value="Данил"></option>
-              <option value="Анастасия"></option>
-              <option value="Марк"></option>
-              <!-- FIXME Вот этот список нужно получать откуда-то с сервака -->
-
-            </datalist>
+            <datalist id="speakers"></datalist>
           </multi-input>
           <p id="values"></p>
 			  </div>
@@ -564,12 +555,8 @@ function add_project(){
     
   </div><!-- modal -->
   </div>`)
-  /* FIXME Закомментил, так как теперь мультивыбор сотрудников, но это может понадобится Андрею
-  a = document.getElementById("colleague")
-  for (i=0;i<colleagues.length;i++){
-    a.insertAdjacentHTML("beforeend",`<option value="${colleagues[i].name}">${colleagues[i].name}</option>`)
-  }
-  */
+  
+
 }
 
 
