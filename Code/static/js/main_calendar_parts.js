@@ -552,10 +552,6 @@ function add_project(){
     
   </div><!-- modal -->
   </div>`)
-  var a = document.getElementById("divproject")
-  for (i=0;i<projects.length;i++){
-    a.insertAdjacentHTML("beforeend",`<option value="${projects[i].name}">${projects[i].name}</option>`)
-  }
   a = document.getElementById("colleague")
   for (i=0;i<colleagues.length;i++){
     a.insertAdjacentHTML("beforeend",`<option value="${colleagues[i].name}">${colleagues[i].name}</option>`)
