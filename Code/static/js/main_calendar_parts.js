@@ -118,7 +118,7 @@ function render_mp_menu(switcher){
       </div><!-- /scroller -->
     </div><!-- /pusher -->`)
    }
-
+//TODO Придумать что-нибудь с отделами
    function render_mp_pusher_for_global(){
     var div = document.getElementById("container");
     div.insertAdjacentHTML("beforeend", `			<!-- Push Wrapper -->
@@ -298,7 +298,6 @@ function projectplace(switcher){
   var div = document.getElementById('projectplace');
   div.textContent = ""
   if (switcher == "task_list"){
-//TODO заставить кнопки удаления проекта и показа инфы о нем работать!
     div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this.name)" name="Все проекты">
     <div class="project-elem">
     <img src="../static/icons/folder.png">
@@ -307,18 +306,17 @@ function projectplace(switcher){
 		for (i=0;i<projects.length;i++){
       div.insertAdjacentHTML("beforeend", `<a name="${projects[i].name}">
       <div class="project-elem">
-      <button id="project" onClick = "apply_project(this.name)" style="width:8vw;" name="${projects[i].name}">
+      <button id="project" onClick = "apply_project_task_list(this.name)" style="width:8vw;" name="${projects[i].name}">
         <img src="../static/icons/folder.png">
         <p>${projects[i].name}</p>
       </button> 
       <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
-      <button id="close" onClick = "delete_project(this.name,'cl')" name="${projects[i].name}">X</button>
+      <button id="close" onClick = "delete_project(this.name,'tl')" name="${projects[i].name}">X</button>
       </div></a>`);
       }
 
   }
   else{
-//TODO заставить кнопки удаления проекта и показа инфы о нем работать!
     div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this.name)" name="Все проекты">
     <div class="project-elem">
     <img src="../static/icons/folder.png">
@@ -482,7 +480,6 @@ function add_task(){
 
 }
 
-//TODO сделать форму для проекта
 function add_project(){
     var div = document.getElementById('right-section');
     div.style = `height: 650px`;
@@ -547,7 +544,7 @@ function add_project(){
 				</div>
 			  </div>
 			  <div class="row">
-				<input onclick="add_task_submit()" type="submit" value="Submit">
+				<input onclick="add_project_submit()" type="submit" value="Submit">
 			  </div>
 			</form>
 		  
@@ -589,7 +586,7 @@ function add_task_submit(){
 
 }
 
-//TODO сделать функцию когда будет форма для проекта add_project_submit()   
+//TODO сделать функцию add_project_submit()   
 
 
 function delete_container(){
