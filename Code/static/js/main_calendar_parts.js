@@ -499,6 +499,7 @@ function add_project(){
     var div = document.getElementById('calendar-box');
     div.insertAdjacentHTML("beforeend",`
         <div id="calendar">
+        <div class="make-form">
 			<form name="add_project_form">
 			  <div class="row">
 				<div class="col-25">
@@ -524,44 +525,15 @@ function add_project(){
 					<!--<input type="text" value="dd-mm-yy" onfocus="this.select();lcs(this)" onclick="event.cancelBubble=true;this.select();lcs(this)">-->
 					<input type="date" name="datapicker2" value="ДД/ММ/ГГГГГ">
 				</div>
-			  </div>
-			  <div class="row">
-				<div class="col-25">
-				  <label for="mark">Метки</label>
-				</div>
-				<div class="col-75">
-          <select id="mark" name="mark">
-          <option value="Без метки">Важно</option>
-					<option value="Важно">Важно</option>
-					<option value="Внимание">Внимание</option>
-					<option value="Срочно">Срочно</option>
-				  </select>
-				</div>
-        </div>
+        </div> 
         <div class="row">
 				<div class="col-25">
-				  <label for="group">Группа</label>
+				  <label for="lname">Поручить</label>
 				</div>
-				<div class="col-75">
-				  <select id="group" name="group">
-					<option value="Конференция">Конференция</option>
-					<option value="Форум">Форум</option>
-          <option value="Фестиваль">Фестиваль</option>
-          <option value="Встреча">Встреча</option>
-					<option value="Совещание">Совещание</option>
-          <option value="Заказ">Заказ</option>
-          <option value="Прочее">Прочее</option>
-				  </select>
-				</div>
+        <div class="col-75">
+        <select id="colleague" name="colleague">
+        </select>
         </div>
-        <div class="row">
-				<div class="col-25">
-				  <label for="group">Проект</label>
-				</div>
-				<div class="col-75">
-				  <select id="divproject" name="divproject">
-				  </select>
-				</div>
 			  </div>
 			  <div class="row">
 				<div class="col-25">

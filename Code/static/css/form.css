@@ -3,7 +3,7 @@ input[type=text], .col-75 select, textarea {
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    resize: vertical;
+    resize: none;
   }
 
    input[type=date], .col-75 select, textarea {
@@ -11,7 +11,11 @@ input[type=text], .col-75 select, textarea {
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    resize: vertical;
+    resize: none;
+  }
+
+  textarea {
+    height: 150px;
   }
   
    label {
@@ -38,6 +42,9 @@ input[type=text], .col-75 select, textarea {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    background: #eeccb3;
+    padding: 20px;
+    border-radius: 7px
   }
   
    .col-25 {
