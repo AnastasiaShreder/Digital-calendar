@@ -17,7 +17,7 @@ class MultiInput extends HTMLElement {
       font-size: 18px;
       pointer-events: auto;
       position: absolute;
-      right: 5px;
+      
       top: -1px;
     }
 

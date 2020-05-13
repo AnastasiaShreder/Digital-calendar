@@ -214,7 +214,7 @@ function render_mp_menu(switcher){
                 <p id="afterGroupPlace">Мои проекты:</p>
                 <div class="project-place-task-list" id ="projectplace"></div> 
               </div> 
-              
+
               <button id="GO_AWAY_from_task" onclick="logout()"><img src="../static/icons/logout2.png"></input>
 
             </div>
@@ -463,7 +463,7 @@ function add_task(){
 				</div>
 			  </div>
 			  <div class="row">
-				<input onclick="add_task_submit()" type="submit" value="Submit">
+				<input onclick="add_task_submit()" style="margin-top: 5px;" type="submit" value="Submit">
 			  </div>
 			</form>
 		  
@@ -529,15 +529,27 @@ function add_project(){
         <div class="row">
 				<div class="col-25">
 				  <label for="lname">Поручить</label>
-				</div>
-        <div class="col-75">
-        <select id="colleague" name="colleague">
-        </select>
         </div>
+
+        <div class="col-75">
+          <multi-input>
+            <input type=text list="speakers">
+            <datalist id="speakers">
+            
+              <option value="Иван"></option>
+              <option value="Андрей"></option>
+              <option value="Данил"></option>
+              <option value="Анастасия"></option>
+              <option value="Марк"></option>
+              <!-- FIXME Вот этот список нужно получать откуда-то с сервака -->
+
+            </datalist>
+          </multi-input>
+          <p id="values"></p>
 			  </div>
 			  <div class="row">
 				<div class="col-25">
-				  <label for="characteristic">Описание задачи</label>
+				  <label for="characteristic">Описание проекта</label>
 				</div>
 				<div class="col-75">
 				  <textarea id="characteristic" name="characteristic" placeholder="Введите описание задачи..." style="height:200px"></textarea>
@@ -552,11 +564,12 @@ function add_project(){
     
   </div><!-- modal -->
   </div>`)
+  /* FIXME Закомментил, так как теперь мультивыбор сотрудников, но это может понадобится Андрею
   a = document.getElementById("colleague")
   for (i=0;i<colleagues.length;i++){
     a.insertAdjacentHTML("beforeend",`<option value="${colleagues[i].name}">${colleagues[i].name}</option>`)
   }
-
+  */
 }
 
 

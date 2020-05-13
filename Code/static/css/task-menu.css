@@ -1,3 +1,12 @@
+/*Для супер-пупер-крутого мультивыбора сотрудников*/
+.item::after{
+	margin-left: auto ;
+}
+
+.item{
+	margin-right: 10px;
+}
+
 /*Нужно для того чтобы плашка была рядом с календарём на любом экране*/
 .surround-calendar{	
 	margin: auto;
