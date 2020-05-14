@@ -8,10 +8,11 @@ cors = CORS(app)
 
 import pymysql as pms
 
-database_pass = "password"
+database_pass = "0000"
 
 def names_to_ids(namesList):
     idList = []
+    print(namesList)
     for i in namesList:
         user_name = i.split(" ")
         conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
@@ -26,7 +27,7 @@ def create_data(data):
     if data["type"]=="colleaguesplace":
         conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
         cursor = conn.cursor()
-        cursor.execute("SELECT id FROM EdgePoint.users where EdgePoint.users.unit = (SELECT unit FROM EdgePoint.users where EdgePoint.users.id = "+ str(data["user_id"])+") AND EdgePoint.users.id != "+str(data["user_id"])+";")
+        cursor.execute("SELECT id FROM EdgePoint.users where EdgePoint.users.unit = (SELECT unit FROM EdgePoint.users where EdgePoint.users.id = "+ str(data["user_id"])+");")
         colleagues = []   
         col_ids = cursor.fetchall()
         if (len(col_ids) == 0):
@@ -88,7 +89,7 @@ def create_data(data):
             user_projects.append(project_data)
         return json.dumps(user_projects)
 
-    if data["type"] == "add_task":
+    if data["type"] == "add_project":
         conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
         cursor = conn.cursor()
         cursor.execute("INSERT INTO `EdgePoint`.`projects` (`name`, `deadline`,  `global`,  `description`,`location`) VALUES ('"+data["name"]+"','"+data["date"]+"','"+str(1)+"','"+data["descr"]+"','"+data["location"]+"');")
@@ -116,19 +117,10 @@ def create_data(data):
     if data["type"]=="taskplace":
         conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
         cursor = conn.cursor()
-        cursor.execute("SELECT EdgePoint.user_task.id_task FROM EdgePoint.user_task WHERE EdgePoint.user_task.id_user = "+str(data["user_id"])+";")#data["user_id"])+";")
-        task_ids = cursor.fetchall()
-        user_tasks = []
-        if (len(task_ids) == 0):
-            return user_tasks
-        task_ids = list(map(lambda x: x[0], task_ids))
-        query = "SELECT id,name,deadline,description FROM EdgePoint.tasks where id="+str(task_ids[0])
-        for i in range(1,len(task_ids)):
-            query += " OR id=" + str(task_ids[i])
-        query+=";"
+        query = "SELECT id,name,deadline,description FROM EdgePoint.tasks;"
         cursor.execute(query)
         task_names = cursor.fetchall()
-        
+        user_tasks=[]
         for i in task_names:
             cursor.execute("(SELECT tag FROM EdgePoint.tag_task where id_task = "+str(i[0])+" AND tag IN ('Конференция','Форум','Фестиваль','Встреча','Совещание','Заказ','Прочее'))"+
                 "UNION (SELECT tag FROM EdgePoint.tag_task where id_task = "+str(i[0])+" AND tag IN ('Важно','Внимание','Срочно','Без метки'))")
@@ -136,28 +128,34 @@ def create_data(data):
             cursor.execute("SELECT name FROM EdgePoint.projects WHERE id = (SELECT id_project FROM EdgePoint.task_project where id_task = "+str(i[0])+" )")
             task_project_name = cursor.fetchall()[0][0]
             cursor.execute("SELECT name,surname FROM EdgePoint.users where id = (SELECT id_user FROM EdgePoint.user_task where id_task = "+str(i[0])+" )")
-            pers= cursor.fetchall()[0]
-            user_tasks.append({"eventName":i[1],"date":str(i[2]),"descr":i[3],"mark":tags[1][0],"calendar":tags[0][0],"project":task_project_name,"person":pers[0] + " " + pers[1]})
+            pers = cursor.fetchall()[0]
+            user_tasks.append({"eventName":i[1],"date":str(i[2]),"descr":i[3],"mark":str(tags[1][0]),"calendar":str(tags[0][0]),"project":str(task_project_name),"person":str(pers[0] + " " + pers[1])})
         cursor.close()
         return json.dumps(user_tasks)
 
     if data["type"] == "add_task":
         #Примечания:
         #Дата в формате ГГГГ-ММ-ДД
-        #data["calendar"] нигде не используется,а то,глобальная или не глобальная задача зависит от проекта
         # в запросе еще есть data["user_id"],но я его не использую
         conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO `EdgePoint`.`tasks` (       `name`,     `deadline`,     `color`,        `description`) VALUES ('"+data["eventName"]+"','"+data["date"]+"',ff00ff,'"+data["descr"]+"');")
+        cursor.execute("INSERT INTO `EdgePoint`.`tasks` (       `name`,     `deadline`,     `color`,        `description`) VALUES ('"+data["eventName"]+"','"+data["date"]+"','ff00ff','"+data["descr"]+"');")
         conn.commit()
         cursor.execute("SELECT LAST_INSERT_ID();")
         new_task_id = cursor.fetchall()[0][0]
-        new_users_id = names_to_ids(data["person"])
-        for i in new_users_id:
-            cursor.execute("INSERT INTO `EdgePoint`.`user_task` (`id_user`, `id_task`) VALUES ("+str(i)+", "+str(new_task_id)+");")
-        cursor.execute("INSERT INTO `EdgePoint`.`task_project`  (`id_task`, `id_project`) VALUES ("+str(new_task_id)+", "+str(data["project"])+");")
+        user_name = data["person"].split(" ")
+        conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
+        cursor = conn.cursor()
+        cursor.execute("SELECT id FROM EdgePoint.users where EdgePoint.users.name = '"+ str(user_name[0])+"' AND EdgePoint.users.surname = '"+ str(user_name[1])+"';")
+        new_user_id = cursor.fetchall()[0][0]
+        cursor.execute("INSERT INTO `EdgePoint`.`user_task` (`id_user`, `id_task`) VALUES ("+str(new_user_id)+", "+str(new_task_id)+");")
+        conn.commit()
+        cursor.execute("SELECT id FROM EdgePoint.projects WHERE name = '"+str(data["project"])+"';")
+        proj_id = cursor.fetchall()[0][0]
+        cursor.execute("INSERT INTO `EdgePoint`.`task_project`  (`id_task`, `id_project`) VALUES ("+str(new_task_id)+", "+str(proj_id)+");")
         #пердполагаю,что в #data["mark"] хранится 1 элемент - тэг задачи
-        cursor.execute("INSERT INTO `EdgePoint`.`tag_task`  (`tag`, `id_task`)  VALUES  ("+str(data["mark"])+","+str(new_task_id)+");")
+        cursor.execute("INSERT INTO `EdgePoint`.`tag_task`  (`tag`, `id_task`)  VALUES  ('"+str(data["mark"])+"',"+str(new_task_id)+");")
+        cursor.execute("INSERT INTO `EdgePoint`.`tag_task`  (`tag`, `id_task`)  VALUES  ('"+str(data["calendar"])+"',"+str(new_task_id)+");")
         conn.commit()
         cursor.close()
         return "True"
@@ -178,7 +176,7 @@ def create_data(data):
 
 @app.route("/",methods=['GET'])
 def simple():
-	return render_template('index.html')
+    return render_template('index.html')
 
 @app.route("/",methods = ['POST'])
 @cross_origin()
