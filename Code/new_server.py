@@ -2,7 +2,9 @@
 from flask import Flask, request, make_response, render_template
 import json
 
+from flask_cors import CORS, cross_origin
 app = Flask(__name__)
+cors = CORS(app)
 
 import pymysql as pms
 
@@ -179,9 +181,11 @@ def simple():
 	return render_template('index.html')
 
 @app.route("/",methods = ['POST'])
+@cross_origin()
 def returnlist():
 	data = create_data(json.loads(request.data))
 	response = make_response(data)
+    response.headers.add("Access-Control-Allow-Credentials", "true")
 	return response
  
 if __name__ == "__main__":
