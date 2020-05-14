@@ -1,13 +1,24 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, request, make_response, render_template
 import json
-from flask_cors import CORS, cross_origin
+
 app = Flask(__name__)
-cors = CORS(app)
 
 import pymysql as pms
 
-database_pass = "0000"
+database_pass = "password"
+
+def names_to_ids(namesList):
+    idList = []
+    for i in namesList:
+        user_name = i.split(" ")
+        conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
+        cursor = conn.cursor()
+        cursor.execute("SELECT id FROM EdgePoint.users where EdgePoint.users.name = '"+ str(user_name[0])+"' AND EdgePoint.users.surname = '"+ str(user_name[1])+"';")
+        idList.append(cursor.fetchall()[0][0])
+        cursor.close()
+    return idList
+
 
 def create_data(data):
     if data["type"]=="colleaguesplace":
@@ -75,6 +86,20 @@ def create_data(data):
             user_projects.append(project_data)
         return json.dumps(user_projects)
 
+    if data["type"] == "add_task":
+            conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO `EdgePoint`.`projects` (`name`, `deadline`,  `global`,  `description`,`location`) VALUES ('"+data["name"]+"','"+data["date"]+"','"+str(1)+"','"+data["descr"]+"','"+data["location"]+"');")
+        conn.commit()
+        cursor.execute("SELECT LAST_INSERT_ID();")
+        new_project_id = cursor.fetchall()[0][0]
+        new_users_id = names_to_ids(data["members"])
+        for i in new_users_id:
+            cursor.execute("INSERT INTO `EdgePoint`.`user_project` (`id_user`, `id_project`,`is_admin`) VALUES ("+str(i)+", "+str(new_project_id)+", "+str(0)+");")
+        conn.commit()
+        cursor.close()
+        return "True"
+
     if data["type"] == "deleteproject":
         conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
         cursor = conn.cursor()
@@ -121,13 +146,12 @@ def create_data(data):
         # в запросе еще есть data["user_id"],но я его не использую
         conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO `EdgePoint`.`tasks` (       `name`,     `deadline`,     `color`,        `description`) VALUES ("+data["eventName"]+","+data["date"]+",ff00ff,"+data["descr"]+");")
+        cursor.execute("INSERT INTO `EdgePoint`.`tasks` (       `name`,     `deadline`,     `color`,        `description`) VALUES ('"+data["eventName"]+"','"+data["date"]+"',ff00ff,'"+data["descr"]+"');")
         conn.commit()
         cursor.execute("SELECT LAST_INSERT_ID();")
         new_task_id = cursor.fetchall()[0][0]
-        print(new_task_id)
-        #пердполагаю,что в data["person"] список из всех,кого надо прикрепить к задаче
-        for i in data["person"]:
+        new_users_id = names_to_ids(data["person"])
+        for i in new_users_id:
             cursor.execute("INSERT INTO `EdgePoint`.`user_task` (`id_user`, `id_task`) VALUES ("+str(i)+", "+str(new_task_id)+");")
         cursor.execute("INSERT INTO `EdgePoint`.`task_project`  (`id_task`, `id_project`) VALUES ("+str(new_task_id)+", "+str(data["project"])+");")
         #пердполагаю,что в #data["mark"] хранится 1 элемент - тэг задачи
@@ -155,14 +179,14 @@ def simple():
 	return render_template('index.html')
 
 @app.route("/",methods = ['POST'])
-@cross_origin()
 def returnlist():
 	data = create_data(json.loads(request.data))
 	response = make_response(data)
-    response.headers.add("Access-Control-Allow-Credentials", "true")
 	return response
  
 if __name__ == "__main__":
+    hui = {}
+    data = {'type':'add_project', "user_id":1, "name":"Проект залупа", "location":"В пизде", "date":"1000-01-01", "members":["Данил Лялин","Марк Шерман"], "descr":"Говно"}
 
-	app.run(host= '192.168.0.121',port='5001')
-	conn.close()
+    #app.run(host= '192.168.0.121',port='5001')
+    #conn.close()
