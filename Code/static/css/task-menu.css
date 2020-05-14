@@ -226,10 +226,19 @@
 /*Конец описания вкладок на плашке*/
 
 /*Описание элементов*/
- .task-elem, .project-elem, .сolleagues-elem, .marks-elem{
+ .task-elem, .project-elem, .сolleagues-elem, .marks-elem, .project-mark{
 	width: auto;
 	height: auto;
 	border-bottom:2px solid #FDCF78;
+}
+
+.project-elem{
+	display: flex;
+	justify-content: space-between;
+}
+
+.project-elem .stay-together{
+	margin-top: 5px;
 }
 
 /*Перемена цвета при наведении на элемент МОЖЕШЬ МЕНЯТЬ*/
@@ -237,16 +246,13 @@
 	background: rgba(224, 180, 113, 0.473);
 }
 
-.project-elem button{
-	margin-left: -8px;
-}
 
-.project-elem img, .сolleagues-elem img{
+.project-elem img, .сolleagues-elem img, .project-mark img{
 	width: 25px;
 	height: 25px;
 	margin-left: 8px;
 }
-.project-elem p, .сolleagues-elem p, .marks-elem p{
+.project-elem p, .сolleagues-elem p, .marks-elem p, .project-mark p{
 	display: inline;
 	color: #72512C;
 	margin: 5px;
