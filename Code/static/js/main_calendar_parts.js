@@ -299,17 +299,17 @@ function projectplace(switcher){
   div.textContent = ""
   if (switcher == "task_list"){
     div.insertAdjacentHTML("beforeend", `<a name="Все проекты">
-    <div class="project-elem">
+    <div class="project-elem-all">
+    <img src="../static/icons/folder.png">
     <button id="project" onclick="apply_project_task_list(this.name)" name="Все проекты">
-      <img src="../static/icons/folder.png">
       <p>Все проекты</p>
     </button>
     </div></a>`);
 		for (i=0;i<projects.length;i++){
       div.insertAdjacentHTML("beforeend", `<a name="${projects[i].name}">
       <div class="project-elem">
+      <img src="../static/icons/folder.png">
       <button id="project" onClick = "apply_project_task_list(this.name)" name="${projects[i].name}">
-        <img src="../static/icons/folder.png">
         <p>${projects[i].name}</p>
       </button> 
       <div class="stay-together">
@@ -322,17 +322,17 @@ function projectplace(switcher){
   }
   else{
     div.insertAdjacentHTML("beforeend", `<a name="Все проекты">
-    <div class="project-elem">
+    <div class="project-elem-all">
+    <img src="../static/icons/folder.png">
     <button id="project" onclick="apply_project(this.name)" name="Все проекты">
-      <img src="../static/icons/folder.png">
       <p>Все проекты</p>
     </button>
     </div></a>`);
 		for (i=0;i<projects.length;i++){
       div.insertAdjacentHTML("beforeend", `<a name="${projects[i].name}">
       <div class="project-elem">
+      <img src="../static/icons/folder.png">
       <button id="project" onClick = "apply_project(this.name)" name="${projects[i].name}">
-        <img src="../static/icons/folder.png">
         <p>${projects[i].name}</p>
       </button> 
       <div class="stay-together">
@@ -538,7 +538,7 @@ function add_project(){
 
         <div class="col-75">
           <multi-input>
-            <input type=text list="speakers" name="speakers">
+            <input type=text list="speakers">
             <datalist id="speakers"></datalist>
           </multi-input>
           <p id="values"></p>
@@ -594,27 +594,8 @@ function add_task_submit(){
 
 }
 
-function add_project_submit(){
-  var form = document.forms.add_project_form
-  var b=document.querySelector('multi-input').getValues()
-  var f = form.elements.firstname.value
-  var p= form.elements.place.value
-  var da = form.elements.datapicker2.value
-  var de = form.elements.characteristic.value
- 
-  if (f!="" && p!="" && da!="" && b.length!=0){
+//TODO сделать функцию add_project_submit()   
 
-    var request = new XMLHttpRequest();
-    request.open('POST',url,false);
-    request.send(JSON.stringify({'type':'add_project', "user_id":user_id, "name":f, "location":p, "date":da, "members":b, "descr":de})); 
-    projects = []
-    get_projects()
-  }
-  else {
-    alert("Ошибка при добавлении проекта")
-  }  
-
-}
 
 function delete_container(){
   document.getElementById("container").remove()
