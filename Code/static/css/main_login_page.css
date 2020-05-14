@@ -57,6 +57,33 @@ a, button, input {
   touch-action: manipulation;
 }
 
+button, html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+  border-radius: 3px;
+  background: #FFB273;
+}
+
+html input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+  background: #FF9640;
+}
+
+#GO_AWAY {
+  background: none;
+}
+
+#trigger {
+  display: block;
+  /*margin: auto;*/
+  background: none;
+ /* margin-left: 30px;
+  margin-top: 30px;*/
+}
+
 a {
 	font-family: OpenSans-Regular;
 	font-size: 14px;
@@ -183,7 +210,8 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #e9faff;
+  /*background: #e9faff;*/
+  background: url(../background/back.jpg) no-repeat;
 }
 
 .wrap-login100 {

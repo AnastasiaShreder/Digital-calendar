@@ -1,3 +1,12 @@
+/*Для супер-пупер-крутого мультивыбора сотрудников*/
+.item::after{
+	margin-left: auto ;
+}
+
+.item{
+	margin-right: 10px;
+}
+
 /*Нужно для того чтобы плашка была рядом с календарём на любом экране*/
 .surround-calendar{	
 	margin: auto;
@@ -12,6 +21,7 @@
 {
 	display: block;
 	margin: auto;
+	font-size: 15pt;
 }
 
 #info, #close{
@@ -19,6 +29,10 @@
 	height: 20px;
 	border:1px solid black;
 	border-radius: 100%;
+	margin-bottom: auto;
+	margin-top: auto;
+	margin: auto;
+
 }
 
 .GO_local img, .GO_global img, .GO_list img{
@@ -126,11 +140,11 @@
 /*Плашка слева*/
 .left-section{	
 	color: #72512C;
-	/*background-color: #ffffffff;*/
+	background-color: #ffffffff;
 	border:2px solid #FDCF78;
 	border-radius: 7px;
 	width: 10vw;
-	height: 320px;
+	height: 330px;
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-top: 160px;
@@ -180,8 +194,15 @@
 	margin-left: 10px;
 }
 
-#apply_right, #add_task, #drop_down, #add_button, #add_project{
+#apply_right, #add_task, #drop_down, #add_button, #add_project, #back_button{
 	width: 13vw;
+	display: block;
+	margin: auto;
+	margin-top: 3px;
+}
+
+#DO_IT {
+	width: 8vw;
 	display: block;
 	margin: auto;
 	margin-top: 3px;
@@ -216,6 +237,10 @@
 	background: rgba(224, 180, 113, 0.473);
 }
 
+.project-elem button{
+	margin-left: -8px;
+}
+
 .project-elem img, .сolleagues-elem img{
 	width: 25px;
 	height: 25px;
@@ -224,8 +249,9 @@
 .project-elem p, .сolleagues-elem p, .marks-elem p{
 	display: inline;
 	color: #72512C;
-	margin: 15px;
+	margin: 5px;
 }
+
 /*Конец описания элементов*/
 
 /*Конец плашки справа*/

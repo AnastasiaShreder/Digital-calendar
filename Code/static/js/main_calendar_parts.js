@@ -68,9 +68,10 @@ function render_mp_menu(switcher){
       
           <div class="content clearfix">
             <div class="block1 block-100 clearfix">
-                <span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
-                <section class="section" id="Prospero">
-                </section>	
+                <button id="trigger">
+                  <img height="45px" width="45px" src="../static/icons/menu.png">
+                </button>
+                
             </div>
             
             <div class="surround-calendar">
@@ -117,7 +118,7 @@ function render_mp_menu(switcher){
       </div><!-- /scroller -->
     </div><!-- /pusher -->`)
    }
-
+//TODO Придумать что-нибудь с отделами
    function render_mp_pusher_for_global(){
     var div = document.getElementById("container");
     div.insertAdjacentHTML("beforeend", `			<!-- Push Wrapper -->
@@ -127,9 +128,9 @@ function render_mp_menu(switcher){
       
           <div class="content clearfix">
             <div class="block1 block-100 clearfix">
-                <span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
-                <section class="section" id="Prospero">
-                </section>	
+              <button id="trigger">
+                <img height="45px" width="45px" src="../static/icons/menu.png">
+              </button>	
             </div>
             
             <div class="surround-calendar">
@@ -178,9 +179,9 @@ function render_mp_menu(switcher){
       
           <div class="content clearfix">
             <div class="block1 block-100 clearfix">
-                <span class="open-menu"><a href="#" id="trigger" class="menu-trigger"></a></span>
-                <section class="section" id="Prospero">
-                </section>	
+              <button id="trigger">
+                <img height="45px" width="45px" src="../static/icons/menu.png">
+              </button>	
             </div>
             
             <div class="surround-task">
@@ -213,7 +214,7 @@ function render_mp_menu(switcher){
                 <p id="afterGroupPlace">Мои проекты:</p>
                 <div class="project-place-task-list" id ="projectplace"></div> 
               </div> 
-              
+
               <button id="GO_AWAY_from_task" onclick="logout()"><img src="../static/icons/logout2.png"></input>
 
             </div>
@@ -297,38 +298,40 @@ function projectplace(switcher){
   var div = document.getElementById('projectplace');
   div.textContent = ""
   if (switcher == "task_list"){
-//TODO заставить кнопки удаления проекта и показа инфы о нем работать!
     div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this.name)" name="Все проекты">
     <div class="project-elem">
     <img src="../static/icons/folder.png">
     <p>Все проекты</p>
     </div></a>`);
 		for (i=0;i<projects.length;i++){
-      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this.name)" name="${projects[i].name}">
-        <div class="project-elem">
+      div.insertAdjacentHTML("beforeend", `<a name="${projects[i].name}">
+      <div class="project-elem">
+      <button id="project" onClick = "apply_project_task_list(this.name)" style="width:8vw;" name="${projects[i].name}">
         <img src="../static/icons/folder.png">
-        <p>${projects[i].name} </p>
-        <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
-        <button id="close" onClick = "delete_project(this.name,'tl')" name="${projects[i].name}">X</button>
-        </div></a>`);
+        <p>${projects[i].name}</p>
+      </button> 
+      <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
+      <button id="close" onClick = "delete_project(this.name,'tl')" name="${projects[i].name}">X</button>
+      </div></a>`);
       }
 
   }
   else{
-//TODO заставить кнопки удаления проекта и показа инфы о нем работать!
     div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this.name)" name="Все проекты">
     <div class="project-elem">
     <img src="../static/icons/folder.png">
     <p>Все проекты</p>
     </div></a>`);
 		for (i=0;i<projects.length;i++){
-      div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this.name)" name="${projects[i].name}">
-        <div class="project-elem">
+      div.insertAdjacentHTML("beforeend", `<a name="${projects[i].name}">
+      <div class="project-elem">
+      <button id="project" onClick = "apply_project(this.name)" style="width:8vw;" name="${projects[i].name}">
         <img src="../static/icons/folder.png">
-        <p onclick="apply_project(this.name)" >${projects[i].name} </p>
-        <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
-        <button id="close" onClick = "delete_project(this.name,'cl')" name="${projects[i].name}">X</button>
-        </div></a>`);
+        <p>${projects[i].name}</p>
+      </button> 
+      <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
+      <button id="close" onClick = "delete_project(this.name,'cl')" name="${projects[i].name}">X</button>
+      </div></a>`);
       }
   }
 }
@@ -360,8 +363,19 @@ function add_button(){
   div.style = `height: 678px;`
 }
 
+function delete_back_button(){
+  var div = document.getElementById('back_button');
+  div.remove()
+  var div = document.getElementById('apply_right');
+  div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>`);
+  render_calendar_m(tasks);
+}
 
 function add_task(){
+    var div = document.getElementById('right-section');
+    div.style = `height: 650px`;
+    var div = document.getElementById('apply_right');
+    div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="delete_back_button()" id="back_button" value="Назад"></input>`)
   
     var div = document.getElementById('add_task');
     div.remove()
@@ -371,7 +385,8 @@ function add_task(){
     div.remove()
     var div = document.getElementById('calendar-box');
     div.insertAdjacentHTML("beforeend",`
-        <div id="calendar">
+        <div id="calendar"> 
+        <div class="make-form">
 			<form name="add_task_form">
 			  <div class="row">
 				<div class="col-25">
@@ -442,11 +457,11 @@ function add_task(){
 				  <label for="characteristic">Описание задачи</label>
 				</div>
 				<div class="col-75">
-				  <textarea id="characteristic" name="characteristic" placeholder="Введите описание задачи..." style="height:200px"></textarea>
+				  <textarea id="characteristic" name="characteristic" placeholder="Введите описание задачи..." style="height:175px"></textarea>
 				</div>
 			  </div>
 			  <div class="row">
-				<input onclick="add_task_submit()" type="submit" value="Submit">
+				<input onclick="add_task_submit()" style="margin-top: 5px;" type="submit" value="Подтвердить">
 			  </div>
 			</form>
 		  
@@ -465,8 +480,13 @@ function add_task(){
 
 }
 
-//TODO сделать форму для проекта
 function add_project(){
+    var div = document.getElementById('right-section');
+    div.style = `height: 650px`;
+
+    var div = document.getElementById('apply_right');
+    div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="delete_back_button()" id="back_button" value="Назад"></input>`);
+
     var div = document.getElementById('add_task');
     div.remove()
     var div = document.getElementById('add_project');
@@ -476,6 +496,7 @@ function add_project(){
     var div = document.getElementById('calendar-box');
     div.insertAdjacentHTML("beforeend",`
         <div id="calendar">
+        <div class="make-form">
 			<form name="add_project_form">
 			  <div class="row">
 				<div class="col-25">
@@ -501,55 +522,29 @@ function add_project(){
 					<!--<input type="text" value="dd-mm-yy" onfocus="this.select();lcs(this)" onclick="event.cancelBubble=true;this.select();lcs(this)">-->
 					<input type="date" name="datapicker2" value="ДД/ММ/ГГГГГ">
 				</div>
-			  </div>
-			  <div class="row">
-				<div class="col-25">
-				  <label for="mark">Метки</label>
-				</div>
-				<div class="col-75">
-          <select id="mark" name="mark">
-          <option value="Без метки">Важно</option>
-					<option value="Важно">Важно</option>
-					<option value="Внимание">Внимание</option>
-					<option value="Срочно">Срочно</option>
-				  </select>
-				</div>
-        </div>
+        </div> 
         <div class="row">
 				<div class="col-25">
-				  <label for="group">Группа</label>
-				</div>
-				<div class="col-75">
-				  <select id="group" name="group">
-					<option value="Конференция">Конференция</option>
-					<option value="Форум">Форум</option>
-          <option value="Фестиваль">Фестиваль</option>
-          <option value="Встреча">Встреча</option>
-					<option value="Совещание">Совещание</option>
-          <option value="Заказ">Заказ</option>
-          <option value="Прочее">Прочее</option>
-				  </select>
-				</div>
+				  <label for="lname">Поручить</label>
         </div>
-        <div class="row">
-				<div class="col-25">
-				  <label for="group">Проект</label>
-				</div>
-				<div class="col-75">
-				  <select id="divproject" name="divproject">
-				  </select>
-				</div>
+
+        <div class="col-75">
+          <multi-input>
+            <input type=text list="speakers">
+            <datalist id="speakers"></datalist>
+          </multi-input>
+          <p id="values"></p>
 			  </div>
 			  <div class="row">
 				<div class="col-25">
-				  <label for="characteristic">Описание задачи</label>
+				  <label for="characteristic">Описание проекта</label>
 				</div>
 				<div class="col-75">
-				  <textarea id="characteristic" name="characteristic" placeholder="Введите описание задачи..." style="height:200px"></textarea>
+				  <textarea id="characteristic" name="characteristic" placeholder="Введите описание задачи..." style="height:175px"></textarea>
 				</div>
 			  </div>
 			  <div class="row">
-				<input onclick="add_task_submit()" type="submit" value="Submit">
+				<input onclick="add_project_submit()" type="submit" value="Подтвердить">
 			  </div>
 			</form>
 		  
@@ -557,14 +552,7 @@ function add_project(){
     
   </div><!-- modal -->
   </div>`)
-  var a = document.getElementById("divproject")
-  for (i=0;i<projects.length;i++){
-    a.insertAdjacentHTML("beforeend",`<option value="${projects[i].name}">${projects[i].name}</option>`)
-  }
-  a = document.getElementById("colleague")
-  for (i=0;i<colleagues.length;i++){
-    a.insertAdjacentHTML("beforeend",`<option value="${colleagues[i].name}">${colleagues[i].name}</option>`)
-  }
+  
 
 }
 
@@ -584,19 +572,21 @@ function add_task_submit(){
   request.open('POST',url,false);
   request.send(JSON.stringify({'type':'add_task', "user_id":user_id, "eventName":form.elements.firstname.value, "calendar":form.elements.group.value, "date":form.elements.datapicker2.value, "mark": form.elements.mark.value, "person":form.elements.colleague.value, "descr":form.elements.characteristic.value, "project":form.elements.divproject.value})); 
   var div = document.getElementById('apply_right');
-  div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>`)
-  render_calendar_m(tasks)
+  //div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>`)
+  //render_calendar_m(tasks)
+  delete_back_button()
   }
   else{
     alert("Ошибка при добавлении задачи")
     var div = document.getElementById('apply_right');
-    div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>`)
-    render_calendar_m(tasks)
+    //div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_button()" id="add_button" value="Добавить"></input>`)
+    //render_calendar_m(tasks)
+    delete_back_button()
   }
 
 }
 
-//TODO сделать функцию когда будет форма для проекта add_project_submit()   
+//TODO сделать функцию add_project_submit()   
 
 
 function delete_container(){
