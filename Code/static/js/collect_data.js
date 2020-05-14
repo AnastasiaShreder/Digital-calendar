@@ -39,8 +39,7 @@ function get_projects(){
         if ((request.readyState==4) && (request.status==200)) {
             responce = JSON.parse(request.responseText)
             for (i=0;i<responce.length;i++){
-                //projects.push({id : responce[i].id, name : responce[i].name,location : responce[i].location, date : responce[i].date, descr : responce[i].descr, members: responce[i].members, isglobal : responce[i].isglobal})
-                projects.push({id : responce[i].id, name : responce[i].name,location : "место", date : "2020-06-06", descr : "описаниеееее", members: "Иван Конев", isglobal : "True"})
+                projects.push({id : responce[i].id, name : responce[i].name,location : responce[i].location, date : responce[i].date, descr : responce[i].descr, members: responce[i].members, isglobal : responce[i].isglobal})
             }
             }}); 
     request.send(JSON.stringify({'type':'projectplace', 'user_id':user_id})); 
