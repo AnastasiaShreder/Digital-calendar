@@ -88,7 +88,7 @@ function render_mp_menu(switcher){
                   <div id="calendar"></div>
               </div> 
               
-              <div class="right-section" id="right-section" style="height: 650px;">
+              <div class="right-section" id="right-section" style="height: 87vh;">
                 <p>Задачи из группы:
                 <select id="filter" onChange="select_mark()">
                   <option value="Все">Все</option>
@@ -199,15 +199,15 @@ function render_mp_menu(switcher){
                 <p id="marks">Метки:</p>
                 <div class="marks-place" style="height: 180px;' id ="marksplace">
                 
-                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/gaymark.png"><p>Все</p></div></a>  
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-mark"><img src="../static/icons/gaymark.png"><p>Все</p></div></a>  
 
-                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/whitemark.png"><p>Без метки</p></div></a>  
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-mark"><img src="../static/icons/whitemark.png"><p>Без метки</p></div></a>  
 
-                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/redmark.png"><p>Срочно</p></div></a>  
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-mark"><img src="../static/icons/redmark.png"><p>Срочно</p></div></a>  
                 
-                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/yellowmark.png"><p>Важно</p></div></a>  
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-mark"><img src="../static/icons/yellowmark.png"><p>Важно</p></div></a>  
                 
-                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-elem"><img src="../static/icons/greenmark.png"><p>Внимание</p></div></a>  
+                <a class="button" onClick="select_mark_task_list(this.textContent)"><div class="project-mark"><img src="../static/icons/greenmark.png"><p>Внимание</p></div></a>  
 
                 </div> 
 
@@ -298,39 +298,47 @@ function projectplace(switcher){
   var div = document.getElementById('projectplace');
   div.textContent = ""
   if (switcher == "task_list"){
-    div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project_task_list(this.name)" name="Все проекты">
+    div.insertAdjacentHTML("beforeend", `<a name="Все проекты">
     <div class="project-elem">
-    <img src="../static/icons/folder.png">
-    <p>Все проекты</p>
+    <button id="project" onclick="apply_project_task_list(this.name)" name="Все проекты">
+      <img src="../static/icons/folder.png">
+      <p>Все проекты</p>
+    </button>
     </div></a>`);
 		for (i=0;i<projects.length;i++){
       div.insertAdjacentHTML("beforeend", `<a name="${projects[i].name}">
       <div class="project-elem">
-      <button id="project" onClick = "apply_project_task_list(this.name)" style="width:8vw;" name="${projects[i].name}">
+      <button id="project" onClick = "apply_project_task_list(this.name)" name="${projects[i].name}">
         <img src="../static/icons/folder.png">
         <p>${projects[i].name}</p>
       </button> 
-      <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
-      <button id="close" onClick = "delete_project(this.name,'tl')" name="${projects[i].name}">X</button>
+      <div class="stay-together">
+        <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
+        <button id="close" onClick = "delete_project(this.name,'tl')" name="${projects[i].name}">X</button>
+      </div>
       </div></a>`);
       }
 
   }
   else{
-    div.insertAdjacentHTML("beforeend", `<a class="button" onclick="apply_project(this.name)" name="Все проекты">
+    div.insertAdjacentHTML("beforeend", `<a name="Все проекты">
     <div class="project-elem">
-    <img src="../static/icons/folder.png">
-    <p>Все проекты</p>
+    <button id="project" onclick="apply_project(this.name)" name="Все проекты">
+      <img src="../static/icons/folder.png">
+      <p>Все проекты</p>
+    </button>
     </div></a>`);
 		for (i=0;i<projects.length;i++){
       div.insertAdjacentHTML("beforeend", `<a name="${projects[i].name}">
       <div class="project-elem">
-      <button id="project" onClick = "apply_project(this.name)" style="width:8vw;" name="${projects[i].name}">
+      <button id="project" onClick = "apply_project(this.name)" name="${projects[i].name}">
         <img src="../static/icons/folder.png">
         <p>${projects[i].name}</p>
       </button> 
-      <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
-      <button id="close" onClick = "delete_project(this.name,'cl')" name="${projects[i].name}">X</button>
+      <div class="stay-together">
+        <button id="info" onClick = "project_info(this.name)" name="${projects[i].name}">?</button>
+        <button id="close" onClick = "delete_project(this.name,'cl')" name="${projects[i].name}">X</button>
+      </div>
       </div></a>`);
       }
   }
@@ -360,7 +368,7 @@ function add_button(){
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_project()" id="add_project" value="Добавить проект"></input>`)
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить задачу"></input>`)
   var div = document.getElementById('right-section');
-  div.style = `height: 678px;`
+  div.style = `height: 90vh;`
 }
 
 function delete_back_button(){
