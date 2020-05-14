@@ -457,11 +457,11 @@ function add_task(){
 				  <label for="characteristic">Описание задачи</label>
 				</div>
 				<div class="col-75">
-				  <textarea id="characteristic" name="characteristic" placeholder="Введите описание задачи..." style="height:200px"></textarea>
+				  <textarea id="characteristic" name="characteristic" placeholder="Введите описание задачи..." style="height:175px"></textarea>
 				</div>
 			  </div>
 			  <div class="row">
-				<input onclick="add_task_submit()" style="margin-top: 5px;" type="submit" value="Submit">
+				<input onclick="add_task_submit()" style="margin-top: 5px;" type="submit" value="Подтвердить">
 			  </div>
 			</form>
 		  
@@ -540,11 +540,11 @@ function add_project(){
 				  <label for="characteristic">Описание проекта</label>
 				</div>
 				<div class="col-75">
-				  <textarea id="characteristic" name="characteristic" placeholder="Введите описание задачи..." style="height:200px"></textarea>
+				  <textarea id="characteristic" name="characteristic" placeholder="Введите описание задачи..." style="height:175px"></textarea>
 				</div>
 			  </div>
 			  <div class="row">
-				<input onclick="add_project_submit()" type="submit" value="Submit">
+				<input onclick="add_project_submit()" type="submit" value="Подтвердить">
 			  </div>
 			</form>
 		  

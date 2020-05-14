@@ -13,10 +13,6 @@ input[type=text], .col-75 select, textarea {
     border-radius: 4px;
     resize: none;
   }
-
-  textarea {
-    height: 150px;
-  }
   
    label {
     padding: 12px 12px 12px 0;
