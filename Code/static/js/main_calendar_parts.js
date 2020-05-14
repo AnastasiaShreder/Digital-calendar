@@ -589,23 +589,16 @@ function add_task_submit(){
 function add_project_submit(){
   var form = document.forms.add_project_form
   var b=document.querySelector('multi-input').getValues()
-  var s = ""
-  f = form.elements.firstname.value
-  p= form.elements.place.value
-  da = form.elements.datapicker2.value
-  b.length
-  de = form.elements.characteristic.value
+  var f = form.elements.firstname.value
+  var p= form.elements.place.value
+  var da = form.elements.datapicker2.value
+  var de = form.elements.characteristic.value
  
   if (f!="" && p!="" && da!="" && b.length!=0){
-    for (i =0; i<b.length-1;i++){
-      s+=b[i]
-      s+=", "
-    }
-    s+=b[b.length-1]
 
     var request = new XMLHttpRequest();
     request.open('POST',url,false);
-    request.send(JSON.stringify({'type':'add_project', "user_id":user_id, "name":f, "location":p, "date":da, "members":s, "descr":de})); 
+    request.send(JSON.stringify({'type':'add_project', "user_id":user_id, "name":f, "location":p, "date":da, "members":b, "descr":de})); 
     projects = []
     get_projects()
   }
