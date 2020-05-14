@@ -89,7 +89,7 @@ def create_data(data):
         return json.dumps(user_projects)
 
     if data["type"] == "add_task":
-            conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
+        conn = pms.connect(user = "root",passwd = database_pass, host = "localhost", database = "EdgePoint")
         cursor = conn.cursor()
         cursor.execute("INSERT INTO `EdgePoint`.`projects` (`name`, `deadline`,  `global`,  `description`,`location`) VALUES ('"+data["name"]+"','"+data["date"]+"','"+str(1)+"','"+data["descr"]+"','"+data["location"]+"');")
         conn.commit()
@@ -183,14 +183,12 @@ def simple():
 @app.route("/",methods = ['POST'])
 @cross_origin()
 def returnlist():
-	data = create_data(json.loads(request.data))
-	response = make_response(data)
+    data = create_data(json.loads(request.data))
+    response = make_response(data)
     response.headers.add("Access-Control-Allow-Credentials", "true")
-	return response
+    return response
  
 if __name__ == "__main__":
-    hui = {}
-    data = {'type':'add_project', "user_id":1, "name":"Проект залупа", "location":"В пизде", "date":"1000-01-01", "members":["Данил Лялин","Марк Шерман"], "descr":"Говно"}
 
-    #app.run(host= '192.168.0.121',port='5001')
-    #conn.close()
+    app.run(host= '192.168.0.121',port='5001')
+    conn.close()
