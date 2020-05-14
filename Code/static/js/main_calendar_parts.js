@@ -88,7 +88,7 @@ function render_mp_menu(switcher){
                   <div id="calendar"></div>
               </div> 
               
-              <div class="right-section" id="right-section" style="height: 87vh;">
+              <div class="right-section" id="right-section" style="height: 650px;">
                 <p>Задачи из группы:
                 <select id="filter" onChange="select_mark()">
                   <option value="Все">Все</option>
@@ -368,7 +368,7 @@ function add_button(){
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_project()" id="add_project" value="Добавить проект"></input>`)
   div.insertAdjacentHTML("afterend",`<input type="button" style="width: 13vw;" onclick="add_task()" id="add_task" value="Добавить задачу"></input>`)
   var div = document.getElementById('right-section');
-  div.style = `height: 90vh;`
+  div.style = `height: 678px;`
 }
 
 function delete_back_button(){
