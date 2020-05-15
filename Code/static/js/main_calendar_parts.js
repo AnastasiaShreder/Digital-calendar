@@ -151,7 +151,18 @@ function render_mp_menu(switcher){
                 <p>Отделы:</p>
       
                 <div class="group-place" style="height: 260px;" id="group_place">
-                Андрей, запихни сюда рандомные отделы как во вкладке проектов.
+                  
+                  <div class="group-elem">
+                    <p> Все отделы </p>
+                  </div>
+                
+                  <div class="group-elem">
+                    <p> Отдел 1 </p>
+                  </div>
+
+                  <div class="group-elem">
+                    <p> Отдел 2 </p>
+                  </div>
                 </div>
                 <p id="afterGroupPlace">Проекты:</p>
                 <div class="project-place" style="height: 260px;" id ="projectplace"></div>
