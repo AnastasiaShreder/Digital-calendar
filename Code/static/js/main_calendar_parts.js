@@ -672,11 +672,11 @@ function mp_menu_animate(){
 
   function render_otdel(){
     var div = document.getElementById("group_place")
-    div.insertAdjacentHTML("beforeend",`<button id="project" onClick = "apply_otdel(this.name)" name="Все отделы">
+    div.insertAdjacentHTML("beforeend",`<button class="group-elem" onClick = "apply_otdel(this.name)" name="Все отделы">
     <p>Все отделы</p></button> `)
-    div.insertAdjacentHTML("beforeend",`<button id="project" onClick = "apply_otdel(this.name)" name="Отдел №1">
+    div.insertAdjacentHTML("beforeend",`<button class="group-elem" onClick = "apply_otdel(this.name)" name="Отдел №1">
     <p>Отдел №1</p></button> `)
-    div.insertAdjacentHTML("beforeend",`<button id="project" onClick = "apply_otdel(this.name)" name="Отдел №2">
+    div.insertAdjacentHTML("beforeend",`<button class="group-elem" onClick = "apply_otdel(this.name)" name="Отдел №2">
     <p>Отдел №2</p></button> `)
   }
 
