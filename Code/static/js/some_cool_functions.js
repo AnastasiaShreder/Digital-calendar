@@ -203,3 +203,24 @@ function delete_project(obj,a){
     projectplace("global")
     apply_project("Все проекты")}
 }
+
+
+function apply_otdel(name){
+  if (name =="Все отделы"){
+    render_calendar_m(tasks)
+  }
+  else if (name == "Отдел №1"){
+    new_tasks=[]
+    for (i=0;i<tasks.length;i++){
+      if (tasks[i].person=="Светлана Конкова" || tasks[i].person=="Анастасия Шредер" || tasks[i].person=="Данил Лялин"){ new_tasks.push(tasks[i])}
+    }
+    render_calendar_m(new_tasks)
+  }
+  else if (name == "Отдел №2"){
+    new_tasks=[]
+    for (i=0;i<tasks.length;i++){
+      if (tasks[i].person=="Андрей Тагиев" || tasks[i].person=="Марк Шерман"){ new_tasks.push(tasks[i])}
+    }
+    render_calendar_m(new_tasks)
+  }
+}

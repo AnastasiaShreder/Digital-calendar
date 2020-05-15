@@ -151,7 +151,7 @@ function render_mp_menu(switcher){
                 <p>Отделы:</p>
       
                 <div class="group-place" style="height: 260px;" id="group_place">
-                Андрей, запихни сюда рандомные отделы как во вкладке проектов.
+                
                 </div>
                 <p id="afterGroupPlace">Проекты:</p>
                 <div class="project-place" style="height: 260px;" id ="projectplace"></div>
@@ -652,6 +652,16 @@ function mp_menu_animate(){
   }
   
 
+  function render_otdel(){
+    var div = document.getElementById("group_place")
+    div.insertAdjacentHTML("beforeend",`<button id="project" onClick = "apply_otdel(this.name)" name="Все отделы">
+    <p>Все отделы</p></button> `)
+    div.insertAdjacentHTML("beforeend",`<button id="project" onClick = "apply_otdel(this.name)" name="Отдел №1">
+    <p>Отдел №1</p></button> `)
+    div.insertAdjacentHTML("beforeend",`<button id="project" onClick = "apply_otdel(this.name)" name="Отдел №2">
+    <p>Отдел №2</p></button> `)
+  }
+
 function render_calendar(switcher){
   get_filters()
   get_tasks()
@@ -671,6 +681,9 @@ function render_calendar(switcher){
   {
     taskplace();
     colleaguesplace();
+  }
+  if (switcher=="global"){
+    render_otdel();
   }
   projectplace(switcher)
 
