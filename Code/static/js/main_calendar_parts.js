@@ -118,7 +118,7 @@ function render_mp_menu(switcher){
       </div><!-- /scroller -->
     </div><!-- /pusher -->`)
    }
-//TODO Придумать что-нибудь с отделами
+
    function render_mp_pusher_for_global(){
     var div = document.getElementById("container");
     div.insertAdjacentHTML("beforeend", `			<!-- Push Wrapper -->
