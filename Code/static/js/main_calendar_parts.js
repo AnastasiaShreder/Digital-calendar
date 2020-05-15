@@ -672,12 +672,15 @@ function mp_menu_animate(){
 
   function render_otdel(){
     var div = document.getElementById("group_place")
-    div.insertAdjacentHTML("beforeend",`<button class="group-elem" onClick = "apply_otdel(this.name)" name="Все отделы">
-    <p>Все отделы</p></button> `)
-    div.insertAdjacentHTML("beforeend",`<button class="group-elem" onClick = "apply_otdel(this.name)" name="Отдел №1">
-    <p>Отдел №1</p></button> `)
-    div.insertAdjacentHTML("beforeend",`<button class="group-elem" onClick = "apply_otdel(this.name)" name="Отдел №2">
-    <p>Отдел №2</p></button> `)
+    div.insertAdjacentHTML("beforeend",`<div class="group-elem">
+    <button onClick = "apply_otdel(this.name)" name="Все отделы">
+    <p>Все отделы</p></button></div> `)
+    div.insertAdjacentHTML("beforeend",`<div class="group-elem">
+    <button onClick = "apply_otdel(this.name)" name="Отдел №1">
+    <p>Отдел №1</p></button></div> `)
+    div.insertAdjacentHTML("beforeend",`<div class="group-elem">
+    <button onClick = "apply_otdel(this.name)" name="Отдел №2">
+    <p>Отдел №2</p></button></div> `)
   }
 
 function render_calendar(switcher){
